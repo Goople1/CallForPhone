@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import Sucursal, SucursalTrabajador 
+from models import Sucursal, SucursalTrabajador ,Cliente
 from actions import export_as_csv
 # Register your models here.
 class SucursalAdmin(admin.ModelAdmin):
@@ -14,6 +14,10 @@ class SucursalTrabajadorAdmin(admin.ModelAdmin):
 	search_fields = ('sucursal',)
 	list_editable = ('sucursal',)
 
+class ClienteAdmin(admin.ModelAdmin):
+	list_display = ('nombre','apellidos','telefono','dni','ruc' ,'correo' , 'direccion')
+
 
 admin.site.register(Sucursal, SucursalAdmin)
 admin.site.register(SucursalTrabajador, SucursalTrabajadorAdmin)
+admin.site.register(Cliente, ClienteAdmin)

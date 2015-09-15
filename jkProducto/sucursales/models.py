@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
 # Create your models here.
 class Sucursal(models.Model):
@@ -21,6 +22,34 @@ class SucursalTrabajador(models.Model):
 	sucursal = models.ForeignKey(Sucursal)
 	trabajador = models.OneToOneField(User)
 	fecha_ingreso = models.DateTimeField(auto_now=True)
+	todos_cargo= (("admi","Administrador"),("empl" ,"Empleado")	 )
+	cargo = models.CharField(max_length=20 , choices=todos_cargo ,  default="vend")
+	dni = models.CharField(max_length=8, unique=True, default="0")
+	fecha_nacimiento = models.DateField(blank=True , null=True)
+	sexo = models.CharField( max_length =1, choices= (("m","M") , ("f","F")) , default="m")
+
+
+
+
 
 	def __unicode__(self):
 		return "%s , %s, %s" %(self.sucursal,self.trabajador,self.fecha_ingreso)
+
+#Modelo Cliente  , no deberia estar  aqui pero por el momento
+class Cliente(models.Model):
+
+	razon_social = models.CharField(max_length=50 , blank=True);
+	nombre = models.CharField(max_length=50)
+	apellidos = models.CharField(max_length=50)
+	telefono = models.CharField(max_length=10)
+	dni = models.CharField(unique=True, max_length = 8 ,validators=[ RegexValidator(regex = '\d{8}', message="DNI no tiene 8 digitos", code="invalido")])
+	direccion = models.CharField(max_length=50 , blank=True)	
+	ruc = models.CharField(max_length=11 , blank=True)
+	correo = models.EmailField(blank=True)
+	
+
+
+
+
+
+    
