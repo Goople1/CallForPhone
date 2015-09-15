@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import TipoProducto, ProductoAlmacen, Marca, Tienda, TiendaTrabajador
+from models import TipoProducto, ProductoAlmacen, Marca
 from actions import export_as_csv
 
 class TipoProductoAdmin(admin.ModelAdmin):
@@ -16,17 +16,14 @@ class ProductoAdmin(admin.ModelAdmin):
 	list_editable =('adicional',)
 	actions = [export_as_csv]
 
-class TiendaAdmin(admin.ModelAdmin):
-	list_display = ('codigo_puesto','nombre','departamento','ciudad','distrito',)
+#class MarcaAdmin(admin.ModelAdmin):
+#	list_display
 
-class TiendaTrabajadorAdmin(admin.ModelAdmin):
-	list_display = ('tienda','trabajador','fecha_ingreso',)
+
 
 # Register your models here.
 admin.site.register(TipoProducto,TipoProductoAdmin)
 admin.site.register(Marca)
-admin.site.register(Tienda,TiendaAdmin)
-admin.site.register(TiendaTrabajador,TiendaTrabajadorAdmin)
 admin.site.register(ProductoAlmacen,ProductoAdmin)
 
 

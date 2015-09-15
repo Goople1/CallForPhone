@@ -51,31 +51,9 @@ class ProductoAlmacen(models.Model):
 	def __unicode__(self):
 		return "  %s , %s , %s, %s, %s, %s, %s"%(self.codigo ,self.marca,self.color,self.tipo_producto,self.stock,self.mayor,self.menor)
 
-class Tienda(models.Model):
-	codigo_puesto = models.CharField(max_length=20)
-	nombre = models.CharField(max_length=60)
-	departamento = models.CharField(max_length=60)
-	ciudad = models.CharField(max_length=60)
-	distrito = models.CharField(max_length=60)
-	#direccion = models.CharField(max_length=60)
 
-	def clean(self):
-		self.codigo_puesto = self.codigo_puesto.capitalize()
-		self.nombre = self.nombre.capitalize()
 
-	class Meta:
-		unique_together = ('codigo_puesto', 'nombre',)
 
-	def __unicode__(self):
-		return " %s de la ciudad: %s con el codigo: %s" %(self.nombre,self.ciudad,self.codigo_puesto)
-
-class TiendaTrabajador(models.Model):
-	tienda = models.ForeignKey(Tienda)
-	trabajador = models.OneToOneField(User)
-	fecha_ingreso = models.DateTimeField(auto_now=True)
-
-	def __unicode__(self):
-		return "%s , %s, %s" %(self.tienda,self.trabajador,self.fecha_ingreso)
 
 
 #User._meta.get_field_by_name('email')[0]._unique = True
