@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
+from datetime import date
 # Create your models here.
 class Sucursal(models.Model):
 	codigo_puesto = models.CharField(max_length=20)
@@ -22,14 +23,11 @@ class SucursalTrabajador(models.Model):
 	sucursal = models.ForeignKey(Sucursal)
 	trabajador = models.OneToOneField(User)
 	fecha_ingreso = models.DateTimeField(auto_now=True)
-	todos_cargo= (("admi","Administrador"),("empl" ,"Empleado")	 )
-	cargo = models.CharField(max_length=20 , choices=todos_cargo ,  default="vend")
-	dni = models.CharField(max_length=8, unique=True, default="0")
-	fecha_nacimiento = models.DateField(blank=True , null=True)
-	sexo = models.CharField( max_length =1, choices= (("m","M") , ("f","F")) , default="m")
-
-
-
+	todos_cargo= (("admi","Administrador"),("empl" ,"Empleado"),	 )
+	cargo = models.CharField(max_length=20 , choices= todos_cargo ,  default="empl")
+	dni = models.CharField(max_length=8, unique=True)
+	fecha_nacimiento = models.DateField(blank=True , null=True,default=date(1990,01,01))
+	sexo = models.CharField( max_length =1, choices= (("m","Masculino") , ("f","Femenino")) , default="m")
 
 
 	def __unicode__(self):
@@ -46,6 +44,7 @@ class Cliente(models.Model):
 	direccion = models.CharField(max_length=50 , blank=True)	
 	ruc = models.CharField(max_length=11 , blank=True)
 	correo = models.EmailField(blank=True)
+
 	
 
 
