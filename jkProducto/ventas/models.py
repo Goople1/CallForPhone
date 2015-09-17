@@ -6,6 +6,7 @@ from productos.models import ProductoAlmacen as Producto
 #Boletao/Factura
 class Venta(models.Model):
 
+
 	cliente  = models.ForeignKey(Cliente)
 	empleado = models.ForeignKey(Empleado)
 	fecha_emision = models.DateTimeField(auto_now=True)
@@ -15,6 +16,7 @@ class Venta(models.Model):
 
 	def __unicode__(self):
 		pass
+		
 
 
 
