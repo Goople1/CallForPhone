@@ -23,17 +23,13 @@ class SucursalTrabajador(models.Model):
 	trabajador = models.OneToOneField(User)
 	fecha_ingreso = models.DateTimeField(auto_now=True)
 	todos_cargo= (("admi","Administrador"),("empl" ,"Empleado")	 )
-	cargo = models.CharField(max_length=20 , choices=todos_cargo ,  default="vend")
+	cargo = models.CharField(max_length=20 , choices=todos_cargo ,  default="empl")
 	dni = models.CharField(max_length=8, unique=True, default="0")
 	fecha_nacimiento = models.DateField(blank=True , null=True)
 	sexo = models.CharField( max_length =1, choices= (("m","M") , ("f","F")) , default="m")
 
-
-
-
-
 	def __unicode__(self):
-		return "%s , %s, %s" %(self.sucursal,self.trabajador,self.fecha_ingreso)
+		return " Trabjador: %s , %s, %s" %(self.trabajador,self.fecha_ingreso ,self.sucursal,)
 
 #Modelo Cliente  , no deberia estar  aqui pero por el momento
 class Cliente(models.Model):
@@ -46,7 +42,10 @@ class Cliente(models.Model):
 	direccion = models.CharField(max_length=50 , blank=True)	
 	ruc = models.CharField(max_length=11 , blank=True)
 	correo = models.EmailField(blank=True)
-	
+
+	def __unicode__(self):
+		return "Cliente : [%s] %s %s " %(self.razon_social,self.nombre , self.apellidos)
+
 
 
 
