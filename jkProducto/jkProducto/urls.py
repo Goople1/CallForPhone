@@ -13,7 +13,6 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('sucursales.views',
- 	url(r'^sucursales/$', 'listarSucusarles', name='sucursales'),
  	url(r'^mantenimientoSucursal/$', 'mantenimientoSucursal', name='mantenimientoSucursal'),
  	url(r'^mantenimientoSucursal/add/$', 'addSucursal', name='add'),
  	url(r'^mantenimientoSucursal/edit/$', 'editSucursal', name='edit'),

@@ -25,10 +25,6 @@ def listSucursal(request):
 	sucursal = Sucursal.objects.all()
 	return render_to_response(template,{'sucursales':sucursal,'operation':operation},context_instance=RequestContext(request))
 
-def listarSucusarles(request):
-	template='ListarSucursales.html'
-	sucursal = Sucursal.objects.all()
-	return render_to_response(template,{'sucursales':sucursal},context_instance=RequestContext(request))
 
 def addSucursalA(request,id):
 	pass
