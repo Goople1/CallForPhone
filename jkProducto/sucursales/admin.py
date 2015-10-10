@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import Sucursal, SucursalTrabajador ,Cliente, DetalleAlmacen
+from models import Sucursal, SucursalTrabajador ,Cliente, DetalleAlmacen,Almacen,EstadoSucursal
 from productos.models import Producto, Marca, TipoProducto
 from actions import export_as_csv
 # Register your models here.
@@ -26,11 +26,14 @@ class SucursalTrabajadorAdmin(admin.ModelAdmin):
 class ClienteAdmin(admin.ModelAdmin):
 	list_display = ('nombre','apellidos','telefono','dni','ruc' ,'correo' , 'direccion')
 
+class AlmacenAdmin(admin.ModelAdmin):
+	list_display = ('nombre_empresa','ruc','departamento','fecha_registro', 'descripcion','telefono','celular',)
+	list_editable = ('nombre_empresa','ruc','departamento','descripcion','telefono','celular',)
 
 #list_display = ('codigo','marca','tipo_producto','color','stock','adicional','mayor','menor','fecha_ingreso',)
 
-
-
+admin.site.register(EstadoSucursal)
+admin.site.register(Almacen, AlmacenAdmin)
 admin.site.register(DetalleAlmacen,DetalleAlmacenAdmin)
 admin.site.register(Sucursal, SucursalAdmin)
 admin.site.register(SucursalTrabajador, SucursalTrabajadorAdmin)

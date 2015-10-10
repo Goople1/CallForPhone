@@ -19,6 +19,7 @@ class ProductoAdmin(admin.ModelAdmin):
 	list_filter = ('codigo','marca','tipo_producto__nombre')
 	search_fields = ('codigo','marca','tipo_producto__nombre')
 	list_editable = ('marca','tipo_producto',)
+	
 
 
 #class MarcaAdmin(admin.ModelAdmin):

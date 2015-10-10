@@ -5,6 +5,18 @@
 </head>
 <body>
 <!-- Lista de Sucursales -->
-
+<h1>Lista de Sucursales</h1>
+<ol>
+{%for sucursal in sucursales %}
+	{% if sucursal.id_estadoSucursal.nombre_estado == "Disponible" %} 
+	<li>
+		<a href="">{{sucursal.nombre}}</a>
+	</li>
+	  <!-- <option value = "{{categoria.id}}">{{categoria.titulo}}</option> -->
+	{% endif %}
+{% empty %}
+<li>No hay Sucursales disponibles</li>
+{%endfor%}
+</ol>
 </body>
 </html>

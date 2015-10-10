@@ -10,13 +10,13 @@ class TipoProducto(models.Model):
     nombre = models.CharField(max_length=60,unique=True)
 #tipo_general = (('Cel','Celular'), ('Tab','Tablets'),)
 #tipo_especifico = models.CharField(max_length=10, choices=tipo_general, default='Cel')
+    class Meta:
+		verbose_name_plural = "Tipos de Productos"
     def clean(self):
         self.nombre = self.nombre.capitalize()
-
     def __str__(self):
     	return self.nombre
-	# def __unicode__(self): #,self.tipo_especifico
-	# 	return self.nombreTipoProducto
+
 
 class Marca(models.Model):
     nombre = models.CharField(max_length=60,unique=True)	
@@ -24,8 +24,6 @@ class Marca(models.Model):
         self.nombre = self.nombre.capitalize()
     def __str__(self):
         return self.nombre
-	# def __unicode__(self):
-	# 	return self.nombreMarca
 
 
 class Producto(models.Model):
@@ -35,6 +33,7 @@ class Producto(models.Model):
 	marca = models.ForeignKey(Marca)
 	tipo_producto = models.ForeignKey(TipoProducto)
 	class Meta:
+		verbose_name_plural = "Mantenimiento de Productos"
 		unique_together = ('codigo', 'color','marca','tipo_producto')
 
 """
