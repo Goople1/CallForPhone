@@ -1,25 +1,31 @@
 # -*- encoding:utf-8 -*-
 from django.db import models
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from django.conf import settings
 #from django.contrib.auth import get_user_model
- 
+
 # Create your models here.
 
 class TipoProducto(models.Model):
-	nombre = models.CharField(max_length=60)
-	#tipo_general = (('Cel','Celular'), ('Tab','Tablets'),)
-	#tipo_especifico = models.CharField(max_length=10, choices=tipo_general, default='Cel')
-	def __unicode__(self): #,self.tipo_especifico
-		return "  %s de %s"%(self.nombre )
+    nombre = models.CharField(max_length=60,unique=True)
+#tipo_general = (('Cel','Celular'), ('Tab','Tablets'),)
+#tipo_especifico = models.CharField(max_length=10, choices=tipo_general, default='Cel')
+    def clean(self):
+        self.nombre = self.nombre.capitalize()
+
+    def __str__(self):
+    	return self.nombre
+	# def __unicode__(self): #,self.tipo_especifico
+	# 	return self.nombreTipoProducto
 
 class Marca(models.Model):
-	nombre = models.CharField(max_length=60,unique=True)	
-        def clean(self):
-            self.nombre = self.nombre.capitalize()
-
-	def __unicode__(self):
-		return self.nombre
+    nombre = models.CharField(max_length=60,unique=True)	
+    def clean(self):
+        self.nombre = self.nombre.capitalize()
+    def __str__(self):
+        return self.nombre
+	# def __unicode__(self):
+	# 	return self.nombreMarca
 
 
 class Producto(models.Model):
@@ -29,11 +35,11 @@ class Producto(models.Model):
 	marca = models.ForeignKey(Marca)
 	tipo_producto = models.ForeignKey(TipoProducto)
 	class Meta:
-		unique_together = ('codigo', 'color','marca')
+		unique_together = ('codigo', 'color','marca','tipo_producto')
 
 """
 class ProductoAlmacen(models.Model):
-	codigo = 
+	codigo =
 	
 	color_todos = (('Sc',''),('Az','Azul'), ('Bl','Blanco'), ('Ne','Negro'), ('Pl','Plomo'),)
 	color = models.CharField(max_length=2, choices=color_todos, default='Sc')

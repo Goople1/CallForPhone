@@ -1,20 +1,25 @@
+# -*- encoding:utf-8 -*-
 from django.contrib import admin
-from models import TipoProducto, ProductoAlmacen, Marca
-from actions import export_as_csv
+from models import TipoProducto, Marca, Producto
+
 
 class TipoProductoAdmin(admin.ModelAdmin):
-	list_display = ('tipo_especifico','nombre',)
-	list_filter  = ('tipo_especifico','nombre',)
-	search_fields = ('tipo_especifico','nombre',)
+	list_display = ('nombre',)
+	list_filter  = ('nombre',)
+	search_fields = ('nombre',)
 
+
+class MarcaAdmin(admin.ModelAdmin):
+	list_display = ('nombre',)
+	list_filter  = ('nombre',)
+	search_fields = ('nombre',)
 
 class ProductoAdmin(admin.ModelAdmin):
-	list_display = ('codigo','marca','tipo_producto','color','stock','adicional','mayor','menor','fecha_ingreso',)
-	#field_options = {'fields': (('stock', 'adicional')),}
-	list_filter = ('codigo','tipo_producto__nombre','tipo_producto__tipo_especifico','marca',)
-	search_fields = ('codigo','tipo_producto__nombre','tipo_producto__tipo_especifico','marca',)
-	list_editable =('adicional',)
-	actions = [export_as_csv]
+	list_display = ('codigo','color','marca','tipo_producto')
+	list_filter = ('codigo','marca','tipo_producto__nombre')
+	search_fields = ('codigo','marca','tipo_producto__nombre')
+	list_editable = ('marca','tipo_producto',)
+
 
 #class MarcaAdmin(admin.ModelAdmin):
 #	list_display
@@ -23,8 +28,9 @@ class ProductoAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(TipoProducto,TipoProductoAdmin)
-admin.site.register(Marca)
-admin.site.register(ProductoAlmacen,ProductoAdmin)
+admin.site.register(Marca,MarcaAdmin)
+admin.site.register(Producto,ProductoAdmin)
+
 
 
 

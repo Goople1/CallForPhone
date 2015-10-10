@@ -6,7 +6,7 @@ from sucursales.models import DetalleAlmacen as Producto
 #Boletao/Factura
 class Venta(models.Model):
 
-
+	"""
 	cliente  = models.ForeignKey(Cliente)
 	empleado = models.ForeignKey(Empleado)
 	fecha_emision = models.DateTimeField(auto_now=True)
@@ -16,12 +16,13 @@ class Venta(models.Model):
 
 	def __unicode__(self):
 		pass
-		
+	"""
+	pass		
 
 
 
 class DetalleVenta(models.Model):
-
+	"""
 	referencia_venta = models.ForeignKey(Venta)
 	referecia_producto =models.ForeignKey(Producto)
 	cantidad = models.PositiveIntegerField()
@@ -29,6 +30,7 @@ class DetalleVenta(models.Model):
 
 	def __unicode__(self):
 		pass
-
+	"""
+	pass
 
 

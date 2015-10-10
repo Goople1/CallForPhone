@@ -18,10 +18,10 @@ class Almacen(models.Model):
 
 class DetalleAlmacen(models.Model):
 	stock = models.PositiveSmallIntegerField(default=0)
-	adicional = models.PositiveSmallIntegerField(default=0)
+	adicional_stock = models.PositiveSmallIntegerField(default=0)
 	descripcion = models.CharField(max_length=400)
-	mayor = models.PositiveSmallIntegerField()
-	menor = models.PositiveSmallIntegerField()
+	precio_x_mayor = models.PositiveSmallIntegerField()
+	precio_x_menor = models.PositiveSmallIntegerField()
 	fecha_ingreso = models.DateTimeField(auto_now=True)
 	producto_id = models.ForeignKey(Producto)
 	class Meta:

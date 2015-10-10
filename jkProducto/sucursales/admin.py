@@ -1,7 +1,16 @@
 from django.contrib import admin
-from models import Sucursal, SucursalTrabajador ,Cliente
+from models import Sucursal, SucursalTrabajador ,Cliente, DetalleAlmacen
+from productos.models import Producto, Marca, TipoProducto
 from actions import export_as_csv
 # Register your models here.
+class DetalleAlmacenAdmin(admin.ModelAdmin):
+	list_display = ('producto_id','stock','adicional_stock','precio_x_mayor','precio_x_menor','fecha_ingreso',)
+	#field_options = {'fields': (('stock', 'adicional')),}
+	list_filter = ('producto_id',)
+	search_fields = ('producto_id__tipo_producto__nombre','producto_id',)
+	list_editable =('adicional_stock',)
+	actions = [export_as_csv]
+
 class SucursalAdmin(admin.ModelAdmin):
 	list_display = ('codigo_puesto', 'nombre', 'departamento', )
 	list_filter = ('codigo_puesto', 'departamento','nombre',)
@@ -18,6 +27,11 @@ class ClienteAdmin(admin.ModelAdmin):
 	list_display = ('nombre','apellidos','telefono','dni','ruc' ,'correo' , 'direccion')
 
 
+#list_display = ('codigo','marca','tipo_producto','color','stock','adicional','mayor','menor','fecha_ingreso',)
+
+
+
+admin.site.register(DetalleAlmacen,DetalleAlmacenAdmin)
 admin.site.register(Sucursal, SucursalAdmin)
 admin.site.register(SucursalTrabajador, SucursalTrabajadorAdmin)
 admin.site.register(Cliente, ClienteAdmin)
