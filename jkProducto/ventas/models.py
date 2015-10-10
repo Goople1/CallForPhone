@@ -1,6 +1,6 @@
 from django.db import models
 from sucursales.models import Cliente , SucursalTrabajador as Empleado
-from productos.models import ProductoAlmacen as Producto
+from sucursales.models import DetalleAlmacen as Producto
 # Create your models here.
 
 #Boletao/Factura
