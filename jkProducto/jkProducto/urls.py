@@ -18,9 +18,9 @@ urlpatterns += patterns('sucursales.views',
  	url(r'^mantenimientoSucursal/add/$', 'addSucursal', name='add'),
  	url(r'^mantenimientoSucursal/edit/$', 'editSucursal', name='edit'),
  	url(r'^mantenimientoSucursal/list/$', 'listSucursal', name='list'),
- 	url(r'^mantenimientoSucursal/add/(?P<slug>[\w-]+)/$', 'addSucursal',name = 'adds'),
- 	url(r'^mantenimientoSucursal/edit/(?P<slug>[\w-]+)/$', 'editSucursal'),
- 	url(r'^mantenimientoSucursal/list/(?P<slug>[\w-]+)/$', 'listSucursal'),
+ 	url(r'^mantenimientoSucursal/add/(?P<id>[\w-]+)/$', 'addSucursalA',name = 'addSucursalA'),
+ 	url(r'^mantenimientoSucursal/edit/(?P<id>[\w-]+)/$', 'editSucursalE',name='editSucursalE'),
+ 	url(r'^mantenimientoSucursal/list/(?P<id>[\w-]+)/$', 'listSucursalL',name='listSucursalL'),
  	
 
  )
