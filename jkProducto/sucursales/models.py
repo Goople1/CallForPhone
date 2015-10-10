@@ -13,6 +13,11 @@ class Almacen(models.Model):
 	def clean(self):
 		self.nombre = self.nombre.capitalize()
 
+class EstadoSucursal(models.Model):
+	nombre_estado = models.CharField(max_length=60)
+	def clean(self):
+		self.nombre_estado = self.nombre_estado
+
 class Sucursal(models.Model):
 	id_almacen = models.ForeignKey(Almacen)
 	codigo_puesto = models.CharField(max_length=20)
@@ -30,11 +35,6 @@ class Sucursal(models.Model):
 
 	def __unicode__(self):
 		return " %s de la ciudad: %s con el codigo: %s" %(self.nombre,self.departamento,self.codigo_puesto)
-
-class EstadoSucursal(models.Model):
-	nombre_estado = models.CharField(max_length=60)
-	def clean(self):
-		self.nombre_estado = self.nombre_estado
 
 #Se Registra cuando se cambia de estado la sucursal
 class HistorialSucursal(models.Model):
