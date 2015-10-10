@@ -8,23 +8,33 @@ from django.conf import settings
 
 class TipoProducto(models.Model):
 	nombre = models.CharField(max_length=60)
-	tipo_general = (('Cel','Celular'), ('Tab','Tablets'),)
-	tipo_especifico = models.CharField(max_length=10, choices=tipo_general, default='Cel')
-	def __unicode__(self):
-		return "  %s de %s"%(self.nombre ,self.tipo_especifico)
+	#tipo_general = (('Cel','Celular'), ('Tab','Tablets'),)
+	#tipo_especifico = models.CharField(max_length=10, choices=tipo_general, default='Cel')
+	def __unicode__(self): #,self.tipo_especifico
+		return "  %s de %s"%(self.nombre )
 
 class Marca(models.Model):
-	nombre = models.CharField(max_length=60,unique=True)
-	
+	nombre = models.CharField(max_length=60,unique=True)	
         def clean(self):
             self.nombre = self.nombre.capitalize()
 
 	def __unicode__(self):
 		return self.nombre
-	
-class ProductoAlmacen(models.Model):
+
+
+class Producto(models.Model):
 	codigo = models.CharField(max_length=20)
+	color_todos = (('Sc',''),('Az','Azul'), ('Bl','Blanco'), ('Ne','Negro'),('Ot','Otro') ('Pl','Plomo'),)
+	color = models.CharField(max_length=2, choices=color_todos, default='Ot')	
 	marca = models.ForeignKey(Marca)
+	tipo_producto = models.ForeignKey(TipoProducto)
+	class Meta:
+		unique_together = ('codigo', 'color','marca')
+
+"""
+class ProductoAlmacen(models.Model):
+	codigo = 
+	
 	color_todos = (('Sc',''),('Az','Azul'), ('Bl','Blanco'), ('Ne','Negro'), ('Pl','Plomo'),)
 	color = models.CharField(max_length=2, choices=color_todos, default='Sc')
 	stock = models.PositiveSmallIntegerField(default=0)
@@ -51,7 +61,7 @@ class ProductoAlmacen(models.Model):
 	def __unicode__(self):
 		return "  %s , %s , %s, %s, %s, %s, %s"%(self.codigo ,self.marca,self.color,self.tipo_producto,self.stock,self.mayor,self.menor)
 
-
+"""
 
 
 

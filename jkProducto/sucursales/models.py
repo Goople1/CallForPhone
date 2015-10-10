@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
 from datetime import date
+from productos.models import Producto
 # Create your models here.
 class Almacen(models.Model):
 	nombreEmpresa = models.CharField(max_length=80)
@@ -10,8 +11,29 @@ class Almacen(models.Model):
 	departamento = models.CharField(max_length=20, choices=todos_departamento, default='Lim')
 	fecha_registro = models.DateTimeField(auto_now=True)
 	descripcion = models.CharField(max_length=400)
+	telefono = models.CharField(max_length=20)
+	celular = models.CharField(max_length=20)
 	def clean(self):
 		self.nombre = self.nombre.capitalize()
+
+class DetalleAlmacen(models.Model):
+	stock = models.PositiveSmallIntegerField(default=0)
+	adicional = models.PositiveSmallIntegerField(default=0)
+	descripcion = models.CharField(max_length=400)
+	mayor = models.PositiveSmallIntegerField()
+	menor = models.PositiveSmallIntegerField()
+	fecha_ingreso = models.DateTimeField(auto_now=True)
+	producto_id = models.ForeignKey(Producto)
+	class Meta:
+		unique_together = ('producto_id',)
+
+class HistorialDetalleAlmacen(models.Model):
+	adicional_producto = models.PositiveSmallIntegerField()
+	fecha_ingreso = models.DateTimeField(auto_now=True)
+	stock_actual = models.PositiveSmallIntegerField()
+	detalle_almacen_id = models.ForeignKey(DetalleAlmacen)
+	
+
 
 class EstadoSucursal(models.Model):
 	nombre_estado = models.CharField(max_length=60)
@@ -24,6 +46,8 @@ class Sucursal(models.Model):
 	nombre = models.CharField(max_length=60)
 	descripcion = models.CharField(max_length=400)
 	fecha_registro = models.DateTimeField(auto_now=True)
+	telefono = models.CharField(max_length=20)
+	celular = models.CharField(max_length=20)
 	todos_departamento = (('Ama','Amazonas'), ('Anc','Ancash'),('Apu','Apurimac'),('Are','Arequipa'),('Aya','Ayacucho'),('Caj','Cajamarca'),('Cal','Callao'),('Cuz','Cuzco'),('Hua','Huancavelica'),('Hun','Huanuco'),('Ica','Ica'),('Jun','Junin'),('Lal','La Libertad'),('Lam','Lambayeque'),('Lim','Lima'),('Lor','Loreto'),('Mad','Madre de Dios'),('Moq','Moquegua'),('Pas','Pasco'),('Piu','Piura'),('Pun','Puno'),('San','San Martin'),('Piu','Piura'),('Tac','Tacna'),('Tum','Tumbes'),('Uca','Ucayali'),)
 	departamento = models.CharField(max_length=20, choices=todos_departamento, default='Lim')
 	id_estadoSucursal = models.ForeignKey(EstadoSucursal)
