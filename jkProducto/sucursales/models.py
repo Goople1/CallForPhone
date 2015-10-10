@@ -17,7 +17,7 @@ class EstadoSucursal(models.Model):
 	nombre_estado = models.CharField(max_length=60)
 	def clean(self):
 		self.nombre_estado = self.nombre_estado
-		
+
 class Sucursal(models.Model):
 	id_almacen = models.ForeignKey(Almacen)
 	codigo_puesto = models.CharField(max_length=20)
