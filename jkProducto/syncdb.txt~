@@ -1,2 +1,0 @@
-python manage.py migrate auth
-python manage.py migrate
