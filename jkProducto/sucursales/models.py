@@ -51,6 +51,7 @@ class Sucursal(models.Model):
 	todos_departamento = (('Ama','Amazonas'), ('Anc','Ancash'),('Apu','Apurimac'),('Are','Arequipa'),('Aya','Ayacucho'),('Caj','Cajamarca'),('Cal','Callao'),('Cuz','Cuzco'),('Hua','Huancavelica'),('Hun','Huanuco'),('Ica','Ica'),('Jun','Junin'),('Lal','La Libertad'),('Lam','Lambayeque'),('Lim','Lima'),('Lor','Loreto'),('Mad','Madre de Dios'),('Moq','Moquegua'),('Pas','Pasco'),('Piu','Piura'),('Pun','Puno'),('San','San Martin'),('Piu','Piura'),('Tac','Tacna'),('Tum','Tumbes'),('Uca','Ucayali'),)
 	departamento = models.CharField(max_length=20, choices=todos_departamento, default='Lim')
 	id_estadoSucursal = models.ForeignKey(EstadoSucursal)
+
 	def clean(self):
 		self.codigo_puesto = self.codigo_puesto.capitalize()
 		self.nombre = self.nombre.capitalize()
@@ -59,6 +60,7 @@ class Sucursal(models.Model):
 
 	def __unicode__(self):
 		return " %s de la ciudad: %s con el codigo: %s" %(self.nombre,self.departamento,self.codigo_puesto)
+
 
 #Se Registra cuando se cambia de estado la sucursal
 class HistorialSucursal(models.Model):

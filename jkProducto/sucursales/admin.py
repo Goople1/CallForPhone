@@ -3,7 +3,7 @@ from models import Sucursal, SucursalTrabajador ,Cliente
 from actions import export_as_csv
 # Register your models here.
 class SucursalAdmin(admin.ModelAdmin):
-	list_display = ('codigo_puesto', 'nombre', 'departamento', 'direccion')
+	list_display = ('codigo_puesto', 'nombre', 'departamento', )
 	list_filter = ('codigo_puesto', 'departamento','nombre',)
 	search_fields = ('codigo_puesto', 'departamento')
 	list_editable = ('codigo_puesto', 'departamento')
