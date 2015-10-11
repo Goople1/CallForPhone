@@ -37,6 +37,8 @@ class Producto(models.Model):
 	class Meta:
 		verbose_name_plural = "Mantenimiento de Productos"
 		unique_together = ('codigo', 'color','marca','tipo_producto')
+	def __unicode__(self):
+		return u'%s,color: %s,marca: %s,tipo: %s' % (self.codigo,self.color,self.marca.nombre,self.tipo_producto.nombre)
 
 """
 class ProductoAlmacen(models.Model):

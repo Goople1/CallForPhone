@@ -22,11 +22,12 @@ class Almacen(models.Model):
         return u'%s' % (self.nombre_empresa)		
 
 class DetalleAlmacen(models.Model):
+	id_almacen = models.ForeignKey(Almacen) 
+	producto_id = models.ForeignKey(Producto)
 	stock = models.PositiveIntegerField(default=0)
 	adicional_stock = models.PositiveSmallIntegerField(default=0)
 	descripcion = models.TextField(max_length=400)
 	fecha_ingreso = models.DateTimeField(auto_now=True)
-	producto_id = models.ForeignKey(Producto)
 	class Meta:
 		unique_together = ('producto_id',)
 
@@ -71,6 +72,11 @@ class Sucursal(models.Model):
 	def __unicode__(self):
 		return " %s de la ciudad: %s con el codigo: %s" %(self.nombre,self.departamento,self.codigo_puesto)
 
+class DetalleSucursalAlmacen(models.Model):
+	stock = models.PositiveIntegerField(default=0)
+	adicional_stock = models.PositiveSmallIntegerField(default=0)
+	producto_id = models.ForeignKey(Producto)
+	fecha_ingreso = models.DateTimeField(auto_now=True)
 
 #Se Registra cuando se cambia de estado la sucursal
 class HistorialSucursal(models.Model):

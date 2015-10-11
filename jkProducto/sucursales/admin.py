@@ -4,12 +4,16 @@ from productos.models import Producto, Marca, TipoProducto
 from actions import export_as_csv
 # Register your models here.
 class DetalleAlmacenAdmin(admin.ModelAdmin):
-	list_display = ('producto_id','stock','adicional_stock','precio_x_mayor','precio_x_menor','fecha_ingreso',)
-	#field_options = {'fields': (('stock', 'adicional')),}
-	list_filter = ('producto_id',)
-	search_fields = ('producto_id__tipo_producto__nombre','producto_id',)
-	list_editable =('adicional_stock',)
-	actions = [export_as_csv]
+    list_display = ('producto_id','stock','adicional_stock','fecha_ingreso','get_Mayor','get_Menor',)
+#field_options = {'fields': (('stock', 'adicional')),}
+    list_filter = ('producto_id',)
+    search_fields = ('producto_id__tipo_producto__nombre',)
+    list_editable =('adicional_stock',)
+    actions = [export_as_csv]
+    def get_Mayor(self, obj):
+        return obj.producto_id.precio_x_mayor
+    def get_Menor(self, obj):
+    	return obj.producto_id.precio_x_menor
 
 class SucursalAdmin(admin.ModelAdmin):
 	list_display = ('codigo_puesto', 'nombre', 'departamento', )
