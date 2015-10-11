@@ -25,8 +25,6 @@ class DetalleAlmacen(models.Model):
 	stock = models.PositiveIntegerField(default=0)
 	adicional_stock = models.PositiveSmallIntegerField(default=0)
 	descripcion = models.TextField(max_length=400)
-	precio_x_mayor = models.PositiveIntegerField()
-	precio_x_menor = models.PositiveIntegerField()
 	fecha_ingreso = models.DateTimeField(auto_now=True)
 	producto_id = models.ForeignKey(Producto)
 	class Meta:

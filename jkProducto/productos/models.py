@@ -29,7 +29,9 @@ class Marca(models.Model):
 class Producto(models.Model):
 	codigo = models.CharField(max_length=20)
 	color_todos = (('Sc',''),('Az','Azul'), ('Bl','Blanco'), ('Ne','Negro'),('Ot','Otro'), ('Pl','Plomo'),)
-	color = models.CharField(max_length=2, choices=color_todos, default='Ot')	
+	color = models.CharField(max_length=2, choices=color_todos, default='Ot')
+	precio_x_mayor = models.PositiveIntegerField()
+	precio_x_menor = models.PositiveIntegerField()	
 	marca = models.ForeignKey(Marca)
 	tipo_producto = models.ForeignKey(TipoProducto)
 	class Meta:

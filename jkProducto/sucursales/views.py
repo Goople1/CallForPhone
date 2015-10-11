@@ -1,4 +1,4 @@
-from django.shortcuts import render,render_to_response
+from django.shortcuts import render,render_to_response, HttpResponse
 from django.template.context import RequestContext
 from models import Sucursal
 # Create your views here.
@@ -27,7 +27,7 @@ def listSucursal(request):
 
 
 def addSucursalA(request,id):
-	pass
+	return HttpResponse("Kalena")
 
 def editSucursalE(request,id):
 	pass
