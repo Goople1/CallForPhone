@@ -36,6 +36,7 @@ class HistorialDetalleAlmacen(models.Model):
 	fecha_ingreso = models.DateTimeField(auto_now=True)
 	stock_actual = models.PositiveIntegerField()
 	detalle_almacen_id = models.ForeignKey(DetalleAlmacen)
+	sucursal_id = models.ForeignKey(Sucursal)
 	
 
 
