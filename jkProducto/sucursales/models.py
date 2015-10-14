@@ -31,12 +31,6 @@ class DetalleAlmacen(models.Model):
 	class Meta:
 		unique_together = ('producto_id',)
 
-class HistorialDetalleAlmacen(models.Model):
-	adicional_producto = models.PositiveIntegerField()
-	fecha_ingreso = models.DateTimeField(auto_now=True)
-	stock_actual = models.PositiveIntegerField()
-	detalle_almacen_id = models.ForeignKey(DetalleAlmacen)
-	sucursal_id = models.ForeignKey(Sucursal)
 	
 
 
@@ -73,10 +67,18 @@ class Sucursal(models.Model):
 	def __unicode__(self):
 		return " %s de la ciudad: %s con el codigo: %s" %(self.nombre,self.departamento,self.codigo_puesto)
 
+class HistorialDetalleAlmacen(models.Model):
+	adicional_producto = models.PositiveIntegerField()
+	fecha_ingreso = models.DateTimeField(auto_now=True)
+	stock_actual = models.PositiveIntegerField()
+	detalle_almacen_id = models.ForeignKey(DetalleAlmacen)
+	sucursal_id = models.ForeignKey(Sucursal, null=True)
+
 class DetalleSucursalAlmacen(models.Model):
 	stock = models.PositiveIntegerField(default=0)
 	adicional_stock = models.PositiveSmallIntegerField(default=0)
 	producto_id = models.ForeignKey(Producto)
+	sucursal_id = models.ForeignKey(Sucursal)
 	fecha_ingreso = models.DateTimeField(auto_now=True)
 
 #Se Registra cuando se cambia de estado la sucursal
