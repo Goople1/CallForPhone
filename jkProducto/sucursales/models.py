@@ -81,6 +81,9 @@ class DetalleSucursalAlmacen(models.Model):
 	sucursal_id = models.ForeignKey(Sucursal)
 	fecha_ingreso = models.DateTimeField(auto_now=True)
 
+	class Meta:
+		unique_together = ('producto_id','sucursal_id')
+
 #Se Registra cuando se cambia de estado la sucursal
 class HistorialSucursal(models.Model):
 	fecha = models.DateTimeField(auto_now=True)

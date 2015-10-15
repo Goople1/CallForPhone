@@ -2,6 +2,8 @@ from django.shortcuts import render_to_response , HttpResponse
 from django.template.context import RequestContext
 from models import Sucursal , DetalleAlmacen , DetalleSucursalAlmacen
 from productos.models import Producto
+from sucursales.utilidades import Utilidades
+from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
 
@@ -37,20 +39,32 @@ def addSucursalA(request,id):
 	sucursal_id = id 
 	print sucursal_id
 
-	detalle_sucursal_almacen_productos = DetalleSucursalAlmacen.objects.filter(sucursal_id = sucursal_id)
+	try:
+		Sucursal.objects.get(pk=sucursal_id)
+		try:
+			detalle_sucursal_almacen_productos = DetalleSucursalAlmacen.objects.filter(sucursal_id = sucursal_id)
+		
+		except Exception, e:
+			print e
+			return  HttpResponse("PROBLEMAS CON SERVER")
+		
 
-	if detalle_sucursal_almacen_productos:
-		id_producto_detalle_sucu_almacen = [deta.producto_id for deta in  detalle_sucursal_almacen_productos]
-		print "Productos en Detalle Sucursal Almacen"
-		print id_producto_detalle_sucu_almacen
-		print "Productos En Detalle Almacen que no estan En DetalleSucursalAlmacen "
-		detalle_almacen_productos = DetalleAlmacen.objects.exclude(producto_id__in= id_producto_detalle_sucu_almacen)
-		print detalle_almacen_productos
+		if detalle_sucursal_almacen_productos:
+			id_producto_detalle_sucu_almacen = [deta.producto_id for deta in  detalle_sucursal_almacen_productos]
+			print "Productos en Detalle Sucursal Almacen"
+			print id_producto_detalle_sucu_almacen
+			print "Productos En Detalle Almacen que no estan En DetalleSucursalAlmacen "
+			detalle_almacen_productos = DetalleAlmacen.objects.exclude(producto_id__in= id_producto_detalle_sucu_almacen)
+			print detalle_almacen_productos
 
 
-	else:
-		print " No hay nada en la lista asi que rojo par y pasa "
-		detalle_almacen_productos  =  DetalleAlmacen.objects.only("producto_id")
+		else:
+			print " No hay nada en la lista asi que rojo par y pasa "
+			detalle_almacen_productos  =  DetalleAlmacen.objects.only("producto_id")
+	
+	except Exception, e:
+		return HttpResponse("<html><body>PAGE NOT FOUND</body></html>")
+
 
 	return render_to_response (template, {'productos':detalle_almacen_productos ,'id_sucursal': sucursal_id} , context_instance = RequestContext(request))
 	
@@ -58,7 +72,22 @@ def addSucursalA(request,id):
 def editSucursalE(request,id):
 	template  = "modificarProductoSucursal.html"
 	sucursal_id = id
-	detalle_sucursal_almacen_productos = DetalleSucursalAlmacen.objects.filter(sucursal_id = sucursal_id)
+	print "dsdfsd"
+	
+	try:
+
+		Sucursal.objects.get(pk=sucursal_id)
+		
+		try:
+			detalle_sucursal_almacen_productos = DetalleSucursalAlmacen.objects.filter(sucursal_id = sucursal_id)
+		except Exception, e:
+			print e
+			return HttpResponse("Problemas Con el  Server")
+
+	except ObjectDoesNotExist,e:
+
+		return HttpResponse("<html><body>PAGE NOT FOUND</body></html>")
+
 	id_producto_detalle_sucu_almacen = [detalle.producto_id for detalle  in detalle_sucursal_almacen_productos]
 
 	return render_to_response(template,{"productos": id_producto_detalle_sucu_almacen , 'id_sucursal': sucursal_id },context_instance = RequestContext(request))
@@ -76,11 +105,21 @@ def dameStock(request):
 	print "Consultando Stock de DetalleAlmecen"
 
 	if request.method == "GET":
-		codigo_producto = request.GET.get("codigo_producto", "")
+		print "pase el get"
+		a =  request.GET.get("codigo_producto")
 
-		if((int(codigo_producto) != 0) & (int(codigo_producto) > 0)):
+		codigo_producto = Utilidades().validarIngresoNum(a)
+		print codigo_producto
 
-			da = DetalleAlmacen.objects.get(producto_id=codigo_producto)
+		if(codigo_producto != 0) & (codigo_producto > 0):
+			try:
+				
+				da = DetalleAlmacen.objects.get(producto_id=codigo_producto)
+			except Exception, e:
+
+				print e
+				return HttpResponse("Problemas Con el SERVER!!!")
+			
 			da = da.stock
 			return  HttpResponse(da)
 
@@ -96,25 +135,44 @@ def dameStock(request):
 def addProductotoSucursal(request):
 	if request.method == "POST":
 
-		producto_id = request.POST.get("producto_id")
-		sucursal_id  = request.POST.get("sucursal_id")
-		stock_add =  request.POST.get("stock_add")
-		print producto_id
+		producto_id = Utilidades().validarIngresoNum(request.POST.get("producto_id"))
+		sucursal_id  = Utilidades().validarIngresoNum(request.POST.get("sucursal_id"))
+		stock_add = Utilidades().validarIngresoNum(request.POST.get("stock_add"))
+		
 
 
-		if ((int(producto_id) != 0) & (int(producto_id) > 0) ):
+		if ((producto_id != 0) & (producto_id > 0) ):
 
 			print "pass"
-			if stock_add.isdigit():
+			if stock_add > 0 :
 
 				print "pase is digit"
-				detalle_almacen = DetalleAlmacen.objects.get(producto_id = producto_id )
+				try : 
+					detalle_almacen = DetalleAlmacen.objects.get(producto_id = producto_id )
+				except Exception,e:
+					print e
+					mensaje = "Problemas con el SERVER"
+					return HttpResponse(mensaje)
+
 				print detalle_almacen
-				detalle_almacen.stock -= int(stock_add)
+				detalle_almacen.stock -= stock_add
 				print detalle_almacen.stock
-				print int(stock_add)
-				producto = Producto.objects.get(id = producto_id)
-				sucursal = Sucursal.objects.get(id = sucursal_id)
+
+				try:
+					producto = Producto.objects.get(id = producto_id)
+				except ObjectDoesNotExist, e :
+					print e
+					mensaje = "Producto no Encontrado,Pruebe otra vez"
+					return HttpResponse(mensaje)
+				
+				try : 
+					sucursal = Sucursal.objects.get(id = sucursal_id)
+
+				except ObjectDoesNotExist, e:
+					print e 
+					mensaje = "Es posible que la Sucursal no Exista, Intente otra vez"
+					return HttpResponse(mensaje)
+
 				print producto
 				print "............"
 				print sucursal
@@ -122,10 +180,17 @@ def addProductotoSucursal(request):
 				# Para crear Objetos con  campos que son llaves Foraneas ,  se debe Vincular  un  Objeto  del Tipo  de  esa  Llave
 				print "fin de Crear detalleSurcusalAlmacen"
 				#se Crea el DetalleSucursalAlamcen
-				DetalleSucursalAlmacen.objects.create(stock = int(stock_add), producto_id = producto , sucursal_id =  sucursal) 
-				#SeGuardan Los cambios para el Stock de DetalleAlmacen
+
+				try:
+					DetalleSucursalAlmacen.objects.create(stock = stock_add, producto_id = producto , sucursal_id =  sucursal) 
+				except Exception , e : 
+					print e 
+					mensaje = "no se puede Guardar los Datos , Parece Que ya Existen , Intente Otro vez"
+					return HttpResponse(mensaje)
+
 				detalle_almacen.save()
 				return HttpResponse("Done!")
+				#SeGuardan Los cambios para el Stock de DetalleAlmacen
 
 			else:
 				return HttpResponse("Algo va mal ")
@@ -141,14 +206,20 @@ def StockDetalleSucursalAlmacen(request):
 	print "Dentro de StockDetalleSucursalAlmacen"
 	if request.method == "GET":
 
-		cod_prod = request.GET.get('codigo_producto')
-		cod_suc = request.GET.get('codigo_sucursal')
+		cod_prod = Utilidades().validarIngresoNum(request.GET.get('codigo_producto'))
+		cod_suc = Utilidades().validarIngresoNum(request.GET.get('codigo_sucursal'))
 
 		print "codigo_producto:",cod_prod
 		print "codigo_sucursal:",cod_suc
 
-		if ((int(cod_prod) != 0) & (int(cod_prod) > 0) ):
-			product = DetalleSucursalAlmacen.objects.get(sucursal_id = cod_suc,producto_id = cod_prod)
+		if (cod_prod != 0) & (cod_prod > 0) :
+			try:
+				product = DetalleSucursalAlmacen.objects.get(sucursal_id = cod_suc,producto_id = cod_prod)
+
+			except Exception, e:
+				print e
+				return HttpResponse("Problemas con el Server!!!!")
+			
 			rsp =  product.stock
 			return HttpResponse(rsp)
 			
@@ -171,21 +242,33 @@ def editProductotoSucursal(request):
 
 	if request.method == "POST":
 		
-		sucursal_id  = request.POST.get("sucursal_id")
-		producto_id = request.POST.get("producto_id")
-		stock_add = int(request.POST.get("stock_add"))
+		sucursal_id  = Utilidades().validarIngresoNum(request.POST.get("sucursal_id",0))
+
+		producto_id = Utilidades().validarIngresoNum(request.POST.get("producto_id",0))
+		#funcion que cuando no sea un numero me retorne 0 
+		stock_add = Utilidades().validarIngresoNum(request.POST.get("stock_add",0))
 		# stock_dispo = request.POST.get("stock_dispo")
 
 		print "Datos Obtenidos :  "
 		print  "Sucursal_id :  %s , producto_id : %s , stock_add : %s " %(sucursal_id,producto_id,stock_add)
 
-		if((int(producto_id) != 0 )& (int(producto_id) > 0)):
+		if(producto_id != 0 )& (producto_id > 0):
 
-			producto_detalle_sucursal_almacen = DetalleSucursalAlmacen.objects.get(sucursal_id=sucursal_id , producto_id=producto_id)
+			try:
+				producto_detalle_sucursal_almacen = DetalleSucursalAlmacen.objects.get(sucursal_id=sucursal_id , producto_id=producto_id)
+			except Exception,e :
+				print e
+				return HttpResponse("No Es Posible Editar  el Producto  en  la Sucursal ")
+
 			print producto_detalle_sucursal_almacen.producto_id
 			print producto_detalle_sucursal_almacen.stock
 
-			detalle_almacen = DetalleAlmacen.objects.get(producto_id=producto_id)
+			try:
+				detalle_almacen = DetalleAlmacen.objects.get(producto_id=producto_id)
+			except Exception, e:
+				print e
+				return HttpResponse ("Problemas con el Server")
+
 			print "...................................."
 			print type(detalle_almacen.stock),type(stock_add)
 			print "....................................."
