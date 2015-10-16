@@ -94,8 +94,29 @@ def editSucursalE(request,id):
 	
 
 def listSucursalL(request,id):
-	pass
 
+	sucursal_id = Utilidades().validarIngresoNum(id)
+	try:
+		sucursal = Sucursal.objects.get(pk=sucursal_id)
+
+
+		try:
+			detalle_sucursal_almacen_productos = DetalleSucursalAlmacen.objects.filter(sucursal_id = sucursal)
+		except Exception, e:
+			return HttpResponse("Problemas del Server")
+
+	
+	except Exception, e : 
+		print e  
+		mensaje ="<html>	<head>		<title></title>		</head>		<body>			<h1> PAGE NOT FOUND!</h1>		</body>		</html>"
+		return HttpResponse(mensaje)
+
+
+	template = "listaProductosSucursalAlmacen.html"
+
+	print locals()
+
+	return render_to_response (template, locals() , context_instance = RequestContext(request))
 #Asignacion de Pedidos a Sucursales
 def registrarPedidoSucursal(request):
 	pass
