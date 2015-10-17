@@ -113,10 +113,8 @@ def listSucursalL(request,id):
 
 
 	template = "listaProductosSucursalAlmacen.html"
-
-	print locals()
-
 	return render_to_response (template, locals() , context_instance = RequestContext(request))
+	
 #Asignacion de Pedidos a Sucursales
 def registrarPedidoSucursal(request):
 	pass

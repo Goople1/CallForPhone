@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Filtro de productos  </title>
+</head>
+
+<body>
+{% load staticfiles %}
+<div id = "div_cmb">
+	<label> Sucursales: </label>
+	<select id = "cmb_sucursal">
+			{% if sucursales %}
+				
+				<option value = "0"> todas </option>
+				{% for sucursal in  sucursales %}
+					
+					<option value = "{{sucursal.id}}">{{sucursal.nombre}} - {{sucursal.codigo_puesto}}  </option>
+
+				{% endfor %}
+			{% else %}
+
+				<option > no hay Datos</option>
+			{% endif %}
+	</select>
+
+	<label> Marca: </label>
+	<select id = "cmb_marca">
+		{% if marcas %}
+
+			<option value = "0"> todas </option>
+
+			{% for marca in marcas %}
+				<option value ="{{marca.id}}"> {{marca.nombre}}</option>
+				
+			{% endfor %}
+
+		{% else %}
+			<option> No Hay datos</option>
+			
+		{% endif %}
+	</select>
+
+	<label>Tipo Produto : </label>
+
+	<select id = "cmb_tipo">
+
+		{% if tipos %}
+
+			<option value = "0"> todas </option>
+
+			{% for tipo in  tipos %}
+
+			<option value ="{{tipo.id}}"> {{tipo.nombre}}</option>
+				
+				
+
+			{% endfor %}
+
+		{% else %}
+
+			<option> No Hay datos</option>
+		{% endif %}
+
+	</select>
+</div>
+
+
+
+<script src="{% static "static/js/jquery-1.8.3.min.js"%}"></script>
+<script src="{% static "static/js/init.js"%}"type="text/javascript"></script>
+</body>
+</html>

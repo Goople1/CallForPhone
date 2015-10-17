@@ -28,3 +28,14 @@ urlpatterns += patterns('sucursales.views',
  	
 
  )
+
+urlpatterns += patterns('productos.views',
+
+	url(r'^producto/filtroproducto/$', 'filtroproductos',name='filtroproductos'),
+	url(r'^producto/filtrocriterio/$', 'filtrocriterio',name='filtrocriterio'),
+	
+
+
+
+
+	)
