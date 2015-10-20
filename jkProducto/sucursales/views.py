@@ -9,6 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 def mantenimientoSucursal(request):
 	template = 'MantenimientoAsignacionSucursales.html'
+	template = 'IndiceOriginal.html'
 	return render_to_response(template,{},context_instance=RequestContext(request))
 
 def addSucursal(request):
