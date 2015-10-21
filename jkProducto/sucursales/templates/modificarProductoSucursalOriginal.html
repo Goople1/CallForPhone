@@ -6,11 +6,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+        {% load staticfiles %}
+        <link rel="shortcut icon" href="{% static "static/images/favicon.png "%}" type="image/png">
 
         <title>Las Malvinas</title>
 
-        <link href="css/style.default.css" rel="stylesheet">
+       <link href="{% static "static/css/style.default.css"%}" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -33,7 +34,7 @@
                     <!-- This is only visible to small devices -->
                     <div class="visible-xs hidden-sm hidden-md hidden-lg">   
                         <div class="media userlogged">
-                            <img alt="" src="images/photos/loggeduser.png" class="media-object">
+                            <img alt="" src="{% static "static/images/photos/loggeduser.png"%}" class="media-object">
                             <div class="media-body">
                                 <h4>John Doe</h4>
                                 <span>"Life is so..."</span>
@@ -79,7 +80,7 @@
                             <li>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                        <img src="images/photos/loggeduser.png" alt="" />
+                                         <img src="{% static "static/images/photos/loggeduser.png"%}" alt="" />
                                         John Doe
                                         <span class="caret"></span>
                                     </button>
@@ -201,18 +202,18 @@
 
 
 
-        <script src="js/jquery-1.11.1.min.js"></script>
-        <script src="js/jquery-migrate-1.2.1.min.js"></script>
-        <script src="js/jquery-ui-1.10.3.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/modernizr.min.js"></script>
-        <script src="js/jquery.sparkline.min.js"></script>
-        <script src="js/toggles.min.js"></script>
-        <script src="js/retina.min.js"></script>
-        <script src="js/jquery.cookies.js"></script>
+        <script src="{% static "static/js/sucursal/jquery-1.11.1.min.js"%}"></script>
+        <script src="{% static "static/js/sucursal/jquery-migrate-1.2.1.min.js"%}"></script>
+        <script src="{% static "static/js/sucursal/bootstrap.min.js"%}"></script>
+        <script src="{% static "static/js/sucursal/modernizr.min.js"%}"></script>
+        <script src="{% static "static/js/sucursal/jquery.sparkline.min.js"%}"></script>
+        <script src="{% static "static/js/sucursal/toggles.min.js"%}"></script>
+        <script src="{% static "static/js/sucursal/retina.min.js"%}"></script>
+        <script src="{% static "static/js/sucursal/jquery.cookies.js"%}"></script>
+        <script src="{% static "static/js/sucursal/jquery-ui-1.10.3.min.js"%}"></script>
 
-      <script src="js/select2.min.js"></script>
-        <script src="js/custom.js"></script>
+      <script src="{% static "static/js/sucursal/select2.min.js"%}"></script>
+        <script src="{% static "static/js/sucursal/custom.js"%}"></script>
 
         <script>
 jQuery(document).ready(function(){
