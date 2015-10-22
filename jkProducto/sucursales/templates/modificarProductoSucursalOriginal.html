@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        {% load staticfiles %}
+        <link rel="shortcut icon" href="{% static "static/images/favicon.png "%}" type="image/png">
+
+        <title>Las Malvinas</title>
+
+       <link href="{% static "static/css/style.default.css"%}" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+        <section>
+
+            <div class="leftpanel">
+
+                <div class="logopanel">
+                    <h1><span>[</span> Las Malvinas <span>]</span></h1>
+                </div><!-- logopanel -->
+
+                <div class="leftpanelinner">
+
+                    <!-- This is only visible to small devices -->
+                    <div class="visible-xs hidden-sm hidden-md hidden-lg">   
+                        <div class="media userlogged">
+                            <img alt="" src="{% static "static/images/photos/loggeduser.png"%}" class="media-object">
+                            <div class="media-body">
+                                <h4>John Doe</h4>
+                                <span>"Life is so..."</span>
+                            </div>
+                        </div>
+
+                        <h5 class="sidebartitle actitle">Account</h5>
+                        <ul class="nav nav-pills nav-stacked nav-bracket mb30">
+                           
+                            <li><a href="signout.html"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
+                        </ul>
+                    </div>
+
+                    <h5 class="sidebartitle">Navegar</h5>
+                    <ul class="nav nav-pills nav-stacked nav-bracket">
+                        <li><a href="index.html"><i class="fa fa-home"></i> <span>Principal</span></a></li>
+                        <li class="nav-parent"><a href="#"><i class="fa fa-th-list"></i> <span>Productos</span></a>
+                            <ul class="children">
+                                <li><a href="#"><i class="fa fa-caret-right"></i> Registrar</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i> Modificar</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i>Listar</a></li>
+
+                            </ul>
+                        </li>
+                     
+                    </ul>
+
+                </div><!-- leftpanelinner -->
+            </div><!-- leftpanel -->
+
+            <div class="mainpanel">
+
+                <div class="headerbar">
+
+                    <a class="menutoggle"><i class="fa fa-bars"></i></a>
+
+                    <form class="searchform" action="http://themepixels.com/demo/webpage/bracket/index.html" method="post">
+                        <input type="text" class="form-control" name="keyword" placeholder="Buscar..." />
+                    </form>
+
+                    <div class="header-right">
+                        <ul class="headermenu">                   
+                            <li>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                         <img src="{% static "static/images/photos/loggeduser.png"%}" alt="" />
+                                        John Doe
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                                        <li><a href="signin.html"><i class="glyphicon glyphicon-log-out"></i>Salir</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div><!-- header-right -->
+
+                </div><!-- headerbar -->
+
+                <div class="pageheader">
+                    <h2><i class="fa fa-home"></i> Las Malvinas <span>Repuestos de celulares...</span></h2>
+                    <div class="breadcrumb-wrapper">
+                        <span class="label">Tu estas aqu&iacute;:</span>
+                        <ol class="breadcrumb">
+                            <li><a href="index.html">Home</a></li>
+                            <li class="active">Principal</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="contentpanel">
+                    <!-- content goes here... -->
+                    
+    <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-btns">
+                           <!-- <a href="" class="panel-close">×</a>-->
+                          <a href="" class="minimize">−</a>
+                          </div><!-- panel-btns -->
+                          <h3 class="panel-title">Modificar Productos a Sucursales</h3>
+                        </div>
+            <div class="panel-body">
+                         
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Producto <span class="asterisk">*</span></label>
+                  <div class="col-sm-9">
+                    <select class="select2" data-placeholder="Escoger Producto...">
+                          <option value=""></option>
+                          <option value="United States">United States</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Email <span class="asterisk">*</span></label>
+                  <div class="col-sm-9">
+                    <input type="email" name="email" class="form-control" placeholder="Type your email..." required="">
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">URL</label>
+                  <div class="col-sm-9">
+                    <input type="url" name="url" class="form-control">
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Comment <span class="asterisk">*</span></label>
+                  <div class="col-sm-9">
+                    <textarea rows="5" class="form-control" placeholder="Type your comment..." required=""></textarea>
+                  </div>
+                </div>
+
+                 <div class="form-group">
+                      <label class="col-sm-3 control-label">Stock Disponible</label>
+                      <div class="col-sm-9">
+                        <input type="text" id="spinner1" class="spinner" />
+                        <span class="help-block">Enhance a text input for entering numeric values, with up/down buttons and arrow key handling.</span>
+                      </div>
+                </div>
+                 <div class="form-group">
+                      <label class="col-sm-3 control-label">Stock Actual</label>
+                      <div class="col-sm-9">
+                        <input type="text" id="spinner2" class="spinner" />
+                        <span class="help-block">Enhance a text input for entering numeric values, with up/down buttons and arrow key handling.</span>
+                      </div>
+                </div>
+                 <div class="form-group">
+                      <label class="col-sm-3 control-label">Stock a Asignar</label>
+                      <div class="col-sm-9">
+                        <input type="text" id="spinner3" class="spinner" />
+                        <span class="help-block">Enhance a text input for entering numeric values, with up/down buttons and arrow key handling.</span>
+                      </div>
+                </div>
+
+         </div>
+
+            <div class="panel-footer">
+             <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                  <button class="btn btn-primary">Modificar</button>&nbsp;
+                  <button class="btn btn-default">Limpiar</button>
+                </div>
+             </div>
+          </div><!-- panel-footer -->
+
+
+                      </div><!-- panel -->
+            </div>
+
+      </div><!-- row -->
+                   
+                </div>
+
+            </div><!-- mainpanel -->
+
+            <div class="rightpanel">
+            
+            </div><!-- rightpanel -->
+
+        </section>
+
+
+
+        <script src="{% static "static/js/sucursal/jquery-1.11.1.min.js"%}"></script>
+        <script src="{% static "static/js/sucursal/jquery-migrate-1.2.1.min.js"%}"></script>
+        <script src="{% static "static/js/sucursal/bootstrap.min.js"%}"></script>
+        <script src="{% static "static/js/sucursal/modernizr.min.js"%}"></script>
+        <script src="{% static "static/js/sucursal/jquery.sparkline.min.js"%}"></script>
+        <script src="{% static "static/js/sucursal/toggles.min.js"%}"></script>
+        <script src="{% static "static/js/sucursal/retina.min.js"%}"></script>
+        <script src="{% static "static/js/sucursal/jquery.cookies.js"%}"></script>
+        <script src="{% static "static/js/sucursal/jquery-ui-1.10.3.min.js"%}"></script>
+
+      <script src="{% static "static/js/sucursal/select2.min.js"%}"></script>
+        <script src="{% static "static/js/sucursal/custom.js"%}"></script>
+
+        <script>
+jQuery(document).ready(function(){
+    
+    "use strict";
+  // Select2
+  jQuery(".select2").select2({
+    width: '100%'
+  });
+
+ // Spinner
+var spinner = jQuery('.spinner').spinner();
+  spinner.spinner('value', 0);
+});
+/*
+var spinner = jQuery('#spinner2').spinner();
+  spinner.spinner('value', 0);
+});
+*/
+</script>
+    </body>
+
+<!-- Mirrored from themepixels.com/demo/webpage/bracket/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 11 Oct 2015 19:21:04 GMT -->
+</html>

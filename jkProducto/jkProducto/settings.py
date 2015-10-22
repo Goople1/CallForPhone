@@ -88,7 +88,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 MEDIA_URL = '/media/'
-im = os.sep.join(os.path.abspath(__file__).split(os.sep)[:-2] + ['registro_usuarios'])
+im = os.sep.join(os.path.abspath(__file__).split(os.sep)[:-2] + ['sucursales'])
 TEMPLATE_DIRS = (
     os.path.join(im,'templates'),
     
@@ -102,3 +102,5 @@ STATICFILES_FINDERS = (
 )
 MEDIA_ROOT = os.sep.join(os.path.abspath(__file__).split(os.sep)[:-2] + ['media'])
 STATIC_ROOT = os.sep.join(os.path.abspath(__file__).split(os.sep)[:-2] + ['content'])
+
+STATICFILES_STORAGE ='django.contrib.staticfiles.storage.CachedStaticFilesStorage'

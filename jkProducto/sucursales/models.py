@@ -6,6 +6,7 @@ from productos.models import Producto
 # Create your models here.
 class Almacen(models.Model):
     nombre_empresa = models.CharField(max_length=80)
+    logo = models.ImageField(upload_to='empresa/',blank=True,null=True)
     ruc = models.CharField(unique=True, max_length = 11,validators=[ RegexValidator(regex = '\d{11}', message="Ruc no tiene 11 digitos", code="invalido")])
     todos_departamento = (('Ama','Amazonas'), ('Anc','Ancash'),('Apu','Apurimac'),('Are','Arequipa'),('Aya','Ayacucho'),('Caj','Cajamarca'),('Cal','Callao'),('Cuz','Cuzco'),('Hua','Huancavelica'),('Hun','Huanuco'),('Ica','Ica'),('Jun','Junin'),('Lal','La Libertad'),('Lam','Lambayeque'),('Lim','Lima'),('Lor','Loreto'),('Mad','Madre de Dios'),('Moq','Moquegua'),('Pas','Pasco'),('Piu','Piura'),('Pun','Puno'),('San','San Martin'),('Piu','Piura'),('Tac','Tacna'),('Tum','Tumbes'),('Uca','Ucayali'),)
     departamento = models.CharField(max_length=20, choices=todos_departamento, default='Lim')
@@ -83,6 +84,10 @@ class DetalleSucursalAlmacen(models.Model):
 
 	class Meta:
 		unique_together = ('producto_id','sucursal_id')
+
+	def __unicode__(self):
+		people = models.Manager()
+		return u'%s' % (self.producto_id)
 
 #Se Registra cuando se cambia de estado la sucursal
 class HistorialSucursal(models.Model):
