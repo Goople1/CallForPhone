@@ -1,3 +1,5 @@
+# from django.db.models import ForeignKey 
+
 class Utilidades():
 	def validarIngresoNum(self,numero):
 
@@ -16,8 +18,73 @@ class Utilidades():
 	def hola (self):
 		print 5
 
+
+	# def mifuncion(self,model_instance):
+	# 	json = {}
+	# 	for field in model_instance._meta.get_all_field_names():
+	# 		print field
+	# 	 	field_object, model, direct, m2m = model_instance._meta.get_field_by_name(field)
+ #    		if not m2m and direct and isinstance(field_object, ForeignKey):
+    			
+ #    			print "es llave Foranea"
+ #    		else:
+ #    			json[field] = model_instance.__getattribute__(field)
+
+			
+	#     return json
+
+
+	def detalle_sucursal_almacen_to_json (self,ObjDetaSucAlm):
+
+		to_json = {	"id" : ObjDetaSucAlm.id,"stock" : ObjDetaSucAlm.stock, "producto": {"id" : ObjDetaSucAlm.producto_id.id,"codigo":ObjDetaSucAlm.producto_id.codigo,"color" :ObjDetaSucAlm.producto_id.get_color_display(),"precio_por_mayor":ObjDetaSucAlm.producto_id.precio_x_mayor,"precio_por_menor":ObjDetaSucAlm.producto_id.precio_x_menor,	"marca":{"nombre":ObjDetaSucAlm.producto_id.marca.nombre},  "tipo_producto":{"nombre":ObjDetaSucAlm.producto_id.tipo_producto.nombre}   }, 	"sucursal":{"codigo_puesto":ObjDetaSucAlm.sucursal_id.codigo_puesto, "nombre":ObjDetaSucAlm.sucursal_id.nombre,	"departamento":ObjDetaSucAlm.sucursal_id.get_departamento_display(),"direccion":ObjDetaSucAlm.sucursal_id.direccion, "telefono":ObjDetaSucAlm.sucursal_id.telefono, "celular":ObjDetaSucAlm.sucursal_id.celular }}
+		return to_json
+
+
+
+
+
+
+
+
+
 # from django.contrib.auth.models import User
 # class ValidarUsuario():
+
+
+
+    	# "id" : ObjDetaSucAlm.id,
+    	# "stock" : ObjDetaSucAlm.stock,
+    	# "producto": {
+    	# 				"id" : ObjDetaSucAlm.producto_id.id,
+    	# 				"codigo":ObjDetaSucAlm.producto_id.codigo,
+    	# 				"color" :ObjDetaSucAlm.producto_id.color,
+    	# 				"precio_por_mayor":ObjDetaSucAlm.producto_id.precio_x_mayor
+    	# 				"precio_por_menor":ObjDetaSucAlm.producto_id.precio_x_menor
+
+    	# 				"marca":{
+    	# 					"nombre":ObjDetaSucAlm.producto_id.marca.nombre
+
+    	# 				}
+
+    	# 				"tipo_producto":{
+
+    	# 					"nombre":ObjDetaSucAlm.producto_id.tipo_producto.nombre
+    	# 				}
+
+
+    	# 			}
+
+     #   	"sucursal":{
+
+     #   			"codigo_puesto":ObjDetaSucAlm.sucursal_id.codigo_puesto,
+     #   			"nombre":ObjDetaSucAlm.sucursal_id.nombre,
+     #   			"departamento":ObjDetaSucAlm.sucursal_id.departamento,
+     #   			"direccion":ObjDetaSucAlm.sucursal_id.direccion,
+     #   			"telefono":ObjDetaSucAlm.sucursal_id.telefono,
+     #   			"celular":ObjDetaSucAlm.sucursal_id.celular
+
+     #   		}
+
 
 #     def validarEmail(self,dato):
 #         rpta={}

@@ -5,6 +5,7 @@ from  sucursales.models import Sucursal , DetalleSucursalAlmacen
 
 from sucursales.utilidades import Utilidades
 
+import json
 # Create your views here.
 def home(request):
 	template = 'ventas.html'
@@ -42,7 +43,6 @@ def filtroproductos(request):
 	template = "filtroProductos.html"
 	return render_to_response(template , {"sucursales":sucursales , "marcas" : marcas , "tipos":tipos} ,context_instance = RequestContext(request)) 
 
-
 def filtrocriterio(request):
 
 	if request.method == "GET":
@@ -53,27 +53,56 @@ def filtrocriterio(request):
 		producto_id = Utilidades().validarIngresoNum(request.GET.get("producto_id"))
 		tipo_id = Utilidades().validarIngresoNum(request.GET.get("tipo_id"))
 
+
+
 		rpt = criteriobusqueda(sucursal_id,producto_id,tipo_id)
 		print "criterios"
 		print rpt
 
 		if not rpt :
 
+			print  "Pasar todos los Objetos"
+
 			productos = DetalleSucursalAlmacen.objects.all()
 			print productos.count()
 
-			return HttpResponse(productos)
+			if productos:
+
+				print "helllo"
+				data = [Utilidades().detalle_sucursal_almacen_to_json(producto) for producto in productos]
+				print data
+
+			else : 
+
+				data = []
+
+			return HttpResponse(json.dumps(data) , content_type='application/json')
 
 
 		else :
 
-			productos = DetalleSucursalAlmacen.objects.filter(**rpt)
+			print "rpt  Tiene Criterios"
+			try:
+				productos = DetalleSucursalAlmacen.objects.filter(**rpt)
+				print productos
+
+				if productos:
+
+					print "helllo"
+					data = [Utilidades().detalle_sucursal_almacen_to_json(producto) for producto in productos]
+					print data
+
+				else : 
+
+					data = []
+
+			except Exception , e:
+				 print e
+				 return  HttpResponse("Error de Servidor ")
 			print productos.count()
-			return HttpResponse(productos)
 
+			return HttpResponse(json.dumps(data) ,content_type='application/json')
 
-
-		#return HttpResponse("que comienze el juego")
 
 		return HttpResponse("No se puede realizar esta accion")
 
@@ -107,11 +136,11 @@ def criteriobusqueda(suc,pro,tipo):
 			criterio.update(regla)
 
 		if "prod" in my_dict:
-			regla = {"producto_id":my_dict.get("prod")}
+			regla = {"producto_id__marca":my_dict.get("prod")}
 			criterio.update(regla)
 
 		if "tipo" in my_dict:
-			regla = {"producto_id.tipo":my_dict.get("tipo")}
+			regla = {"producto_id__tipo_producto":my_dict.get("tipo")}
 			criterio.update(regla)
 
 		return criterio

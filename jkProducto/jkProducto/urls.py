@@ -8,7 +8,9 @@ urlpatterns = patterns('',
     # url(r'^$', 'jkProducto.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^$', 'productos.views.home', name='home'),
-    url(r'^login/$', 'productos.views.iniciarSesion', name='login'),
+    #url(r'^login/$', 'productos.views.iniciarSesion', name='login'),
+    url(r'^cuenta/', include('empleados_login.urls')),
+    url(r'^ventas/', include('ventas.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
 

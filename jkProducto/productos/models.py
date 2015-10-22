@@ -38,7 +38,7 @@ class Producto(models.Model):
 		verbose_name_plural = "Mantenimiento de Productos"
 		unique_together = ('codigo', 'color','marca','tipo_producto')
 	def __unicode__(self):
-		return u'%s,color: %s,marca: %s,tipo: %s' % (self.codigo,self.color,self.marca.nombre,self.tipo_producto.nombre)
+		return u'%s,color: %s,marca: %s,tipo: %s' % (self.codigo,self.get_color_display(),self.marca.nombre,self.tipo_producto.nombre)
 
 """
 class ProductoAlmacen(models.Model):
