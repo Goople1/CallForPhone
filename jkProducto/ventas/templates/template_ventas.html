@@ -57,7 +57,7 @@
                 <tr id='addr0'>
                   <th scope="row">1</th>
 
-                  <td>
+                  <td id="cmbd0">
                       <select id="cmb0" class ="cmb_producto">
                           <option value = "0">  Elegir .... </option>
                           {% for  producto in  productos %}
@@ -130,9 +130,12 @@
 
     <!-- Javascript for tables -->
     <script src="{% static "static/js/jquery-1.8.3.min.js"%}"></script>
-    <script src="{% static "static/js/ventas.js"%}"></script>
+    <!--<script src="{% static "static/js/ventas.js"%}"></script>-->
 
     <script type="text/javascript">
+    $(document).ready(function(){
+
+  
         var pro = [];
 
                 {% for producto in  productos %}
@@ -167,31 +170,84 @@
         {% endfor %}
 
        //Cantidad de llaves que hay en el json :/ , eso creo u_u
-      console.log(Object.keys(pro).length)
+     // console.log(Object.keys(pro).length)
 
-        console.log(pro);
+       // console.log(pro);
 
         var to_cmb  = pro;
-
+         comAux="";
+/*  
  $(".cmb_producto").focus(function () {
         // Store the current value on focus, before it changes
         previous = this.value;
+        console.log("testFOCUS")
        
     })
-  $("body").delegate('.cmb_producto','change',function() {
+*/
+/*
+  $("body").delegate('.cmb_producto','change',function(e) {
         // Do something with the previous value after the change
    
-     var ahoraK=$(this).val();
-     console.log("detete"+ahoraK)
-      cambiarEstadoOff(previous);
-      cambiarEstadoON(ahoraK);
-      console.log("twinem: "+previous);
+     
+     var comboActualP = $(this);
+     var previo = comboActualP.data('previous');
+    // alert("PRevio:"+previo)
+     comboActualP.data('previous', comboActualP.val());
+     // //console.log("detete"+ahoraK)
+     //  //cambiarEstadoOff(previous);
+     //  //console.log("es cero?: "+ahoraK);
+     // // cambiarEstadoON(comAux)
+     // console.log("Ahora:"+comboActualP.val()+"-"+previo)
+     //  cambiarEstadoON(comboActualP.val());
+     
+      //if(comboActualP.val()=="0")
+      //{
+        //console.log("ceroo"+previousT);
+        // if((previo!=undefined && previo!=null && previo !="undefined") || (comboActualP.val()=="0"))
+        // {
+        //   cambiarEstadoOff(previo);
+        //   console.log("estado Change"+previo)  
+        // }
+
+        if(comboActualP.val()=="0")
+        {
+         // alert("PrevioChane: "+previo);
+          if(previo!=undefined && previo!=null && previo !="undefined")
+          {
+           // alert("Change previous")
+            cambiarEstadoOff(previo);
+          }
+          else
+          {
+            //alert("Change if else")
+          }
+        }
+        else
+        {
+          cambiarEstadoON(comboActualP.val());
+          if(previo!=undefined && previo!=null && previo !="undefined")
+          {
+            //alert("else previo ");
+            cambiarEstadoOff(previo);
+          }
+          else
+          {
+           // alert("else else Change previous")
+          }
+        }
+         
+        //cambiarEstadoOff
+      //}
+      //console.log("twinem: "+previous);
        
     });
+*/
+/*
   $(".cmb_producto").on("focus",function(){
     //create_cmb(to_cmb);
     var ccc=$(this);
     previous = ccc.val();
+    console.log("focus: "+previous);
     if(ccc.val()==previous)
     {
       cambiarEstadoOff(previous);  
@@ -204,9 +260,84 @@
     
   });
  
+*/
+ $("body").delegate('.cmb_producto','focus', function () {
+    var ppp = $(this);
+    console.log("dllFocus:",ppp.val());
+    //console.log(this.value);
+    var pre = ppp.data('previous');
+    if(typeof pre !== "undefined" && pre.toString()!="0")
+    {
+      cambiarEstadoOff(pre);
 
+    }
+    create_cmb(to_cmb,ppp.prop("id"));
+    ppp.data('previous', ppp.val());
+    //console.log("new focuss-"+ddl.val());
+}).on('change','.cmb_producto', function () {
+    var nnn = $(this);
+    console.log("dllChange:",nnn.val())
+    console.log(this);
+    var previous = nnn.data('previous');
+    var actual=nnn.val();
+    if(actual.toString()!="0")
+    {
+      cambiarEstadoON(actual);
+    }
+    if(previous!="0")
+    {
+      console.log("dllChangePrevv:",previous)
+      cambiarEstadoOff(previous);
+    }
+    
+    nnn.data('previous',actual);  
+    
+    //create_cmb(to_cmb,nnn.prop("id"));
+    //ddl.data('previous', ddl.val());
+    //console.log("new change");
+});
+
+
+/*
+$("body").delegate(".cmb_producto",'focus',function()
+  {
+    
+    var oldDato= $(this);
+    var previo = oldDato.data('previous');
+    
+
+     if(typeof previo !== "undefined" && previo!="0")
+      {
+        //console.log("focus")
+        console.log("Previo indefinido:",previo)
+        console.log("Valores: "+previo+"-"+oldDato.val())
+        //alert("Focus change estsado off");
+
+        var id = oldDato.prop("id");
+        console.log("id: ",id);
+        var idCmb=to_cmb[previo].estado;
+        if(idCmb=="0")
+        {
+         cambiarEstadoOff(previo);
+          //create_cmb(to_cmb,id);
+        }
+
+        
+        
+      }
+      console.log("to_cmb->focus->",to_cmb)
+  create_cmb(to_cmb,oldDato.prop("id"));
+    // //console.log("focusAlw: ",oldDato.val() );
+    // comAux= oldDato.val();
+    // cambiarEstadoOff(oldDato.val());
+    //alert("focus intro change");
+      
+    
+  });
+  */
     function cambiarEstadoOff(llave)
     {
+      console.log("on")
       if(llave.toString()!="0")
       {
         to_cmb[llave].estado="1";
@@ -215,6 +346,7 @@
     }
     function cambiarEstadoON(llave)
     {
+      console.log("off");
       if(llave.toString() !="0")
       {
         to_cmb[llave].estado="0";
@@ -222,12 +354,12 @@
       }
     }
 
-
+/*
  $("table").delegate(".cmb_producto","change",function(){
     
 
-  var tt=$('.cmb_producto:last option:selected').val();
-    var p = $(this).val();
+  //var tt=$('.cmb_producto:last option:selected').val();
+    //var p = $(this).val();
    // console.log("producto selected" , p )
    // console.log("Tt: "+tt);
   
@@ -235,26 +367,28 @@
 
  var option_list=[]
 
-  
+  */
    
 
    function create_cmb(lista,iden){
 
 
-    console.log("LIsta",lista);
+    //console.log("LIsta",lista);
     //var combo = $("#"+iden);
+    //console.log("Iden: ",iden)
+    //console.log(lista);
     var  auxComb = document.getElementById(iden);
     var combo = (auxComb) ? auxComb:-1;
-    console.log("combix",combo)
+    //console.log("combix",combo)
     if(parseInt(combo) == -1 )
     {
-      console.log("tmr");
+      console.log("combo nuevo");
 
       combo = $("<select></select>").attr("class", "cmb_producto").attr("id","cmb"+iden);  
     }
     else
     {
-      console.log("else")
+      console.log("crear combo vacio")
        $("#"+iden).empty();
     }
   
@@ -271,7 +405,7 @@
          
           if(p.estado.toString()=="1")
           {
-            console.log("after");
+            //console.log("after");
 
             $("<option />", {value: p.producto.id, text: p.id}).appendTo(combo);
           }
@@ -282,8 +416,9 @@
 
     
         
-     console.log("combo")
+     
      //$("#"+iden).append(combo)
+     //console.log("tablar: ",combo);
      return combo;
 
 
@@ -337,10 +472,10 @@
 
         
 
-            $('#addr'+i).html("<td>"+ (i+1) +"</td><td id= 'cmb"+i+"'> </td> <td><input name='inputCantidad"+i+"' type='text' class='form-control input-md'  /></td><td><input  name='inputProductName"+i+"' type='text' class='form-control input-md'></td><td><input  name='unitPrice"+i+"' type='text' class='form-control input-md'></td><td><input  name='inputImport"+i+"' type='text' class='form-control input-md'></td>");
+            $('#addr'+i).html("<td>"+ (i+1) +"</td><td id= 'cmbd"+i+"'> </td> <td><input name='inputCantidad"+i+"' type='text' class='form-control input-md'  /></td><td><input  name='inputProductName"+i+"' type='text' class='form-control input-md'></td><td><input  name='unitPrice"+i+"' type='text' class='form-control input-md'></td><td><input  name='inputImport"+i+"' type='text' class='form-control input-md'></td>");
 
 
-            $('#cmb'+i).append(create_cmb(to_cmb,i));
+            $('#cmbd'+i).append(create_cmb(to_cmb,i));
 
 
 
@@ -348,7 +483,7 @@
         i++;
     });
 
-       
+  });      
 
 
     </script>
