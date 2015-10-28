@@ -119,7 +119,9 @@
                           <h3 class="panel-title">Sucursales</h3>
                         </div>
                         <div class="panel-body">
-                         
+           {%for sucursal in sucursales %}
+            {% if sucursal.id_estadoSucursal.nombre_estado == "Disponible" %}
+            <a href="{% url operation sucursal.id %}">               
                     <div class="col-sm-6 col-md-3">
                       <div class="panel panel-success panel-stat">
                         <div class="panel-heading">
@@ -127,62 +129,40 @@
                           <div class="stat">
                             <div class="row">
                               <div class="col-xs-4">
-                                <img src="{% static "static/img/shop.png"%}" alt="" />
+                                <img src="{% static "static/images/shop.png"%}" alt="" />
                               </div>
                               <div class="col-xs-8">
-                                <small class="stat-label">Visits Today</small>
-                                <h1>900k+</h1>
+                                <small class="stat-label">Sucursal</small>
+                                <h1>{{sucursal.codigo_puesto}}</h1>
                               </div>
                             </div><!-- row -->
 
                             <div class="mb15"></div>
 
                             <div class="row">
-                              <div class="col-xs-6">
-                                <small class="stat-label">Pages / Visit</small>
-                                <h4>7.80</h4>
+                             <!--  <div class="col-xs-6"> -->
+                             <div class="col-xs-12">
+                                <small class="stat-label">{{sucursal.get_departamento_display}}</small>
+                                <h4>{{sucursal.nombre}}</h4>
                               </div>
 
-                              <div class="col-xs-6">
+                              <!-- <div class="col-xs-6">
                                 <small class="stat-label">% New Visits</small>
                                 <h4>76.43%</h4>
-                              </div>
+                              </div> -->
                             </div><!-- row -->
                           </div><!-- stat -->
 
                         </div><!-- panel-heading -->
                       </div><!-- panel -->
                     </div><!-- col-sm-6 -->
-
-                    <div class="col-sm-6 col-md-3">
-                      <div class="panel panel-danger panel-stat">
-                        <div class="panel-heading">
-
-                          <div class="stat">
-                            <div class="row">
-                              <div class="col-xs-4">
-                                <img src="{% static "static/img/is-document.png"%}" alt="" />
-                              </div>
-                              <div class="col-xs-8">
-                                <small class="stat-label">% Unique Visitors</small>
-                                <h1>54.40%</h1>
-                              </div>
-                            </div><!-- row -->
-
-                            <div class="mb15"></div>
-
-                            <small class="stat-label">Avg. Visit Duration</small>
-                            <h4>01:80:22</h4>
-
-                          </div><!-- stat -->
-
-                        </div><!-- panel-heading -->
-                      </div><!-- panel -->
-                    </div><!-- col-sm-6 -->
-
-
+             </a>
+            {% endif %}
+            {% empty %}
+                <h4>No hay Sucursales disponibles</h4>
+            {%endfor%}        
                         </div>
-                      </div><!-- panel -->
+                 </div><!-- panel -->
             </div>
 
       </div><!-- row -->

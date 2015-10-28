@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response , HttpResponse
 from django.template.context import RequestContext
-from models import Sucursal , DetalleAlmacen , DetalleSucursalAlmacen
+from models import Sucursal , DetalleAlmacen , DetalleSucursalAlmacen, HistorialDetalleSucursalAlmacen
 from productos.models import Producto
 from sucursales.utilidades import Utilidades
 from django.core.exceptions import ObjectDoesNotExist
@@ -8,26 +8,34 @@ from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 
 def mantenimientoSucursal(request):
-	template = 'MantenimientoAsignacionSucursales.html'
-	template = 'modificarProductoSucursalOriginal.html'
-	template = 'ListarProductosOriginal.html'
-	template = 'signin.html'
+	#template = 'MantenimientoAsignacionSucursales.html'
+	#template = 'modificarProductoSucursalOriginal.html'
+	#template = 'ListarProductosOriginal.html'
+	# template = 'signin.html'
+	#template = "IndiceOriginal.html"
+	#template = 'AddProductosSucursal.html'
+	#template = 'ListarSucursales.html' #fake
+	#template = 'registrarProductoOriginal.html'
+	template = 'mantenimientoSucursal.html'
 	return render_to_response(template,{},context_instance=RequestContext(request))
 
 def addSucursal(request):
 	template='ListarSucursales.html'
+	template = "IndiceOriginal.html"
 	operation = 'addSucursalA'
 	sucursal = Sucursal.objects.all()
 	return render_to_response(template,{'sucursales':sucursal,'operation':operation},context_instance=RequestContext(request))
 
 def editSucursal(request):
 	template='ListarSucursales.html'
+	template = "IndiceOriginal.html"
 	operation = 'editSucursalE'
 	sucursal = Sucursal.objects.all()
 	return render_to_response(template,{'sucursales':sucursal,'operation':operation},context_instance=RequestContext(request))
 
 def listSucursal(request):
 	template='ListarSucursales.html'
+	template = "IndiceOriginal.html"
 	operation = 'listSucursalL'
 	sucursal = Sucursal.objects.all()
 	return render_to_response(template,{'sucursales':sucursal,'operation':operation},context_instance=RequestContext(request))
@@ -36,9 +44,9 @@ def listSucursal(request):
 def addSucursalA(request,id):
 
 	template = 'AddProductosSucursal.html'
+	#template = 'registrarProductoOriginal.html'
 
 	#para Sacar los productos  que ya existen en  los DetallesSucursalAlmacen  de una Sucursal 
-
 	sucursal_id = id 
 	print sucursal_id
 
@@ -54,15 +62,15 @@ def addSucursalA(request,id):
 
 		if detalle_sucursal_almacen_productos:
 			id_producto_detalle_sucu_almacen = [deta.producto_id for deta in  detalle_sucursal_almacen_productos]
-			print "Productos en Detalle Sucursal Almacen"
-			print id_producto_detalle_sucu_almacen
-			print "Productos En Detalle Almacen que no estan En DetalleSucursalAlmacen "
+			#print "Productos en Detalle Sucursal Almacen"
+			#print id_producto_detalle_sucu_almacen
+			#print "Productos En Detalle Almacen que no estan En DetalleSucursalAlmacen "
 			detalle_almacen_productos = DetalleAlmacen.objects.exclude(producto_id__in= id_producto_detalle_sucu_almacen)
-			print detalle_almacen_productos
+			#print detalle_almacen_productos
 
 
 		else:
-			print " No hay nada en la lista asi que rojo par y pasa "
+			#print " No hay nada en la lista asi que rojo par y pasa "
 			detalle_almacen_productos  =  DetalleAlmacen.objects.only("producto_id")
 	
 	except Exception, e:
@@ -127,11 +135,11 @@ def dameStock(request):
 	print "Consultando Stock de DetalleAlmecen"
 
 	if request.method == "GET":
-		print "pase el get"
+		#print "pase el get"
 		a =  request.GET.get("codigo_producto")
 
 		codigo_producto = Utilidades().validarIngresoNum(a)
-		print codigo_producto
+		#print codigo_producto
 
 		if(codigo_producto != 0) & (codigo_producto > 0):
 			try:
@@ -155,20 +163,17 @@ def dameStock(request):
 
 
 def addProductotoSucursal(request):
+	print "LLEGA ACA SI O SI"
 	if request.method == "POST":
-
 		producto_id = Utilidades().validarIngresoNum(request.POST.get("producto_id"))
 		sucursal_id  = Utilidades().validarIngresoNum(request.POST.get("sucursal_id"))
 		stock_add = Utilidades().validarIngresoNum(request.POST.get("stock_add"))
-		
-
-
 		if ((producto_id != 0) & (producto_id > 0) ):
 
-			print "pass"
+			#print "pass"
 			if stock_add > 0 :
 
-				print "pase is digit"
+				#print "pase is digit"
 				try : 
 					detalle_almacen = DetalleAlmacen.objects.get(producto_id = producto_id )
 				except Exception,e:
@@ -176,7 +181,7 @@ def addProductotoSucursal(request):
 					mensaje = "Problemas con el SERVER"
 					return HttpResponse(mensaje)
 
-				print detalle_almacen
+				#print detalle_almacen
 				detalle_almacen.stock -= stock_add
 				print detalle_almacen.stock
 
@@ -189,22 +194,25 @@ def addProductotoSucursal(request):
 				
 				try : 
 					sucursal = Sucursal.objects.get(id = sucursal_id)
-
 				except ObjectDoesNotExist, e:
 					print e 
 					mensaje = "Es posible que la Sucursal no Exista, Intente otra vez"
 					return HttpResponse(mensaje)
 
-				print producto
-				print "............"
-				print sucursal
-				print "Creando el detalleSurcusalAlmacen"
+				#print producto
+				#print "............"
+				#print sucursal
+				#print "Creando el detalleSurcusalAlmacen"
 				# Para crear Objetos con  campos que son llaves Foraneas ,  se debe Vincular  un  Objeto  del Tipo  de  esa  Llave
-				print "fin de Crear detalleSurcusalAlmacen"
+				#print "fin de Crear detalleSurcusalAlmacen"
 				#se Crea el DetalleSucursalAlamcen
 
 				try:
-					DetalleSucursalAlmacen.objects.create(stock = stock_add, producto_id = producto , sucursal_id =  sucursal) 
+					detalleSA = DetalleSucursalAlmacen(stock = stock_add, producto_id = producto , sucursal_id =  sucursal) 
+					print "llega aca DETALLE HISTORIAL"
+					detalleSA.save()
+					HistorialDetalleSucursalAlmacen.objects.create(stock_actual =detalleSA.stock ,id_detalle_sucursal_almacen=detalleSA)
+
 				except Exception , e : 
 					print e 
 					mensaje = "no se puede Guardar los Datos , Parece Que ya Existen , Intente Otro vez"
@@ -295,12 +303,13 @@ def editProductotoSucursal(request):
 			print type(detalle_almacen.stock),type(stock_add)
 			print "....................................."
 
-			if(detalle_almacen.stock >= stock_add):
-
+			if(detalle_almacen.stock >= stock_add): 
 				detalle_almacen.stock-=stock_add
+				antes_dsa = producto_detalle_sucursal_almacen.stock
 				producto_detalle_sucursal_almacen.stock+=stock_add
 				detalle_almacen.save()
 				producto_detalle_sucursal_almacen.save()
+				HistorialDetalleSucursalAlmacen.objects.create(stock_actual =antes_dsa,stock_adicional= stock_add,id_detalle_sucursal_almacen=producto_detalle_sucursal_almacen)
 				return HttpResponse("Modificacion  del Producto hecha")
 			else:
 				mensaje = "La Cantidad En el Almacen  no es Suficiente para su Pedido"

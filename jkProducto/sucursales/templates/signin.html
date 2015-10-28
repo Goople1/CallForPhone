@@ -30,6 +30,7 @@
 		<div id="signinBlock">
 			<span class="formContainer">			    
  				<form id="signInForm" action="#" method="POST" data-ajax="true">
+ 					{% csrf_token %}
 					<span class="field signinRow ">
 						<span class="message"></span>
 						<span class="errorBlip"></span>

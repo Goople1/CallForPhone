@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        {% load staticfiles %}
+         {% load staticfiles %}
         <link rel="shortcut icon" href="{% static "static/images/favicon.png "%}" type="image/png">
 
         <title>Las Malvinas</title>
@@ -21,6 +21,7 @@
     </head>
 
     <body>
+
         <section>
 
             <div class="leftpanel">
@@ -36,14 +37,14 @@
                         <div class="media userlogged">
                             <img alt="" src="{% static "static/images/photos/loggeduser.png"%}" class="media-object">
                             <div class="media-body">
-                                <h4>John Doe</h4>
+                                <h4>JK</h4>
                                 <span>"Life is so..."</span>
                             </div>
                         </div>
 
                         <h5 class="sidebartitle actitle">Account</h5>
                         <ul class="nav nav-pills nav-stacked nav-bracket mb30">
-                           
+                          
                             <li><a href="signout.html"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
                         </ul>
                     </div>
@@ -51,6 +52,8 @@
                     <h5 class="sidebartitle">Navegar</h5>
                     <ul class="nav nav-pills nav-stacked nav-bracket">
                         <li><a href="index.html"><i class="fa fa-home"></i> <span>Principal</span></a></li>
+                        
+
                         <li class="nav-parent"><a href="#"><i class="fa fa-th-list"></i> <span>Productos</span></a>
                             <ul class="children">
                                 <li><a href="#"><i class="fa fa-caret-right"></i> Registrar</a></li>
@@ -59,7 +62,7 @@
 
                             </ul>
                         </li>
-                     
+                       
                     </ul>
 
                 </div><!-- leftpanelinner -->
@@ -76,12 +79,12 @@
                     </form>
 
                     <div class="header-right">
-                        <ul class="headermenu">                   
+                        <ul class="headermenu">
                             <li>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                         <img src="{% static "static/images/photos/loggeduser.png"%}" alt="" />
-                                        John Doe
+                                        JK
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
@@ -109,60 +112,106 @@
                     <!-- content goes here... -->
                     
     <div class="row">
-            <div class="col-sm-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <div class="panel-btns">
-                           <!-- <a href="" class="panel-close">×</a>-->
-                          <a href="" class="minimize">−</a>
-                          </div><!-- panel-btns -->
-                          <h3 class="panel-title">Registrar Productos a Sucursales</h3>
-                        </div>
-            <div class="panel-body">
-                         
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">Producto <span class="asterisk">*</span></label>
-                  <div class="col-sm-9">
-
-                    <select id ="cmb_producto" class="select2" data-placeholder="Escoger Producto...">
-                          <option value=""></option>
-                          {%for producto in productos%}
-                          <option value="{{producto.producto_id.id}}">{{producto.producto_id}}</option>
-                          {%endfor%}
-                    </select>
-                  </div>
-                </div>
-                
-
-                 <div class="form-group">
-                      <label class="col-sm-3 control-label">Stock Disponible</label>
-                      <div class="col-sm-9">
-                        <input type="text" id="spinner1" class="spinner" />
-                        <span class="help-block">Enhance a text input for entering numeric values, with up/down buttons and arrow key handling.</span>
-                      </div>
-                </div>
-                 <div class="form-group">
-                      <label class="col-sm-3 control-label">Stock a Asignar</label>
-                      <div class="col-sm-9">
-                        <input type="text" id="spinner2" class="spinner" />
-                        <span class="help-block">Enhance a text input for entering numeric values, with up/down buttons and arrow key handling.</span>
-                      </div>
-                </div>
-
-         </div>
-
-            <div class="panel-footer">
-             <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
-                  <button class="btn btn-primary">Registrar</button>&nbsp;
-                  <button class="btn btn-default">Limpiar</button>
-                </div>
-             </div>
-          </div><!-- panel-footer -->
 
 
-                      </div><!-- panel -->
-            </div>
+			<div class="col-sm-12">
+			          <div class="panel panel-primary">
+			            <div class="panel-heading">
+			              <div class="panel-btns">
+			               <!-- <a href="" class="panel-close">×</a> -->
+			                <a href="" class="minimize">−</a>
+			              </div><!-- panel-btns -->
+			              <h3 class="panel-title">Asignaci&oacute;n de Productos</h3>
+			            </div>
+			            <div class="panel-body">
+			                 <div class="col-sm-6 col-md-3">
+						          <div class="panel panel-danger panel-stat">
+                                    <a href="{% url "add" %}">
+						            <div class="panel-heading">
+
+						              <div class="stat">
+						                <div class="row">
+						                  <div class="col-xs-4">
+						                    <img src="{% static "static/images/plus3.png"%}" alt="" />
+						                  </div>
+						                  <div class="col-xs-8">
+						                    <small class="stat-label">Registrar</small>
+						                    <h3>Productos</h3>
+						                  </div>
+						                </div><!-- row -->
+
+						                <div class="mb15"></div>
+
+						                <!-- <small class="stat-label">Avg. Visit Duration</small>
+						                <h4>01:80:22</h4 >-->
+
+						              </div><!-- stat -->
+
+						            </div><!-- panel-heading -->
+                                    </a>
+						          </div><!-- panel -->
+						      </div><!-- col-sm-6 -->
+
+
+						       <div class="col-sm-6 col-md-3">
+							        <div class="panel panel-danger panel-stat">
+                                        <a href="{% url "edit" %}">
+							            <div class="panel-heading">
+
+							              <div class="stat">
+							                <div class="row">
+							                  <div class="col-xs-4">
+							                    <img src="{% static "static/images/edit3.png"%}" alt="" />
+							                  </div>
+							                  <div class="col-xs-8">
+							                    <small class="stat-label">Modificar</small>
+							                    <h3>Productos</h3>
+							                  </div>
+							                </div><!-- row -->
+
+							                <div class="mb15"></div>
+
+							               <!--  <small class="stat-label">Avg. Visit Duration</small>
+							                <h4>01:80:22</h4> -->
+
+							              </div><!-- stat -->
+
+							            </div><!-- panel-heading -->
+                                        </a>
+							         </div><!-- panel -->
+			        			</div><!-- col-sm-6 -->
+
+
+						        <div class="col-sm-6 col-md-3">
+						          <div class="panel panel-danger panel-stat">
+                                    <a href="{% url "list" %}">
+						            <div class="panel-heading">
+
+						              <div class="stat">
+						                <div class="row">
+						                  <div class="col-xs-4">
+						                    <img src="{% static "static/images/reportes.png"%}" alt="" />
+						                  </div>
+						                  <div class="col-xs-8">
+						                    <small class="stat-label">Listar</small>
+						                    <h3>Productos</h3>
+						                  </div>
+						                </div><!-- row -->
+
+						                <div class="mb15"></div>
+
+						              <!--   <small class="stat-label">Avg. Visit Duration</small>
+						                <h4>01:80:22</h4> -->
+
+						              </div><!-- stat -->
+
+						            </div><!-- panel-heading -->
+                                    </a>
+						          </div><!-- panel -->
+						        </div><!-- col-sm-6 -->
+			            </div>
+			          </div><!-- panel -->
+			 </div>
 
       </div><!-- row -->
                    
@@ -171,16 +220,20 @@
             </div><!-- mainpanel -->
 
             <div class="rightpanel">
-            
+                <!-- Nav tabs -->
+             <!--   <ul class="nav nav-tabs nav-justified">
+                    <li class="active"><a href="#rp-alluser" data-toggle="tab"><i class="fa fa-users"></i></a></li>
+                    <li><a href="#rp-favorites" data-toggle="tab"><i class="fa fa-heart"></i></a></li>
+                    <li><a href="#rp-history" data-toggle="tab"><i class="fa fa-clock-o"></i></a></li>
+                    <li><a href="#rp-settings" data-toggle="tab"><i class="fa fa-gear"></i></a></li>
+                </ul>
+            -->
             </div><!-- rightpanel -->
 
         </section>
 
-
-
         <script src="{% static "static/js/sucursal/jquery-1.11.1.min.js"%}"></script>
         <script src="{% static "static/js/sucursal/jquery-migrate-1.2.1.min.js"%}"></script>
-        <script src="{% static "static/js/sucursal/jquery-ui-1.10.3.min.js"%}"></script>
         <script src="{% static "static/js/sucursal/bootstrap.min.js"%}"></script>
         <script src="{% static "static/js/sucursal/modernizr.min.js"%}"></script>
         <script src="{% static "static/js/sucursal/jquery.sparkline.min.js"%}"></script>
@@ -188,29 +241,9 @@
         <script src="{% static "static/js/sucursal/retina.min.js"%}"></script>
         <script src="{% static "static/js/sucursal/jquery.cookies.js"%}"></script>
 
-      <script src="{% static "static/js/sucursal/select2.min.js"%}"></script>
-      <script src="{% static "static/js/sucursal/custom.js"%}"></script>
 
-        <script>
-jQuery(document).ready(function(){
-    
-    "use strict";
-  // Select2
-  jQuery(".select2").select2({
-    width: '100%'
-  });
+        <script src="{% static "static/js/sucursal/custom.js"%}"></script>
 
- // Spinner
-var spinner = jQuery('.spinner').spinner();
-  spinner.spinner('value', 0);
-});
-/*
-var spinner = jQuery('#spinner2').spinner();
-  spinner.spinner('value', 0);
-});
-*/
-</script>
+
     </body>
-
-<!-- Mirrored from themepixels.com/demo/webpage/bracket/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 11 Oct 2015 19:21:04 GMT -->
 </html>
