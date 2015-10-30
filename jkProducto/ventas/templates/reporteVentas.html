@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Reporte de Ventas</title>
+</head>
+
+<body>
+
+	<div>
+		<h1>
+			<label> 	HOLA! : {{trabajador.trabajador.get_full_name}}</label 
+		</h1> <br>
+
+		<label> empleado : </label>  <label>{{trabajador.trabajador.get_full_name}}</label>	<br>
+		<label> Codigo Puesto </label> : {{trabajador.sucursal.codigo_puesto}} <br>
+		<label>Direccion :</label>   {{trabajador.sucursal.direccion}}  <br>
+		<label>Departamento :  </label>  {{trabajador.sucursal.get_departamento_display}}<br>
+		<label>Telefono</label> : {{trabajador.sucursal.telefono}} <br>
+	</div>	
+
+
+	<div>
+
+	
+
+			<h2> Resporte de Ventas </h2>
+
+			<table>
+
+				<thead>
+					<tr>
+						<th>Nro#</th>
+						<th>Codigo</th>
+						<th>Empleado</th>
+						<th>Total</th>
+						<th>Fecha</th>
+					</tr>
+				</thead>
+
+				<tbody>
+
+						
+					{% for venta in ventas %}
+
+							<tr>
+								
+									<td>{{forloop.counter}}</td>
+									<td>=<a href="">por Definir=</a></td>
+									<td>{{venta.empleado.trabajador.get_full_name}}</td>
+									<td>{{venta.total}}</td>
+									<td>{{venta.fecha_emision| date:" D d M Y" }} > {{venta.fecha_emision|date:"P"}}</td>
+							</tr>
+
+
+						
+					{% endfor %}
+
+					
+
+				</tbody>
+
+
+			</table>
+			
+	
+
+
+	</div>
+
+</body>
+</html>
