@@ -88,7 +88,7 @@
 
 
                   <td>
-                      <input type="text" id="inputCantidad0" class="form-control cantidadPro" value= 1></input>
+                      <input type="text" id="inputCantidad0" class="form-control" value= 1></input>
                   </td>
                   <td>
                       <input type="text" id="inputProductName0" class="form-control"></input>
@@ -148,7 +148,7 @@
                     </td>
 
                     <td>
-                          <input type="text" id="inputCantidad{{forloop.counter0}}" class="form-control cantidadPro" value={{detalle.cantidad}} disabled></input>
+                          <input type="text" id="inputCantidad{{forloop.counter0}}" class="form-control" value={{detalle.cantidad}} disabled></input>
                   
                     </td>
 
@@ -172,7 +172,7 @@
 
                 
               {% endif %}
-              </tbody>
+              </tbody>nt
             </table>
 
             <div class="row col-lg-12">
@@ -238,14 +238,6 @@
     <!--<script src="{% static "static/js/ventas.js"%}"></script>-->
 
     <script type="text/javascript">
-
-    $(document).ready(function(){
-
-         $("#total").val(calcular_total()); 
-    });
-
-
-
     $(document).ready(function(){
 
   
@@ -283,6 +275,10 @@
           
         {% endfor %}
 
+       //Cantidad de llaves que hay en el json :/ , eso creo u_u
+     // console.log(Object.keys(pro).length)
+
+       // console.log(pro);
 
 
        {% if modificar %}
@@ -321,6 +317,91 @@
 
   }); 
 
+/*  
+ $(".cmb_producto").focus(function () {
+        // Store the current value on focus, before it changes
+        previous = this.value;
+        console.log("testFOCUS")
+       
+    })
+*/
+/*
+  $("body").delegate('.cmb_producto','change',function(e) {
+        // Do something with the previous value after the change
+   
+     
+     var comboActualP = $(this);
+     var previo = comboActualP.data('previous');
+    // alert("PRevio:"+previo)
+     comboActualP.data('previous', comboActualP.val());
+     // //console.log("detete"+ahoraK)
+     //  //cambiarEstadoOff(previous);asdadasd
+     //  //console.log("es cero?: "+ahoraK);
+     // // cambiarEstadoON(comAux)
+     // console.log("Ahora:"+comboActualP.val()+"-"+previo)
+     //  cambiarEstadoON(comboActualP.val());
+     
+      //if(comboActualP.val()=="0")
+      //{
+        //console.log("ceroo"+previousT);
+        // if((previo!=undefined && previo!=null && previo !="undefined") || (comboActualP.val()=="0"))
+        // {
+        //   cambiarEstadoOff(previo);
+        //   console.log("estado Change"+previo)  
+        // }
+
+        if(comboActualP.val()=="0")
+        {
+         // alert("PrevioChane: "+previo);
+          if(previo!=undefined && previo!=null && previo !="undefined")
+          {
+           // alert("Change previous")
+            cambiarEstadoOff(previo);
+          }
+          else
+          {
+            //alert("Change if else")
+          }
+        }
+        else
+        {
+          cambiarEstadoON(comboActualP.val());
+          if(previo!=undefined && previo!=null && previo !="undefined")
+          {
+            //alert("else previo ");
+            cambiarEstadoOff(previo);
+          }
+          else
+          {
+           // alert("else else Change previous")
+          }
+        }
+         
+        //cambiarEstadoOff
+      //}
+      //console.log("twinem: "+previous);
+       
+    });
+*/
+/*
+  $(".cmb_producto").on("focus",function(){
+    //create_cmb(to_cmb);
+    var ccc=$(this);
+    previous = ccc.val();
+    console.log("focus: "+previous);
+    if(ccc.val()==previous)
+    {
+      cambiarEstadoOff(previous);  
+    }
+    
+    var iden = ccc.prop("id");
+    //console.log("focus : ",create_cmb(to_cmb));
+    create_cmb(to_cmb,iden);
+    console.log("ennfocandooo");
+    
+  });
+ 
+*/
  $("body").delegate('.cmb_producto','focus', function () {
     var ppp = $(this);
     console.log("dllFocus:",ppp.val());
@@ -367,9 +448,49 @@
 
     $("#total").val(calcular_total()); 
     
+    //create_cmb(to_cmb,nnn.prop("id"));
+    //ddl.data('previous', ddl.val());
+    //console.log("new change");
 });
 
 
+/*
+$("body").delegate(".cmb_producto",'focus',function()
+  {
+    
+    var oldDato= $(this);
+    var previo = oldDato.data('previous');
+    
+
+     if(typeof previo !== "undefined" && previo!="0")
+      {
+        //console.log("focus")
+        console.log("Previo indefinido:",previo)
+        console.log("Valores: "+previo+"-"+oldDato.val())
+        //alert("Focus change estsado off");
+
+        var id = oldDato.prop("id");
+        console.log("id: ",id);
+        var idCmb=to_cmb[previo].estado;
+        if(idCmb=="0")
+        {
+         cambiarEstadoOff(previo);
+          //create_cmb(to_cmb,id);
+        }
+
+        
+        
+      }
+      console.log("to_cmb->focus->",to_cmb)
+  create_cmb(to_cmb,oldDato.prop("id"));
+    // //console.log("focusAlw: ",oldDato.val() );
+    // comAux= oldDato.val();
+    // cambiarEstadoOff(oldDato.val());
+    //alert("focus intro change");
+      
+    
+  });
+  */
     function cambiarEstadoOff(llave)
     {
       console.log("on")
@@ -388,10 +509,30 @@
         
       }
     }
+
+/*
+ $("table").delegate(".cmb_producto","change",function(){
+    
+
+  //var tt=$('.cmb_producto:last option:selected').val();
+    //var p = $(this).val();
+   // console.log("producto selected" , p )
+   // console.log("Tt: "+tt);
+  
+});
+
+ var option_list=[]
+
+  */
    
 
    function create_cmb(lista,iden){
 
+
+    //console.log("LIsta",lista);
+    //var combo = $("#"+iden);
+    //console.log("Iden: ",iden)
+    //console.log(lista);
     var  auxComb = document.getElementById(iden);
     var combo = (auxComb) ? auxComb:-1;
     //console.log("combix",combo)
@@ -420,11 +561,25 @@
          
           if(p.estado.toString()=="1")
           {
+            //console.log("after");
+
             $("<option />", {value: p.producto.id, text: p.id}).appendTo(combo);
           }
+
+    
+      //console.log(p)
      }
 
+    
+        
+     
+     //$("#"+iden).append(combo)
+     //console.log("tablar: ",combo);
      return combo;
+
+
+        
+
     }
 
 
@@ -440,14 +595,34 @@
     }
 
 
-   
+    
+
+
+
+
+   // $("tr").on("click", function(){
+
+   //    var index  =  $(this).parent('#table_logic').index(); 
+
+   //    console.log("INDEX FILA  : " , index )
+    
+   // });
+
+
+
 function calcular_importe( cantidad, precio ){
+
+
+
   var importe  = cantidad * precio; 
   return importe;
+
 }
 
 
 function getPrecio(producto , tipo){
+
+
     if(tipo =="menor"){
 
       return producto.producto.precio_por_menor
@@ -495,38 +670,50 @@ $('body').delegate("#tab_logic tbody tr","click" , function(){
 
 
           console.log("tipoPrecio  , Cantidad  ,  precio"  , tipoPrecio,cantidad , precio);
+
+
            inputImporte.val(calcular_importe(cantidad,precio));
+
+
+
+          // var tipoPrecio = ComboProducto.val();
+          // var precio = inputPrecioUnitario.val();
+
+
+          //calcular_importe
 
      }
 
      else {
+
           inputImporte.val("");
           inputCantidad.val(1);
           inputPrecioUnitario.val("");
+
+
      }
- $("#total").val(calcular_total());       
-});
 
 
-  $('body').delegate(".cantidadPro",'keyup' , function(){
+ $("#total").val(calcular_total()); 
+        // ComboProducto.on("change",function(){
+
+        //   inputImporte.val("");
+        //   inputCantidad.val(1);
+
+
+
+        // });
+
+
+        inputCantidad.on("keyup" , function(){
           alert("CANTIDAD KEYUP");
-          var row = $(this).parent().parent();
-
           var cantidad = 1;
-          //var inputPrecioUnitario=$(this).parent().parent().parent().find('td:eq(5)').find("input:text");
-          var inputPrecioUnitario=row.find('td:eq(5)').find("input:text");
-          var inputImporte = row.find('td:eq(6)').find("input:text");
-
-          console.log(" padre del padre" ,$(this).parent().parent());
-          console.log(" padre del padre del padre " ,$(this).parent().parent().parent());
-
-
-
-          // este input inporte hace referencia a  primero que encuentra ,  no a la fila que pertenece
             try{
 
               cantidad = parseInt($(this).val());
               //console.log("CANTIDAD : " , cantidad  ,  $(this).val() )  ;
+
+
                if (!isNaN(cantidad)){
                 $(this).val(cantidad);
 
@@ -556,18 +743,18 @@ $('body').delegate("#tab_logic tbody tr","click" , function(){
               inputImporte.val(calcular_importe(cantidad,precio));
               $("#total").val(calcular_total()); 
             }
+
+              
+            
+
+
+
         });
 
-$('body').delegate('.cantidadPro','blur', function(){
+      inputCantidad.on("blur", function(){
         var cantidad = 1;
-        var  row = $(this).parent().parent();
-
-       // var inputPrecioUnitario=$(this).parent().parent().parent().find('td:eq(5)').find("input:text");
-        var inputPrecioUnitario=row.find('td:eq(5)').find("input:text");
-      // var inputImporte = $(this).parent().parent().parent().find('td:eq(6)').find("input:text");
-        var inputImporte = row.find('td:eq(6)').find("input:text");
-        alert("CANTIDAD BLUR"+inputPrecioUnitario.val());
-          
+        alert("CANTIDAD BLUR");
+        
           try
           { 
             cantidad = parseInt($(this).val());
@@ -592,6 +779,101 @@ $('body').delegate('.cantidadPro','blur', function(){
       });
 
 
+
+
+      // var valueComboProducto = ComboProducto.val();
+
+      // if(valueComboProducto != 0 && valueComboProducto > 0){
+
+
+      //   producto =  pro[valueComboProducto]; 
+        
+      //   //console.log("producto" , producto);
+      //   //console.log("producto.producto.precio_por_menor", producto.producto.precio_por_menor);
+      //   if(comboTipoPrecio=="menor"){
+
+      //      $(this).find('td:eq(5)').find("input:text").val( producto.producto.precio_por_menor);
+      //   }
+
+
+      //   if(comboTipoPrecio=="mayor"){
+        
+      //      $(this).find('td:eq(5)').find("input:text").val( producto.producto.precio_por_mayor);
+      //   }
+
+      // }
+
+      // else {
+
+      //   //Volver en  Blanco el valor del Precio  
+      //   $(this).find('td:eq(5)').find("input:text").val("");
+
+      // }
+
+
+      //   precio =  $(this).find('td:eq(5)').find("input:text").val();
+      //   inputImporte = $(this).find('td:eq(6)').find("input:text");
+
+      //   $(this).find('td:eq(3)').find("input:text").on("blur", function(){
+
+      //     var cantidad = $(this).val();
+      //     //$(this).find('td:eq(6)').find("input:text").val(importe);
+      //      inputImporte.val(cantidad * precio);
+      //     //console.log("Cantidad focus" ,  cantidad);
+      //   });
+
+      // // Cantidad de productos en la tabla 
+      // var cantidad = $(this).find('td:eq(3)').find("input:text").val();
+
+      // precio =  $(this).find('td:eq(5)').find("input:text").val();
+      // console.log("Cantidad" , typeof(cantidad));
+
+
+      // if (cantidad != 0  && cantidad > 0){
+
+
+      //   console.log("Precio y cantidad" , precio , cantidad);
+
+
+
+      //   importe =  parseInt(cantidad) * parseInt(precio);
+
+      //   console.log("importe:    ", importe);
+
+
+      //   $(this).find('td:eq(6)').find("input:text").val(importe);
+
+
+      // }
+
+
+      // else{
+
+
+      //    $(this).find('td:eq(6)').find("input:text").val("");
+
+
+      // }
+
+
+  //-----------------------------------------------------------------------------------------------------------
+
+
+   // console.log('Row: ' + row + ', Column: ' + col); 
+
+  //row.find('td');
+
+  //var  p  = $(this).closest("td").index();
+  // console.log("combo_in_tr_value",combo_in_tr);
+
+
+
+});
+
+
+
+
+
   //console.log(find('td:eq(0)'));
 
    var i=1;
@@ -602,8 +884,22 @@ $('body').delegate('.cantidadPro','blur', function(){
 
            cantidadFilas = $("#tab_logic tbody tr").length;
            console.log("cantidad" , cantidadFilas)
-           var list = [];
+           var list = []
 
+          // $(".cmb_producto option:selected").each(function(p){
+          //         console.log("p : ",p,"val",$(this).val());
+          //         list[p] = $(this).val();
+          // });
+          //console.log("+++++to_cmb++++++++++" , to_cmb)
+         // p = $(".cmb_producto option:selected").last().val()
+         // console.log("last va" , p ) 
+          // for (var  i = 0 ; i<list.length; i ++){
+           //delete to_cmb[p];
+          // }
+          // for(var i = 0 ;  i < option_selected.length;i++ ){
+          //   list[i] = option_selected[i].value
+         // }
+         // console.log("list",list);
          console.log("Valor   i : " ,   i )
 
           
@@ -613,7 +909,7 @@ $('body').delegate('.cantidadPro','blur', function(){
             $("#tab_logic tbody").append('<tr id="addr'+i+'"> </tr>')
 
 
-            $('#addr'+i).html("<td>"+ (i+1) +"</td> <td id= 'cmbd"+i+"'>  </td>  <td id = 'cmb_precio"+i+"'></td> <td><input name='inputCantidad"+i+"' type='text' class='form-control cantidadPro input-md' value ='1' /></td><td><input  name='inputProductName"+i+"' type='text' class='form-control input-md'></td><td><input  name='unitPrice"+i+"' type='text' class='form-control input-md'></td><td><input  name='inputImport"+i+"' type='text' class='form-control input-md'></td><td><div class='col-lg-1'><a class='pull-center btn btn-default delete'>-</a></div></td>");
+            $('#addr'+i).html("<td>"+ (i+1) +"</td> <td id= 'cmbd"+i+"'>  </td>  <td id = 'cmb_precio"+i+"'></td> <td><input name='inputCantidad"+i+"' type='text' class='form-control input-md' value = 1 /></td><td><input  name='inputProductName"+i+"' type='text' class='form-control input-md'></td><td><input  name='unitPrice"+i+"' type='text' class='form-control input-md'></td><td><input  name='inputImport"+i+"' type='text' class='form-control input-md'></td><td><div class='col-lg-1'><a class='pull-center btn btn-default delete'>-</a></div></td>");
 
 
             $('#cmbd'+i).append(create_cmb(to_cmb,i));
@@ -636,6 +932,19 @@ $('body').delegate('.cantidadPro','blur', function(){
   });      
 
 
+
+// $("#tab_logic tbody").on("blur" , function(){
+
+//   $("#total").val(calcular_total());
+
+
+//    console.log("asdfasdfasd")
+
+// });
+
+
+ 
+
   function calcular_total(){
 
 
@@ -644,9 +953,11 @@ $('body').delegate('.cantidadPro','blur', function(){
     $("#tab_logic tbody tr").each(function(){
 
        var importe = $(this).find('td:eq(6)').find("input:text").val();
+       total+= parseFloat(validarEntrada(importe));
+
+       
 
 
-       total+= parseFloat(validarEntrada(parseFloat(importe)));
 
     });
 
@@ -663,14 +974,15 @@ $('body').delegate('.cantidadPro','blur', function(){
   function validarEntrada(numero)
   {
 
-    if(!isNaN(numero) && numero !="" && numero>=0) {
+    if(!isNaN(numero) && numero !="" && numero>=0)
+    {
       
       return numero;
     }
-
-    else{
-        return 0;
-      }
+    else
+    {
+      return 0;
+    }
   }
 
 
