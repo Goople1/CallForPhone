@@ -392,26 +392,34 @@
                         <li><a href="#">5</a></li>
                         <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
                     </ul>
-                    <h4 class="panel-title">Buscar resultados para "Sucursal MDS"</h4>
-                    <p>About 1,370 results (0.13 seconds)</p>
+                    <h4 class="panel-title">Buscar resultados para " {{sucursal.nombre}} "</h4>
+                    <!--<p>About 1,370 results (0.13 seconds)</p>-->
                 </div><!-- panel-heading -->
                 <div class="panel-body">
                     
                     <div class="results-list">
+
+                      {% for  producto  in  detalle_sucursal_almacen_productos %}
                         
                         <div class="media">
                             <a href="#" class="pull-left">
-                              <img alt="" src="{% static "images/photos/media1.jpg"%}" class="media-object">
+                              <!--<img alt="" src="{% static "images/photos/media1.jpg"%}" class="media-object">-->
+                              <img alt="" src="{{ producto.producto_id.imagen}}" class="media-object">
                             </a>
                             <div class="media-body">
-                              <h4 class="filename text-primary">Pizza.png</h4>
-                              <small class="text-muted">Type: JPG Image</small><br />
-                              <small class="text-muted">Created: January 10, 2014 at 7:30am</small><br />
-                              <small class="text-muted">Modified: January 13, 2014 at 11:30am</small>
+                              <h4 class="filename text-primary">{{producto.producto_id}}</h4>
+                              <small class="text-muted">Codigo Producto: {{producto.producto_id.codigo}}</small><br />
+                              <small class="text-muted">Stock: {{producto.stock}}</small><br />
+                              <small class="text-muted">Fecha Ingreso: {{producto.fecha_ingreso | date:" D d M Y" }}</small><br/>
+                              <small class="text-muted">Color: {{producto.producto_id.get_color_display}}</small><br />
+                              <small class="text-muted">Marca: {{producto.producto_id.marca}}</small><br />
+                              <small class="text-muted">Tipo: {{producto.producto_id.tipo_producto}}</small><br />
                             </div>
                         </div>
                         
-                        <div class="media">
+                      {% endfor %}
+                        
+                        <!--<div class="media">
                             <a href="#" class="pull-left">
                               <img alt="" src="{% static "images/photos/media-doc.png"%}"  class="media-object">
                             </a>
@@ -505,7 +513,7 @@
                               <small class="text-muted">Created: January 13, 2014 at 7:30am</small><br />
                               <small class="text-muted">Modified: January 13, 2014 at 11:30am</small>
                             </div>
-                        </div>
+                        </div>-->
                         
                     </div><!-- results-list -->
                     

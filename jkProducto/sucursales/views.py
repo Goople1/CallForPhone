@@ -123,7 +123,8 @@ def listSucursalL(request,id):
 		return HttpResponse(mensaje)
 
 
-	template = "listaProductosSucursalAlmacen.html"
+	#template = "listaProductosSucursalAlmacen.html"
+	template = "ListarProductosOriginal.html"
 	return render_to_response (template, locals() , context_instance = RequestContext(request))
 	
 #Asignacion de Pedidos a Sucursales
