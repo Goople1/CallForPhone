@@ -29,18 +29,20 @@
 		
 		<div id="signinBlock">
 			<span class="formContainer">			    
- 				<form id="signInForm" action="#" method="POST" data-ajax="true">
+ 				<form id="signInForm" action="." method="POST" data-ajax="true">
  					{% csrf_token %}
 					<span class="field signinRow ">
 						<span class="message"></span>
 						<span class="errorBlip"></span>
-						<input class="fillin validated " autofocus="true" name="email" value="" title="Email" type="email" required="required" placeholder="Email" spellcheck="false"/>
+						<!-- <input class="fillin validated " autofocus="true" name="email" value="" title="Email" type="email" required="required" placeholder="Email" spellcheck="false"/> -->
+						{{ form_iniciar_sesion.username }}
 					</span>
 					
 					<span class="field signinRow passRow ">
 						<span class="message"></span>
 						<span class="errorBlip"></span>
-						<input class="fillin validated " name="password" title="Password" type="password" required="required" placeholder="Password"/>
+						{{ form_iniciar_sesion.password }}
+						<!-- <input class="fillin validated " name="password" title="Password" type="password" required="required" placeholder="Password"/> -->
 						<!--<a class="resetPassLink" href="passwordresets/new.html">Forgot?</a>-->
 					</span>
 				

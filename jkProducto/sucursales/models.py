@@ -111,6 +111,8 @@ class DetalleSucursalAlmacen(models.Model):
 	def __unicode__(self):
 		return u'%s' % (self.producto_id)
 
+
+
 #Se Registra cuando se cambia de estado la sucursal
 class HistorialSucursal(models.Model):
 	fecha = models.DateTimeField(auto_now=True)
@@ -127,18 +129,44 @@ class HistorialDetalleSucursalAlmacen(models.Model):
 
 
 class SucursalTrabajador(models.Model):
-	sucursal = models.ForeignKey(Sucursal)
-	trabajador = models.OneToOneField(User)
-	fecha_ingreso = models.DateTimeField(auto_now=True)
-	todos_cargo= (("admi","Administrador"),("empl" ,"Empleado"),	 )
-	cargo = models.CharField(max_length=20 , choices= todos_cargo ,  default="empl")
 	dni = models.CharField(max_length=8, unique=True)
+	trabajador = models.OneToOneField(User)
+	sucursal = models.ForeignKey(Sucursal)
+	fecha_ingreso = models.DateTimeField(auto_now=True)
+	todos_cargo= (("admi","Administrador"),("empl" ,"Empleado"),)
+	todos_estado= (("act","Activo"),("ina" ,"Inactivo"),)
+	estado_empleado = models.CharField(null=True,max_length='8',choices =todos_estado, default='act')
+	cargo = models.CharField(max_length=20 , choices= todos_cargo ,  default="empl")
 	fecha_nacimiento = models.DateField(blank=True , null=True,default=date(1990,01,01))
 	sexo = models.CharField( max_length =1, choices= (("m","Masculino") , ("f","Femenino")) , default="m")
-
+	def save(self):
+		flag = True
+		try:
+			usuario =User.objects.get(pk=self.trabajador.id)
+			print usuario.is_active
+			print "ACTIVADOOOO"
+			if self.cargo == 'admi':
+				usuario.is_staff = True
+			elif self.cargo == 'empl':
+				usuario.is_staff = False
+			else:
+				flag = False
+			if self.estado_empleado == 'act':
+				usuario.is_active = True
+			elif self.estado_empleado == 'ina':
+				usuario.is_active = False
+			else:
+				flag = False
+			if flag:
+				usuario.save()
+				print "LLEGA TRABAJADOR"
+				super(SucursalTrabajador, self).save()
+			else:
+				print "mensaje de error"
+		except Exception, e:
+			print "Mensaje de error: %s" %(e)
 	def __unicode__(self):
-		return " Trabjador: %s , %s, %s" %(self.trabajador,self.fecha_ingreso ,self.sucursal,)
-
+		return " Trabjador: %s , %s" %(self.trabajador,self.sucursal,)		
 #Modelo Cliente  , no deberia estar  aqui pero por el momento
 class Cliente(models.Model):
 	razon_social = models.CharField(max_length=50 , blank=True);

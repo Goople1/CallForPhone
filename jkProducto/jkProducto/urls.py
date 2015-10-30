@@ -11,7 +11,8 @@ urlpatterns = patterns('',
     #url(r'^login/$', 'productos.views.iniciarSesion', name='login'),
     url(r'^cuenta/', include('empleados_login.urls')),
     url(r'^ventas/', include('ventas.urls')),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/login', include(admin.site.urls)),
+    url(r'^admin/', include('empleados_login.urls')),
 )
 
 urlpatterns += patterns('sucursales.views',

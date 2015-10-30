@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response,redirect
 from django.template.context import RequestContext
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate,logout
@@ -9,6 +9,7 @@ def iniciarSesion(request):
 
 
     template = "login.html"
+    template = "signin.html"
     print request.user.is_authenticated()
     if not request.user.is_authenticated():
         if request.method == "POST":
@@ -17,6 +18,8 @@ def iniciarSesion(request):
                 user = iniciar_sesion.cleaned_data['username'] #iniciar_sesion.cleaned_data['iniciar_input_email']
                 clave = iniciar_sesion.cleaned_data['password']#iniciar_sesion.cleaned_data['iniciar_input_password']
                 acceso = authenticate(username=user,password=clave)
+                login(request,acceso)
+                return redirect("/admin/login")
                 if acceso is not None:
                     if acceso.is_active:
                         login(request,acceso)
@@ -26,6 +29,7 @@ def iniciarSesion(request):
                         iniciar_sesion = FormInciarSesion(request.POST)
                         return render_to_response(template,{'form_iniciar_sesion':iniciar_sesion,'error':'Su cuenta ha sido desactivada,por violar los derechos de uso'},context_instance = RequestContext(request))
                 else:
+
                     iniciar_sesion = FormInciarSesion(request.POST)
                     return render_to_response(template,{'form_iniciar_sesion':iniciar_sesion,'error':'Por favor Ingrese Correctamente su usuario o password'},context_instance=RequestContext(request))
             else:
