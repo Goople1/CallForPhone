@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import Sucursal, SucursalTrabajador ,Cliente, DetalleAlmacen,Almacen,EstadoSucursal
+from models import Sucursal, SucursalTrabajador ,Cliente, DetalleAlmacen,Almacen,EstadoSucursal,HistorialSucursal
 from productos.models import Producto, Marca, TipoProducto
 from actions import export_as_csv
 # Register your models here.
@@ -16,10 +16,10 @@ class DetalleAlmacenAdmin(admin.ModelAdmin):
     	return obj.producto_id.precio_x_menor
 
 class SucursalAdmin(admin.ModelAdmin):
-	list_display = ('codigo_puesto', 'nombre', 'departamento', )
-	list_filter = ('codigo_puesto', 'departamento','nombre',)
+	list_display = ('codigo_puesto', 'nombre', 'departamento', 'id_estadoSucursal')
+	list_filter = ('codigo_puesto', 'departamento','nombre','id_estadoSucursal',)
 	search_fields = ('codigo_puesto', 'departamento')
-	list_editable = ('codigo_puesto', 'departamento')
+	list_editable = ('codigo_puesto', 'departamento','id_estadoSucursal',)
 
 class SucursalTrabajadorAdmin(admin.ModelAdmin):
 	list_display = ('sucursal','trabajador','fecha_ingreso',)

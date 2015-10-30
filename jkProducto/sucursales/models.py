@@ -3,6 +3,7 @@ from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
 from datetime import date
 from productos.models import Producto
+from utilidades import Utilidades
 # Create your models here.
 class Almacen(models.Model):
     nombre_empresa = models.CharField(max_length=80)
@@ -32,8 +33,23 @@ class DetalleAlmacen(models.Model):
 	class Meta:
 		unique_together = ('producto_id',)
 
-	
-
+	def save(self):
+		agregar = Utilidades().validarIngresoNum(self.adicional_stock)
+		if agregar != 0 :
+			stock_antes = self.stock
+			self.stock += agregar
+			self.adicional_stock = 0
+			super(DetalleAlmacen, self).save()
+			try:
+				HistorialDetalleAlmacen.objects.create(
+					adicional_producto = agregar,
+					stock_actual = stock_antes,
+					detalle_almacen_id = self
+				)
+			except Exception, e:
+				print '%s' %(e)
+		else:
+			super(DetalleAlmacen, self).save()
 
 class EstadoSucursal(models.Model):
     nombre_estado = models.CharField(max_length=60)
@@ -63,17 +79,25 @@ class Sucursal(models.Model):
 	class Meta:
 		verbose_name_plural = "Mantenimiento de Sucursales"
 		unique_together = ('codigo_puesto', 'departamento',)
-
-
 	def __unicode__(self):
 		return " %s de la ciudad: %s con el codigo: %s" %(self.nombre,self.departamento,self.codigo_puesto)
+	def save(self):
+		try:
+			estado = Sucursal.objects.get(pk=self.id)
+			estado =estado.id_estadoSucursal
+			HistorialSucursal.objects.create(estado_antes = estado  ,estado_actual= self.id_estadoSucursal.nombre_estado,id_sucursal = self )
+			super(Sucursal, self).save()
+		except Exception, e:
+			super(Sucursal, self).save()
+			HistorialSucursal.objects.create(estado_antes = self.id_estadoSucursal.nombre_estado  ,estado_actual= self.id_estadoSucursal.nombre_estado,id_sucursal = self )
+			print '%s' %(e)
 
 class HistorialDetalleAlmacen(models.Model):
 	adicional_producto = models.PositiveIntegerField()
-	fecha_ingreso = models.DateTimeField(auto_now=True)
 	stock_actual = models.PositiveIntegerField()
+	fecha_ingreso = models.DateTimeField(auto_now=True)
 	detalle_almacen_id = models.ForeignKey(DetalleAlmacen)
-	sucursal_id = models.ForeignKey(Sucursal, null=True)
+	#sucursal_id = models.ForeignKey(Sucursal, null=True)
 
 class DetalleSucursalAlmacen(models.Model):
 	stock = models.PositiveIntegerField(default=0)
@@ -84,15 +108,23 @@ class DetalleSucursalAlmacen(models.Model):
 
 	class Meta:
 		unique_together = ('producto_id','sucursal_id')
-
 	def __unicode__(self):
-		people = models.Manager()
 		return u'%s' % (self.producto_id)
 
 #Se Registra cuando se cambia de estado la sucursal
 class HistorialSucursal(models.Model):
 	fecha = models.DateTimeField(auto_now=True)
+	estado_antes = models.CharField(max_length = 60)
+	estado_actual = models.CharField(max_length = 60)
 	id_sucursal = models.ForeignKey(Sucursal)
+
+class HistorialDetalleSucursalAlmacen(models.Model):
+	stock_actual = models.PositiveIntegerField()
+	stock_adicional = models.PositiveIntegerField(default=0)
+	fecha_ingreso = models.DateTimeField(auto_now=True)
+	id_detalle_sucursal_almacen = models.ForeignKey(DetalleSucursalAlmacen)
+
+
 
 class SucursalTrabajador(models.Model):
 	sucursal = models.ForeignKey(Sucursal)

@@ -2,7 +2,7 @@
 <html>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
-	<title>Sign in - Carbonmade</title>
+	<title>Iniciar Sesi&oacute;n</title>
 	
 	
 
@@ -19,7 +19,7 @@
 -->
 
 <div class="topHead">
-	<a href="index.html" class="logo">carbonmade</a>
+	<!--<a href="index.html" class="logo">carbonmade</a>-->
 </div>
 
 <div id="content">
@@ -30,6 +30,7 @@
 		<div id="signinBlock">
 			<span class="formContainer">			    
  				<form id="signInForm" action="#" method="POST" data-ajax="true">
+ 					{% csrf_token %}
 					<span class="field signinRow ">
 						<span class="message"></span>
 						<span class="errorBlip"></span>

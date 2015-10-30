@@ -4,7 +4,7 @@ class Utilidades():
 	def validarIngresoNum(self,numero):
 
 		if numero != None :
-			numero = numero.strip()
+			numero = str(numero) if str(numero).isdigit()  else numero.strip()
 			if numero.isdigit():
 				numero=int(numero)
 				if numero > 0 :
