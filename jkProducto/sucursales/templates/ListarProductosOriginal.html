@@ -404,7 +404,7 @@
                         <div class="media">
                             <a href="#" class="pull-left">
                               <!--<img alt="" src="{% static "images/photos/media1.jpg"%}" class="media-object">-->
-                              <img alt="" src="{{ producto.producto_id.imagen}}" class="media-object">
+                              <img alt="" src=" {{MEDIA_URL}}{{ producto.producto_id.imagen}}" class="media-object">
                             </a>
                             <div class="media-body">
                               <h4 class="filename text-primary">{{producto.producto_id}}</h4>

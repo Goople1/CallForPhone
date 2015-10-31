@@ -19,12 +19,19 @@ def iniciarSesion(request):
                 clave = iniciar_sesion.cleaned_data['password']#iniciar_sesion.cleaned_data['iniciar_input_password']
                 acceso = authenticate(username=user,password=clave)
                 login(request,acceso)
-                return redirect("/admin/login")
+                #return redirect("/admin/")
                 if acceso is not None:
                     if acceso.is_active:
-                        login(request,acceso)
-                        print "acceso"
-                        return HttpResponseRedirect('/ventas/')
+                        if acceso.is_staff:
+
+                            return HttpResponseRedirect('/admin/')
+
+                        else :
+
+
+                        #login(request,acceso)
+                            print "acceso"
+                            return HttpResponseRedirect('/ventas/')
                     else:
                         iniciar_sesion = FormInciarSesion(request.POST)
                         return render_to_response(template,{'form_iniciar_sesion':iniciar_sesion,'error':'Su cuenta ha sido desactivada,por violar los derechos de uso'},context_instance = RequestContext(request))

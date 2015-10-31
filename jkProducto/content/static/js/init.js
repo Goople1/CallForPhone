@@ -10,29 +10,34 @@ $('document').ready(function(){
 
 
 	$.ajax({
-		contentType: "application/json",
+
 		data : {"sucursal_id":cmb_sucursal ,
 				"producto_id":cmb_producto,
 				"tipo_id": cmb_tipo,},
 		type:"get",
 		url : "/producto/filtrocriterio/",
-		dataType: "json"
 
 	
 
 	})
 	.done(function(data){
-		console.log("Testss");
-		
-		for(var i=0; i<data.length;i++)
-		{
-			console.log(data[i].producto_id+"xD");
+
+
+		for (var i = 0 ; i < data.length ; i ++){
+
+			console.log("data" , data[i].producto.marca.nombre);
 		}
-	})
-	.fail(function(data){
-		console.log("falla1");
+
 		console.log(data);
-	
+
+		console.log("fin" + data.length)
+
+	})
+
+	.fail(function(data){
+
+		console.log(data);
+
 	});
 
 

@@ -15,7 +15,7 @@ from django.db import transaction, IntegrityError
 
 #fdef para el Home_empleado
 
-@login_required(login_url='/cuenta/login')
+@login_required(login_url='/cuenta/')
 def home_ventas(request):
 	print request.user.id
 	user_id = request.user.id
@@ -29,7 +29,7 @@ def home_ventas(request):
 	template = "empleado_home.html"
 	return render_to_response(template , {"trabajador": trabajador} , context_instance=RequestContext(request))
 
-@login_required(login_url='/cuenta/login')
+@login_required(login_url='/cuenta/')
 def lista_producto (request):
 
 	user_id = request.user.id
@@ -47,7 +47,7 @@ def lista_producto (request):
 
 	return render_to_response(template,{"detalle_sucursal_almacen_productos":lista_producto , "sucursal" :sucursal} , context_instance = RequestContext(request))
 
-@login_required(login_url='/cuenta/login')
+@login_required(login_url='/cuenta/')
 def venta (request):	
 
 	user_id = request.user.id
@@ -62,7 +62,7 @@ def venta (request):
 
 
 
-@login_required(login_url='/cuenta/login')
+@login_required(login_url='/cuenta/')
 @transaction.atomic()
 def addVenta(request):
 
@@ -115,7 +115,7 @@ def addVenta(request):
         finally:
             return HttpResponse("algo")
 
-@login_required(login_url='/cuenta/login')
+@login_required(login_url='/cuenta/')
 def reporte_ventas(request):
 
     if request.method == "GET":
@@ -138,7 +138,7 @@ def reporte_ventas(request):
 
 
 
-@login_required(login_url='/cuenta/login')
+@login_required(login_url='/cuenta/')
 def detalle_ventas (request,venta_id):
 
     #FALTA VALIDAR ALGUNOS CAMPOS
@@ -166,7 +166,7 @@ por el momento lo  unico que me interesa  es :
     3.- sucursal 
     4.-  ...
 """
-@login_required(login_url='/cuenta/login')
+@login_required(login_url='/cuenta/')
 def cargar_productos(request):
 
     if request.method == "POST":

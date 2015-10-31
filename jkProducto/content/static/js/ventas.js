@@ -1,4 +1,4 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
     var i=1;
 
         $("#add_row").click(function(){
@@ -14,4 +14,4 @@ $(document).ready(function(){
             i--;
         }
     });
-});
+});*/

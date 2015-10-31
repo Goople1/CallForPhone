@@ -43,8 +43,9 @@ def listSucursal(request):
 
 def addSucursalA(request,id):
 
-	template = 'AddProductosSucursal.html'
-	#template = 'registrarProductoOriginal.html'
+	#template = 'AddProductosSucursal.html'
+	#template = 'mantenimientoSucursal.html'
+	template = 'registrarProductoOriginal.html'
 
 	#para Sacar los productos  que ya existen en  los DetallesSucursalAlmacen  de una Sucursal 
 	sucursal_id = id 
@@ -81,9 +82,10 @@ def addSucursalA(request,id):
 	
 
 def editSucursalE(request,id):
-	template  = "modificarProductoSucursal.html"
+	#template  = "modificarProductoSucursal.html"
+	template = "modificarProductoSucursalOriginal.html"
 	sucursal_id = id
-	print "dsdfsd"
+	
 	
 	try:
 
