@@ -1,0 +1,2452 @@
+body {
+    background-color: #F1F2F6;
+    /*background: url("/images/background.jpg") no-repeat scroll center top #FFFFFF;*/
+}
+
+a:link,
+a:visited,
+a:active,
+a:hover {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.wrapper {
+    /*background: #fff url('res/bg-header-texture.jpg') repeat-x 0 0;*/
+    /*background: #fff  repeat-x 0 0;*/
+    background: #FFF repeat-x 0 0;
+    display: block;
+    margin: 0 auto;
+    width: 980px;
+}
+
+.wrapper .clear-fix:before, .wrapper .clear-fix:after{
+    display: table;
+    content: "";
+}
+
+.wrapper .clear-fix:after{
+    clear: both;
+
+}
+
+.newDisWra {
+    display: block;
+    margin: 0 auto;
+    width: 1170px;
+}
+
+.header,
+.content,
+.footer {
+    display: block;
+    position: relative;
+}
+
+.header {
+    background: #005179;
+    height: 125px;
+}
+
+.header .header-title {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+
+.header-title a:link,
+.header-title a:visited,
+.header-title a:active,
+.header-title a:hover {
+    background: url('res/sprite.png') no-repeat -326px -48px;
+    display: block;
+    height: 40px;
+    overflow: hidden;
+    text-indent: -999px;
+    width: 184px;
+}
+
+.header .menu {
+    left: 25px;
+    position: absolute;
+    top: 75px;
+    width: 812px;
+    z-index: 30;
+}
+
+.content,
+.content .content-header {
+    display: block;
+    position: relative;
+}
+
+.content .content-header {
+    height: 80px;
+}
+
+.content .content-header-title {
+    left: 10px;
+    overflow: hidden;
+    position: absolute;
+    top: 10px;
+    color: #005b83;
+    font-family: "MovistarHeadline";
+    font-size: 44px;
+
+}
+
+.content .content-header-title-catalogo {
+    background-position: 0px -165px;
+    height: 66px;
+    width: 354px;
+
+}
+
+.content .social {
+    position: absolute;
+    right: 20px;
+    top: 17px;
+}
+
+.content .nav-content {
+    background: #00c6d7 url('res/menu-bg.png') no-repeat 0 bottom;
+    display: block;
+    height: 50px;
+    list-style: none;
+    margin: 0;
+    padding: 0 20px;
+}
+
+.nav-content li {
+    display: inline;
+    float: left;
+}
+
+.nav-content .nav-content-link:link,
+.nav-content .nav-content-link:visited,
+.nav-content .nav-content-link:active,
+.nav-content .nav-content-link:hover {
+    display: block;
+    height: 16px;
+    padding: 24px 0 10px 8px;
+    position: relative;
+    width: 135px;
+}
+
+.nav-content .nav-content-link-selected:link,
+.nav-content .nav-content-link-selected:visited,
+.nav-content .nav-content-link-selected:active,
+.nav-content .nav-content-link-selected:hover,
+.nav-content .nav-content-link:hover {
+    background: url('res/sprite.png') no-repeat -549px 2px;
+    padding: 25px 0 9px 8px;
+}
+
+.nav-content .nav-content-link:link span,
+.nav-content .nav-content-link:visited span,
+.nav-content .nav-content-link:active span,
+.nav-content .nav-content-link:hover span {
+    background-image: url('res/sprite-menu.gif');
+    display: block;
+    margin: 0 auto;
+    overflow: hidden;
+    text-indent: -999px;
+}
+
+.nav-content .nav-content-link-smartphones:link span,
+.nav-content .nav-content-link-smartphones:visited span,
+.nav-content .nav-content-link-smartphones:active span,
+.nav-content .nav-content-link-smartphones:hover span {
+    background-position: 0 0;
+    height: 15px;
+    width: 92px;
+}
+
+.nav-content .nav-content-link-smartphones-selected:link span,
+.nav-content .nav-content-link-smartphones-selected:visited span,
+.nav-content .nav-content-link-smartphones-selected:active span,
+.nav-content .nav-content-link-smartphones-selected:hover span,
+.nav-content .nav-content-link-smartphones:hover span {
+    background-position: 0 -15px;
+    height: 16px;
+    width: 94px;
+}
+
+.nav-content .nav-content-link-multimedia:link span,
+.nav-content .nav-content-link-multimedia:visited span,
+.nav-content .nav-content-link-multimedia:active span,
+.nav-content .nav-content-link-multimedia:hover span {
+    background-position: -92px 0;
+    height: 15px;
+    width: 75px;
+}
+
+.nav-content .nav-content-link-multimedia-selected:link span,
+.nav-content .nav-content-link-multimedia-selected:visited span,
+.nav-content .nav-content-link-multimedia-selected:active span,
+.nav-content .nav-content-link-multimedia-selected:hover span,
+.nav-content .nav-content-link-multimedia:hover span {
+    background-position: -95px -15px;
+    height: 16px;
+    width: 78px;
+}
+
+.nav-content .nav-content-link-musicales:link span,
+.nav-content .nav-content-link-musicales:visited span,
+.nav-content .nav-content-link-musicales:active span,
+.nav-content .nav-content-link-musicales:hover span {
+    background-position: -167px 0;
+    height: 15px;
+    width: 65px;
+}
+
+.nav-content .nav-content-link-musicales-selected:link span,
+.nav-content .nav-content-link-musicales-selected:visited span,
+.nav-content .nav-content-link-musicales-selected:active span,
+.nav-content .nav-content-link-musicales-selected:hover span,
+.nav-content .nav-content-link-musicales:hover span {
+    background-position: -173px -15px;
+    height: 15px;
+    width: 67px;
+}
+
+.nav-content .nav-content-link-novedades:link span,
+.nav-content .nav-content-link-novedades:visited span,
+.nav-content .nav-content-link-novedades:active span,
+.nav-content .nav-content-link-novedades:hover span {
+    background-position: -232px 0;
+    height: 15px;
+    width: 74px;
+}
+
+.nav-content .nav-content-link-novedades-selected:link span,
+.nav-content .nav-content-link-novedades-selected:visited span,
+.nav-content .nav-content-link-novedades-selected:active span,
+.nav-content .nav-content-link-novedades-selected:hover span,
+.nav-content .nav-content-link-novedades:hover span {
+    background-position: -240px -15px;
+    height: 15px;
+    width: 77px;
+}
+
+.nav-content .nav-content-link-soporte:link span,
+.nav-content .nav-content-link-soporte:visited span,
+.nav-content .nav-content-link-soporte:active span,
+.nav-content .nav-content-link-soporte:hover span {
+    background-position: -306px 0;
+    height: 15px;
+    width: 55px;
+}
+
+.nav-content .nav-content-link-soporte-selected:link span,
+.nav-content .nav-content-link-soporte-selected:visited span,
+.nav-content .nav-content-link-soporte-selected:active span,
+.nav-content .nav-content-link-soporte-selected:hover span,
+.nav-content .nav-content-link-soporte:hover span {
+    background-position: -317px -15px;
+    height: 16px;
+    width: 56px;
+}
+
+.nav-content .nav-content-link-preguntas:link span,
+.nav-content .nav-content-link-preguntas:visited span,
+.nav-content .nav-content-link-preguntas:active span,
+.nav-content .nav-content-link-preguntas:hover span {
+    background-position: -361px 0;
+    height: 15px;
+    width: 69px;
+}
+
+.nav-content .nav-content-link-preguntas:hover span {
+    background-position: -373px -15px;
+    height: 15px;
+    width: 71px;
+}
+
+.widecolumn {
+    display: inline;
+    float: left;
+    width: 914px;
+}
+
+.narrowcolumn {
+    display: inline;
+    float: left;
+    width: 450px;
+}
+
+/*.nawRowNewDis{
+    width: 450px;
+}*/
+
+.aside {
+    display: inline;
+    float: right;
+    width: 220px;
+}
+
+.footer {
+    padding: 0 0;
+}
+
+.footer .footnote, .footer p {
+    color: #999999;
+    display: block;
+    font: normal normal 11px/1.3em Arial, Helvetica, sans-serif;
+    padding: 0 20px 25px;
+    text-align: justify;
+}
+
+.footer .nav-footer {
+    background-color: #00517a;
+    color: #4a6d71;
+    display: block;
+    padding: 5px;
+    position: relative;
+}
+
+.footer .nav-footer a:link,
+.footer .nav-footer a:visited,
+.footer .nav-footer a:active,
+.footer .nav-footer a:hover {
+    color: #51c6d9;
+    font: normal normal 12px/1.3em Arial, Helvetica, sans-serif;
+    padding: 0 2px;
+}
+
+.footer .nav-footer-link-telefonica:link,
+.footer .nav-footer-link-telefonica:visited,
+.footer .nav-footer-link-telefonica:active,
+.footer .nav-footer-link-telefonica:hover {
+    background: url('res/sprite-menu.gif') no-repeat 0 -31px;
+    height: 26px;
+    overflow: hidden;
+    position: absolute;
+    right: 5px;
+    text-indent: -999px;
+    top: 5px;
+    width: 90px;
+}
+
+.mascara {
+    width: 218px;
+    height: 182px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.mascara-nokias {
+    width: 218px;
+    height: 182px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    /*background-color:blue;*/
+}
+
+.all-body {
+
+    height: 753px;
+    left: 50%;
+    margin-left: -613px;
+    position: absolute;
+    top: 0;
+    width: 1227px;
+    z-index: 8888;
+}
+
+.skin-body {
+    background: url("../images/skin.jpg") no-repeat scroll center top #FFFFFF;
+    height: 917px;
+    left: 50%;
+    margin-left: -674px;
+    position: absolute;
+    top: 0;
+    width: 1349px;
+
+}
+
+.link-skin-body {
+    z-index: 1;
+}
+
+.nameEquipo {
+    font-family: Arial;
+    font-size: 18px;
+    color: #000000;
+    padding-bottom: 10px;
+}
+
+.breadcrumb {
+    border-top: 1px solid #DEE4EA;
+    border-bottom: 1px solid #DEE4EA;
+    display: block;
+    margin: 10px 0;
+    overflow: hidden;
+    padding: 0 10px;
+    font-family: Arial;
+    font-size: 13px;
+    color: #666666;
+    clear: both;
+}
+
+.breadcrumb > a:link,
+.breadcrumb > a:visited,
+.breadcrumb > a:active,
+.breadcrumb > a:hover {
+    background: url('res/pathway-sep.gif') no-repeat right center;
+    display: inline;
+    float: left;
+    color: #515559;
+    font: normal bold 14px/1.4em Verdana, Geneva, sans-serif;
+    padding: 10px 30px 10px 20px;
+}
+
+.breadcrumb-item {
+    background: url('res/pathway-sep.gif') no-repeat right center;
+    display: inline;
+    float: left;
+    padding: 10px 30px 10px 20px;
+}
+
+.breadcrumb-item,
+.breadcrumb-item a:link,
+.breadcrumb-item a:visited,
+.breadcrumb-item a:active,
+.breadcrumb-item a:hover {
+    color: #515559;
+    font: normal bold 14px/1.4em Verdana, Geneva, sans-serif;
+}
+
+/*************************/
+.btn-regresar {
+    float: right;
+    height: auto;
+    margin: -60px 20px 0 0;
+    width: 97px;
+}
+
+.btn-regresar a {
+    background: url("../images/regresar.png") no-repeat scroll left top transparent;
+    cursor: pointer;
+    float: right;
+    height: 32px;
+    width: 97px;
+}
+
+.wrapper .d20, .wrapper .d110, .wrapper .d196, .wrapper .d220, .wrapper .d240, .wrapper .d460, .wrapper .d480, .wrapper .d700, .wrapper .d720, .wrapper .d840, .wrapper .d940, .wrapper .d980 {
+    float: left;
+    text-align: left !important;
+}
+
+.wrapper .d20 {
+    width: 20px;
+}
+
+.wrapper .d110 {
+    width: 110px;
+}
+
+.wrapper .d196 {
+    width: 196px;
+}
+
+.wrapper .d220 {
+    width: 220px;
+}
+
+.wrapper .d240 {
+    width: 240px;
+}
+
+.wrapper .d460 {
+    width: 460px;
+}
+
+.wrapper .d480 {
+    width: 480px;
+}
+
+.wrapper .d700 {
+    width: 700px;
+}
+
+.wrapper .d720 {
+    width: 720px;
+}
+
+.wrapper .d840 {
+    width: 840px;
+}
+
+.wrapper .d940 {
+    width: 940px;
+}
+
+.wrapper .d980 {
+    width: 980px;
+}
+
+.newH1 {
+    float: left;
+    margin: 20px 0 20px 20px;
+    padding: 0;
+    width: 960px;
+}
+
+ul.submenu {
+    background: url("../images/bg-submenu.gif") repeat-x scroll center top transparent;
+    float: left;
+    height: 32px;
+    list-style: none outside none;
+    padding: 0 0 15px;
+    width: 100%;
+}
+
+ul.submenu li {
+    background: url("../images/bg-submenu-sep.gif") no-repeat scroll right center transparent;
+    float: left;
+}
+
+ul.submenu li a:hover, ul.submenu li a.on {
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #515459;
+    text-decoration: none;
+}
+
+ul.submenu li a {
+    color: #0087C1;
+    float: left;
+    font: bold 12px Arial, Helvetica, sans-serif;
+    margin: 1px 0 0 1px;
+    padding: 7px 11px 9px 10px;
+    text-decoration: none;
+}
+
+.subtitulo-promos02 {
+    color: #000000 !important;
+    font: bold 15px Verdana, Geneva, sans-serif !important;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #0086C3;
+    /*font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;*/
+    text-decoration: none;
+}
+
+.planLink {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+.wrap {
+    height: 310px;
+    margin: 0;
+    padding: 0;
+    width: 460px;
+}
+
+ul.lista {
+    float: left;
+    padding: 0 0 0 20px;
+}
+
+ol.lista {
+    float: left;
+    padding: 0 0 0 20px;
+}
+
+input.textbox {
+    width: 165px; /*175px*/
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #505559;
+    background: url(../images/btn-txt-sms.html) no-repeat top left;
+    padding: 2px 5px;
+}
+
+textarea.txtarea {
+    width: 165px; /*175px*/
+    height: 70px; /*76px*/
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #505559;
+    background: #F0F0F0 url(../images/btn-txtarea-sms.html) no-repeat top left;
+    padding: 2px 5px;
+}
+
+ul.formulario {
+    float: left;
+    width: 400px;
+    list-style: none;
+    margin: 0 0 0 60px;
+    _margin-left: 50px;
+}
+
+ul.formulario li {
+    float: left;
+    height: 25px;
+}
+
+ul.formulario li.txt {
+    width: 130px;
+    color: #505559;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+ul.formulario li.box, ul.formulario li.boxarea {
+    width: 250px;
+}
+
+ul.formulario li.boxarea {
+    height: auto
+}
+
+a.btn-enviar {
+    float: left;
+    width: 68px;
+    height: 28px;
+    background: url(../images/btn-enviar.gif) no-repeat 0 0;
+    margin: 0 0 0 50px;
+}
+
+.no-margin {
+    margin: 0 0 0 0px !important;
+}
+
+a.btn-borrar {
+    float: left;
+    width: 69px;
+    height: 28px;
+    background: url(../images/btn-borrar.gif) no-repeat 0 0;
+    margin: 0 18px 0 0px;
+}
+
+a.btn-registrarme {
+    float: left;
+    width: 113px;
+    height: 34px;
+    background: url(../images/btn-registrarme.jpg) no-repeat 0 0;
+    margin: 0 18px 0 0px;
+}
+
+.marca-title {
+    font-size: 32px;
+    font-family: MovistarHeadline;
+    color: #00517a;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+/* Section */
+
+#promotion {
+    background: url('../images/bglayer-super.png') no-repeat;
+    width: 940px;
+    height: 134px;
+    margin: auto;
+    position: fixed;
+    bottom: 0;
+    z-index: 9999;
+    display: none;
+}
+
+#promotion-nokia, #promotion-nokia-2 {
+    background: url('../images/bg-layer-familia-nokia_mini.jpg') no-repeat;
+    width: 940px;
+    height: 180px;
+    margin: auto;
+    position: fixed;
+    /*bottom: 0;*/
+    top: 100%;
+    z-index: 9999;
+    /*display: none;*/
+}
+
+#promotion .phone {
+    float: right;
+    margin-right: 155px;
+    margin-top: 51px;
+    width: 200px;
+}
+
+#promotion-nokia .phone-nokia, #promotion-nokia-2 .phone-nokia {
+    float: left;
+    margin-left: 40px;
+    margin-top: 180px;
+    z-index: 1;
+}
+
+#promotion-nokia .phone-nokias {
+    position: absolute;
+    right: 100px;
+    /*top: 100%;*/
+    top: 8px;
+    display: none;
+    z-index: -1;
+}
+
+#promotion-nokia-2 .phone-nokias {
+    position: absolute;
+    right: 100px;
+    /*top: 100%;*/
+    top: 8px;
+    display: none;
+    z-index: 0;
+}
+
+#promotion .phone img, #promotion-nokia .phone img, #promotion-nokia-2 .phone img {
+    margin-top: 180px;
+    /*margin-left: 20px;*/
+}
+
+#promotion .description {
+    float: left;
+    margin-left: 55px;
+    width: 530px;
+}
+
+#promotion-nokia .description-1, #promotion-nokia-2 .description-1 {
+    margin-left: 30px;
+    margin-top: 173px;
+    width: 580px;
+    float: left;
+}
+
+#promotion-nokia .description-2-a {
+    /*margin-left:30px;
+    margin-top: 173px;*/
+    position: absolute;
+    left: 30px;
+    top: 100%;
+    width: 580px;
+    /*float:left; */
+    /*display:none;*/
+}
+
+#promotion-nokia-2 .description-2 {
+    /*margin-left:30px;
+    margin-top: 173px;*/
+    position: absolute;
+    left: 30px;
+    top: 100%;
+    width: 580px;
+    /*float:left; */
+    /*display:none;*/
+}
+
+#promotion-nokia .description-3, #promotion-nokia-2 .description-3 {
+    position: absolute;
+    width: 350px;
+    top: 100%;
+    left: 150px;
+}
+
+#promotion-nokia .frame-logo, #promotion-nokia-2 .frame-logo {
+    position: absolute;
+    width: 226px;
+    top: 100%;
+    left: 357px;
+}
+
+#promotion-nokia .description-3 .llevate, #promotion-nokia-2 .description-3 .llevate {
+    color: #ffffff;
+    font-family: 'MovistarText';
+    font-size: 26px;
+    margin-bottom: 0px;
+}
+
+#promotion-nokia .description-3 .desde, #promotion-nokia-2 .description-3 .desde {
+    color: #ffffff;
+    font-family: 'MovistarHeadline';
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#promotion-nokia .description-3 .precio, #promotion-nokia-2 .description-3 .precio {
+    color: #ffffff;
+
+}
+
+#promotion-nokia .description-3 .precio .unidad, #promotion-nokia-2 .description-3 .precio .unidad {
+    font-size: 28px;
+    font-family: 'MovistarHeadline';
+    font-weight: bold;
+}
+
+#promotion-nokia .description-3 .precio .cantidad, #promotion-nokia-2 .description-3 .precio .cantidad {
+    font-size: 54px;
+    font-family: 'MovistarHeadline';
+    font-weight: bold;
+}
+
+#promotion-nokia .description-3 .mas-info a, #promotion-nokia-2 .description-3 .mas-info a {
+    color: #ffffff;
+    font-family: Arial, Verdana, serif;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+#promotion-nokia .description-3 .mas-info img, #promotion-nokia-2 .description-3 .mas-info img {
+    vertical-align: middle;
+}
+
+#promotion-nokia .description-1 p, #promotion-nokia .description-2-a p, #promotion-nokia-2 .description-1 p, #promotion-nokia-2 .description-2 p {
+    color: #FFFFFF;
+    font-family: 'MovistarHeadline';
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 40px;
+
+}
+
+#promotion .description h3, #promotion-nokia .description h3, #promotion-nokia-2 .description h3 {
+    font-family: 'MovistarText';
+    font-size: 26px;
+    color: #8dc63f;
+    height: 36px;
+    margin-top: 8px;
+    font-weight: bold
+}
+
+#promotion .description p, #promotion-nokia .description p, #promotion-nokia-2 .description p {
+    font-size: 18px;
+    color: #fff;
+    font-family: 'MovistarHeadline';
+    margin-top: 0px;
+    font-weight: bold;
+    line-height: 22px;
+}
+
+#promotion .description .more, #promotion-nokia .description .more, #promotion-nokia-2 .description .more {
+    background-image: url("../images/more2.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    color: #FFFFFF;
+    float: right;
+    height: 30px;
+    font-size: 14px;
+    line-height: 26px;
+    margin-right: 10px;
+    padding-right: 40px;
+    margin-top: -18px;
+    width: 115px;
+    font-family: 'MovistarHeadline';
+    font-weight: bold
+}
+
+#promotion .close, #promotion-nokia .close, #promotion-nokia-2 .close {
+    background: url('../images/close.png') no-repeat;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    right: 0;
+    margin-top: 8px;
+    cursor: pointer;
+    display: none;
+}
+
+#promotion .description span, #promotion-nokia .description span, #promotion-nokia-2 .description span {
+    color: #FFFFFF;
+    font-family: 'MovistarHeadline';
+    font-size: 24px;
+    line-height: 22px;
+    margin-top: 0;
+}
+
+#promotion .description .time, #promotion-nokia .description .time, #promotion-nokia-2 .description .time {
+    color: #FFFFFF;
+    font-family: 'MovistarHeadline';
+    font-size: 16px;
+    line-height: 22px;
+    margin-top: 0;
+}
+
+#promotion .description .time strong, #promotion-nokia .description .time strong, #promotion-nokia-2 .description .time strong {
+    font-weight: bold;
+}
+
+#promotion-pulpo {
+    width: 980px;
+    height: 188px;
+    margin: auto;
+    position: fixed;
+    bottom: -188px;
+    z-index: 9999;
+    left: 50%;
+    margin-left: -490px;
+    z-index: 9999;
+}
+
+#promotion-ss {
+    background: url('../images/popup-junio.jpg') no-repeat;
+    /*background: url('../images/copa-inca-final.jpg') no-repeat;*/
+    /*background: url('../img/bg-layers.jpg') no-repeat;*/
+    width: 940px;
+    height: 187px;
+    margin: auto;
+    position: fixed;
+    bottom: 0;
+    /*display: none;*/
+    z-index: 1001;
+}
+
+#promotion-ss .phone {
+    float: right;
+    /*float:left;*/
+    margin-right: 145px;
+    margin-top: 57px;
+    width: 200px;
+}
+
+#promotion-ss .phone img {
+    margin-top: 180px;
+    margin-left: 20px;
+}
+
+#promotion-ss .description {
+    float: left;
+    margin-left: 55px;
+    /* margin-left:15px;*/
+    width: 535px;
+    /*width:690px;*/
+    height: 226px;
+    position: relative;
+}
+
+#promotion-ss .description h3 {
+    font-size: 24px;
+    color: #8dc63f;
+    /*color:#ffffff;*/
+    height: 26px;
+    margin-top: 16px;
+    font-family: 'MovistarHeadline';
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+#promotion-ss .description span {
+    font-size: 20px;
+    color: #fff;
+    font-family: 'MovistarHeadline';
+    font-weight: bold;
+    /*font-family: 'MovistarText';*/
+    margin-top: 0px;
+    line-height: 22px;
+}
+
+#promotion-ss .description .time {
+    font-size: 16px;
+    color: #fff;
+    font-family: 'MovistarText';
+    margin-top: 0px;
+    margin-bottom: 5px;
+    line-height: 22px;
+}
+
+#promotion-ss .description .mas-info, #promotion-ss .description .mas-info:hover {
+    font-family: Arial, Verdana, Serif;
+    font-size: 14px;
+    color: #ffffff;
+    text-decoration: none;
+    top: 97px;
+    position: absolute;
+    left: -38px;
+    /* background: red; */
+    z-index: 99;
+    /* display: none; */
+}
+
+#promotion-ss .description .saber-mas {
+    background-image: url("../img/btn-quiero-saber-mas.html");
+    background-position: right center;
+    background-repeat: no-repeat;
+    color: #FFFFFF;
+    /*float: right;*/
+    height: 31px;
+    line-height: 26px;
+    /*margin-right: 120px;*/
+    /*margin-top: -4px;
+    padding-right: 40px;*/
+    width: 165px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+#promotion-megas .close, #promotion-ss .close {
+    background: url('../images/close.png') no-repeat;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+    /* display: none; */
+    top: 10px;
+}
+
+/*css cabecera*/
+/* IE9  */
+
+@media all and (min-width: 0) {
+
+    #header-menuglobal .submenu-item-fijo {
+        margin-left: 818px \0/ !important;
+        width: 885px \0/ !important;
+    }
+
+    #header-menuglobal .submenu-item-tienda {
+        margin-left: 590px \0/ !important;
+    }
+
+    #header-menuglobal .submenu-item-promociones {
+        margin-left: 585px \0/ !important;
+    }
+
+    #header-menuglobal .submenu-item-ayuda {
+        margin-left: 590px \0/ !important;
+    }
+}
+
+/*--*/
+
+/*css cabecera*/
+/* IE8  */
+
+#header-menuglobal .submenu-item-fijo {
+    margin-left /*\**/: 825px \9 !important;
+
+}
+
+#header-menuglobal .submenu-desplegable ul.lista-menu-1, .submenu-desplegable ul.lista-menu-2 {
+    margin-left: -65px !important;
+}
+
+ul.menu {
+    margin: 6px 0 0 -2px !important;
+}
+
+ul.menu li a {
+
+}
+
+#header-menuglobal .not-bg {
+    margin-top: 6px !important;
+    width: 5px !important;
+}
+
+#header-menuglobal .not-bg img {
+    width: auto !important;
+}
+
+#header-menuglobal .titbox {
+    font-family: MovistarHeadline !important;
+    font-weight: bold;
+}
+
+#header-menuglobal .titboxx {
+    font-family: MovistarHeadline !important;
+    font-weight: bold;
+}
+
+#header-menuglobal .submenu-desplegable ul.lista-menu-1, .submenu-desplegable ul.lista-menu-2 {
+    padding-left: 11px !important;
+    padding-right: 15px;
+    text-align: left;
+    width: 208px !important;
+}
+
+#header-menuglobal .submenu-item-tienda {
+    width: 230px !important;
+    margin-left: 600px;
+}
+
+#header-menuglobal .submenu-item-tienda .lista-menu-1 {
+    margin-bottom: 20px;
+}
+
+#header-menuglobal .submenu-item-ayuda {
+    width: 249px !important;
+}
+
+#header-menuglobal .submenu-item-ayuda .lista-menu-1 {
+    margin-bottom: 20px;
+}
+
+.submenu-item-promociones .lista-menu-3 {
+    width: 235px !important;
+    margin-right: 20px;
+}
+
+#header-movistar {
+    height: 126px;
+    margin-top: 20px;
+}
+
+#header-menuglobal .submenu-item-tienda {
+    margin-left: 620px;
+}
+
+#header-menuglobal .submenu-item-ayuda {
+    margin-left: 601px;
+}
+
+html body #header-menuglobal .titboxx {
+    color: #00517A !important;
+    float: left;
+    font-family: MovistarHeadline !important;
+    font-weight: bold !important;
+    font-size: 18px !important;
+    margin-bottom: 46px !important;
+    margin-top: 0px !important;
+    width: 52px !important;
+}
+
+#header-menuglobal .img-list-prom {
+    margin-left: -22px !important;
+    margin-top: 35px;
+    text-align: center;
+    width: 211px;
+}
+
+#header-menuglobal .img-list-prom {
+    margin-left: 11px !important;
+}
+
+html #header-menuglobal .submenu-item-promociones .lista-menu-1 {
+    margin-left: -53px !important;
+}
+
+html #header-menuglobal .submenu-item-promociones {
+    width: 235px !important;
+    margin-left: 594px;
+    margin-top: 15px !important;
+}
+
+html #header-menuglobal .submenu-item-fijo {
+    width: 895px !important;
+    margin-left: 826px;
+}
+
+#header-menuglobal .submenu-desplegable ul.lista-menu-1 li, .submenu-desplegable ul.lista-menu-2 li {
+    width: 190px !important;
+}
+
+/* mM */
+#virtual-asistent {
+    background: transparent url('../images/virtual-asistant.png') no-repeat 0 0;
+    width: 145px;
+    height: 61px;
+    float: right;
+    margin-top: -38px;
+    padding: 9px 7px 7px 115px;
+}
+
+#virtual-asistent p {
+    margin: 0;
+}
+
+#virtual-asistent .help-va {
+    font-family: Verdana, Arial;
+    font-size: 11px;
+    font-weight: bold;
+    color: #00507c;
+    margin-bottom: 7px;
+}
+
+#virtual-asistent #va-topic_ayuda {
+    width: 142px;
+    height: 20px;
+    cursor: pointer;
+}
+
+#virtual-asistent a {
+    font-family: Arial, Verdana;
+    font-size: 11px;
+    color: #0086c3;
+    margin-right: 9px;
+}
+
+#virtual-asistent a:hover {
+    text-decoration: none;
+}
+
+h2.titulo-va {
+    background: none repeat scroll 0 0 #00517A;
+    color: #FFFFFF;
+    display: block;
+    font: bold 25px/1.3em 'MovistarHeadline', Arial, Helvetica, sans-serif;
+    letter-spacing: 0.05em;
+    padding: 10px 25px;
+}
+
+#container-va {
+    padding: 19px 22px;
+}
+
+#container-va .left-va {
+    float: left;
+}
+
+#container-va .right-va {
+    float: right;
+}
+
+#container-va .left-va .ventajas-va {
+    margin-bottom: 20px;
+    margin-left: -13px;
+    font-weight: bold;
+    font-family: Arial;
+    font-size: 15px;
+    color: #515559;
+}
+
+#container-va .left-va ul {
+    list-style-type: square;
+}
+
+#container-va .left-va ul li {
+    font-family: Arial;
+    font-size: 12px;
+    color: #515559;
+    margin-bottom: 10px;
+}
+
+#container-va .left-va ul li span {
+    font-weight: bold;
+}
+
+#robot-question {
+    margin-right: 12px;
+    margin-top: -22px;
+    cursor: pointer;
+}
+
+/* */
+
+.tooltip-productos {
+    background-color: #0086C3;
+    display: none;
+    height: 33px;
+    position: relative;
+    top: 30px;
+    width: 79px;
+}
+
+#modal {
+    background-color: #000000;
+    display: none;
+    left: 0;
+    position: absolute;
+    top: 0;
+    z-index: 99999;
+}
+
+#boxes .window {
+    display: block;
+    position: fixed;
+    z-index: 999999;
+}
+
+#boxes .dialog {
+    /*background: none repeat scroll 0 0 #f1f3f2;
+    color: #999999;
+    font-size: 11px;
+    line-height: 13px;
+    margin-top: 10%;
+    padding: 14px 20px;
+    width: 550px;
+    height: 360px;*/
+    background: none repeat scroll 0 0 #F1F3F2;
+    height: 360px;
+    line-height: 13px;
+    padding: 14px 20px;
+    width: 550px;
+}
+
+.temporal-information {
+    background: url("../images/layer-temporal.jpg") repeat scroll 0 0 transparent;
+    height: 322px;
+    margin-top: 20px;
+    position: relative;
+    width: 420px;
+}
+
+.temporal-celular {
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+    bottom: 0;
+}
+
+#promotion .temporal-close {
+    background: url('../images/close.png') no-repeat;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    right: 0;
+    margin-top: 8px;
+    cursor: pointer;
+
+}
+
+.temporal-button {
+    background: url('../images/btnInformateAqui.png') no-repeat;
+    margin-left: -5px;
+    width: 120px;
+    height: 31px;
+    display: block;
+    clear: both;
+    cursor: pointer;
+}
+
+.background-temporal {
+    background-image: url('../images/skin-temporal.jpg');
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+.btnInformateAqui {
+    background: url('../images/btnInformateAqui.png') no-repeat;
+    margin-left: -5px;
+    width: 120px;
+    height: 31px;
+    display: block;
+    clear: both;
+    cursor: pointer;
+}
+
+.prom-layers {
+    width: 890px;
+    height: 104px;
+    padding: 15px 30px;
+    margin: auto;
+    position: fixed;
+    bottom: -300px; /*-300px*/
+    z-index: 1001;
+}
+
+.prom-layers h1 {
+    color: #fff !important;
+    font-size: 26px !important;
+    margin: -2px 0 0 !important;
+    line-height: 26px !important;
+    width: 100%;
+}
+
+.prom-layers p {
+    float: left;
+    margin: 6px 0 0;
+    color: #fff;
+}
+
+.prom-layers .close {
+    background: url('../images/close.png') no-repeat;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+}
+
+.prom-layers .btn-promo {
+    width: 116px;
+    height: 32px;
+    display: block;
+}
+
+#promotion-megas {
+    background: url('../images/popup-junio.jpg') no-repeat;
+    width: 980px;
+    height: 187px;
+    margin: auto;
+    position: fixed;
+    bottom: -140px;
+    z-index: 1001;
+    margin-left: -20px;
+}
+
+#promotion-megas .btn-promo {
+    background: url("../images/btn_masinfo.jpg") no-repeat;
+    bottom: 20px;
+    height: 25px;
+    left: 23px;
+    position: absolute;
+    width: 129px;
+}
+
+#promotion-megas .close {
+    background: url('../images/close.png') no-repeat;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    right: 0px;
+    margin-top: -2px;
+    cursor: pointer;
+    display: none;
+}
+
+/*Redisenio seccion soporte mM*/
+#manuals {
+
+}
+
+#manuals .row-manuals {
+}
+
+#manuals .row-manuals .manual {
+}
+
+#manuals .row-manuals .l-box-m {
+    background: url("../images/soporte/left-box-soporte.jpg") 0 0 no-repeat transparent;
+    width: 4px;
+    height: 126px;
+    float: left;
+}
+
+#manuals .row-manuals .manual .c-box-m {
+    background: url("../images/soporte/center-box-soporte.jpg") 0 0 repeat-x transparent;
+    border-right: 1px solid #d9dcdc;
+    width: 180px;
+    height: 101px;
+    float: left;
+    padding: 5px 0 20px 0;
+}
+
+#manuals .row-manuals .manual .c-box-m .image, #manuals .row-manuals .manual .c-box-m .title {
+    text-align: center;
+    color: #4e5459;
+    font-size: 15px;
+    font-family: 'MovistarText';
+    margin-top: 5px;
+    line-height: 16px;
+    width: 180px;
+    height: 61px;
+}
+
+#manuals .row-manuals .manual .no-border {
+    border: none;
+}
+
+#manuals .row-manuals .r-box-m {
+    background: url("../images/soporte/right-box-soporte.jpg") 0 0 repeat-x transparent;
+    width: 4px;
+    height: 126px;
+    float: left;
+}
+
+.clean-row-manuals {
+    clear: both;
+    height: 10px;
+}
+
+.fix-clear {
+    clear: both;
+}
+
+/*Tabs*/
+.pestfichaproducto {
+    display: inline;
+    /*float: right;
+    padding-right: 20px;
+    width: 702px;*/
+}
+
+.tabs_producto {
+    clear: left;
+    float: left;
+    overflow: hidden;
+    padding: 10px 0;
+    width: 100%;
+}
+
+.tabs_producto .tabs_nav {
+    background: url("../images/soporte/fnd_tabs_prod.gif") repeat-x scroll left center transparent;
+    height: 33px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.tabs_producto .tabs_nav li.first.selected {
+    border-left: 1px solid #D3E1E4;
+}
+
+.tabs_producto .tabs_nav li.selected {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-top: 1px solid #D3E1E4;
+}
+
+.tabs_producto .tabs_nav li {
+    float: left;
+    list-style: none outside none;
+}
+
+.tabs_producto .tabs_nav li.first a {
+    padding-left: 17px;
+    background: none;
+}
+
+.tabs_producto .tabs_nav li.last a {
+    background: none;
+}
+
+.tabs_producto .tabs_nav li.selected a {
+    color: #515559 !important;
+    cursor: text;
+    padding: 10px 20px;
+}
+
+.tabs_producto .tabs_nav a:link, .tabs_producto .tabs_nav a:visited {
+    color: #0086C3;
+}
+
+.tabs_producto .tabs_nav a {
+    background: url("../images/soporte/vertical_line_white.gif") no-repeat scroll right center transparent;
+    display: block;
+    float: left;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 9px 12px;
+    text-decoration: none;
+    font-family: "Arial", Verdana;
+}
+
+a {
+    color: #0086C3;
+    cursor: pointer !important;
+    text-decoration: none !important;
+}
+
+/*End Tabs*/
+/*Fin Redisenio seccion soporte mM*/
+
+/* Responsive mM*/
+/* Large desktop */
+@media (min-width: 1200px) {
+
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+    #promotion-megas {
+        display: none;
+    }
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+    #promotion-megas {
+        display: none;
+    }
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+    #promotion-megas {
+        display: none;
+    }
+}
+
+.footerEquipos, .footerMobil {
+    display: none;
+}
+
+/****Modal*****/
+#mask {
+    width: 100% !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 99999;
+    background-color: #000;
+    display: none;
+}
+
+#boxes .window {
+    position: fixed;
+    display: none;
+    z-index: 9999;
+}
+
+#boxes #dialog {
+    /* background: #fff;
+     width: 86%;
+     padding: 20px;
+     box-sizing: border-box;
+     top: 100px;
+     -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+     border-radius: 5px;
+     -webkit-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+     -moz-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+     left: 34px !important;
+     border: 1px solid #999;*/
+    width: 633px;
+    height: 408px;
+    top: 50% !important;
+    /*bottom: -8px !important;*/
+    left: 50% !important;
+    margin-top: -204px !important;
+    margin-left: -316px;
+    z-index: 999999;
+}
+
+.newCerrarAu {
+    background: url(../images/btnCerrarLayer.png) no-repeat;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 15px;
+    right: -10px;
+}
+
+.movie-detail {
+    position: relative;
+    display: none;
+}
+
+.legal-modal-up {
+    cursor: pointer;
+    float: right;
+    margin-right: -2px;
+    margin-top: -12px;
+}
+
+.title-2 {
+    font-family: 'MovistarHeadline';
+    font-size: 20px;
+    line-height: 30px;
+    color: #005C84;
+    margin-left: 8px;
+    font-weight: bold;
+}
+
+.content-2 {
+    background: #FFF;
+    color: #00517A;
+    font-family: Arial, Verdana, Serif;
+    font-weight: bold;
+    padding: 6px 0 0 26px;
+    font-size: 12px;
+}
+
+.content-2 ol {
+    list-style: decimal;
+}
+
+.content-2 ol li {
+    line-height: 20px;
+}
+
+.content-2 ol li span {
+    color: #515559;
+    font-weight: normal;
+}
+
+.btnParticiparGala {
+    background: url("../images/btnParticiparGala.png") no-repeat;
+    width: 122px;
+    height: 32px;
+    position: absolute;
+    bottom: 74px;
+    left: 24px;
+}
+
+.btnEnterateAqui {
+    background: url("../images/btnParticipar.jpg") no-repeat;
+    width: 123px;
+    position: absolute;
+    bottom: 204px;
+    height: 32px;
+    left: 28px;
+}
+
+.txtRenueva {
+    font: normal 11px Arial, Helvetica, sans-serif;
+    color: #959595;
+    float: right;
+    padding-top: 4px;
+    /*background:url("../images/fondoinput.png") no-repeat;*/
+    background: url("../images/Equipo4G.png") no-repeat;
+    text-indent: -8000px;
+    overflow: hidden;
+    width: 140px;
+    height: 24px;
+    margin-right: 12px;
+}
+
+.txtRenueva label {
+    float: right;
+    margin-right: 14px;
+    width: 95%;
+    cursor: pointer;
+    margin-top: 2px;
+}
+
+#checkRenueva {
+    margin-top: 1px;
+    float: right;
+    margin-left: 6px;
+}
+
+.iframe_anim {
+    float: left;
+    position: relative;
+}
+
+.iframe_anim .linkCapa {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-indent: -8000px;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 99999;
+    background: url('../images/capa.html') repeat transparent;
+}
+
+#iframesoporte {
+    display: none;
+    margin-left: -20px;
+    overflow: hidden;
+    border: none;
+}
+
+.btnoutlet {
+    background: url(../images/outlet.png) no-repeat 0 -56px;
+    padding: 0px;
+    float: left;
+    color: #fff;
+    width: 79px;
+    height: 53px;
+    margin-top: -9px !important;
+    overflow: hidden;
+    margin-bottom: 0px !important;
+    display: none !important;
+}
+
+.btnoutlet:hover {
+    background: url(../images/outlet.png) no-repeat 0 0;
+}
+
+.btnoutlet a {
+    width: 100%;
+    height: 100%;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    text-indent: -8000px;
+    overflow: hidden;
+}
+
+td.boton-comprar-tabla {
+    min-width: 110px;
+}
+
+td.pequipo-value-mensual,
+td.pequipo-value {
+    min-width: 40px;
+}
+
+.btnIngresoSoporte {
+    width: 128px;
+    background-color: #00759F;
+    color: #FFF;
+    font-family: MovistarHeadline;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    padding: 3px 0;
+    float: right;
+    margin-bottom: 20px;
+}
+
+#btnSopRespo{
+    display: none;
+    float: left;
+    margin-bottom: 0;
+}
+
+/*
+    Cambio en Diseï¿½o 02/09/14
+*/
+.aside {
+    margin-top: 0;
+}
+
+.aside .block-delta .block-content {
+    background-color: #59b274;
+}
+
+.block .block-title-comparador {
+    background: none !important;
+    background-color: #59b274 !important;
+    text-indent: 0px !important;
+    color: #fff !important;
+    font-size: 25px;
+    font-family: 'MovistarHeadline';
+    height: 70px !important;
+    padding-left: 10px;
+    line-height: 30px;
+    padding-top: 10px;
+    width: 210px !important;
+}
+
+.widecolumn .block-delta .block-content {
+    background-color: #5995b1 !important;
+    font-size: 25px !important;
+    color: #fff;
+}
+
+.form-dropdown-type{
+  z-index: 999999 !important;
+}
+.form-dropdown-brand{
+    z-index: 99999 !important;
+}
+
+.form-dropdown-4g{
+    z-index: 9999 !important;
+}
+
+/*
+    * comparador
+    */
+#compare .block-header h4 {
+    background: #A8CE37 url(../images/compare/iphone.png) 22px 16px no-repeat !important;
+    padding-left: 56px !important;
+    padding-top: 0 !important;
+    line-height: 60px !important;
+    font-size: 17px !important;
+    width: 164px !important;
+}
+
+.grid-item-open.grid-item-bg1 {
+    background: #cae399 url(../images/compare/bg01.jpg) no-repeat center center !important;
+}
+
+.grid-item-open.grid-item-bg2 {
+    background: #cae399 url(../images/compare/bg02.jpg) no-repeat center center !important;
+}
+
+.grid-item-open.grid-item-bg3 {
+    background: #cae399 url(../images/compare/bg03.jpg) no-repeat center center !important;
+}
+
+.grid-item-open.grid-item-bg4 {
+    background: #cae399 url(../images/compare/bg04.jpg) no-repeat center center !important;
+}
+
+.aside .block-delta .block-content {
+    width: 208px;
+    background: #ffffff url(../images/compare/title.png) top center no-repeat;
+    -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
+    -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
+    padding-top: 14px !important;
+}
+
+.link-compare:link, .link-compare:visited, .link-compare:active, .link-compare:hover {
+    font-size: 12px !important;
+    font-weight: bold !important;
+    color: #FFF !important;
+    width: 91px !important;
+    height: 25px !important;
+    background: #9D32B5 !important;
+    text-align: center;
+    float: left !important;
+    line-height: 25px !important;
+    text-indent: 0 !important;
+}
+
+.scrollup {
+    background: url(../images/btnTop.jpg) no-repeat;
+    width: 48px;
+    height: 76px;
+    position: fixed;
+    bottom: 50px;
+    right: 0;
+    z-index: 99999;
+    text-indent: -9999px;
+    display: none;
+}
+
+.mes18{
+    padding: 20px 10px 0;
+    font-size: 14px;
+    font-family: arial;
+    color: #707070;
+    clear: both;
+}
+
+#moduleoriginaldown h2{
+    font-family: MovistarText;
+    padding: 26px 0 20px 10px;
+    color: #0077A2;
+    font-weight: bold;
+}
+
+.titDetaPlan{
+    background: url(../images/fle-title.png) no-repeat;
+    width: 160px;
+    float: left;
+    color: #005B83;
+    font-family: MovistarText;
+    font-size: 16px;
+    padding-bottom: 6px;
+    padding-left: 18px;
+    line-height: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/**** FORM PORTABILIDAD ****/
+
+.contPorta {
+    padding: 20px 21px;
+}
+
+.contPorta h2.titPorta {
+    color: #005b83;
+    font-family: MovistarHeadline;
+    font-size: 30px;
+}
+
+.contFormPorta {
+    background: #edf2f5;
+    width: 100%;
+    font-family: MovistarText;
+}
+
+.contFormPorta.padForm {
+    padding: 8px 18px 28px;
+}
+
+.contFormPorta h2 {
+    color: #005b83;
+}
+
+.contFormPorta h3 {
+    color: #005b83;
+    font-size: 24px;
+    float: left;
+}
+
+.contFormPorta p.subTit{
+    color: #005b83;
+    font-size: 24px;
+    clear: both;
+}
+
+.contFormPorta .boxDatFija {
+    background: #fff;
+    padding: 26px;
+    clear: both;
+}
+
+.contFormPorta .boxDatFija .nameMarcaEqui {
+    color: #005b83;
+    font-family: MovistarHeadline;
+    font-size: 36px;
+    float: left;
+    line-height: 28px;
+}
+
+.contFormPorta .boxDatFija .sepIco {
+    margin-right: 8px;
+}
+
+.contFormPorta .boxDatFija .nameModelEqui {
+    width: 90px;
+    color: #005B83;
+    font-size: 24px;
+    float: left;
+    clear: left;
+    line-height: 24px;
+    padding-top: 18px;
+}
+
+.contFormPorta .boxDatFija .titGenEqui {
+    color: #005B83;
+    font-size: 20px;
+    padding-top: 8px;
+    line-height: 22px;
+}
+
+.contFormPorta .boxDatFija .contPrice {
+    color: #005B83;
+    padding-top: 8px;
+}
+
+.contFormPorta span.tipoMoneda {
+    font-family: 'MovistarHeadline';
+    font-weight: bold;
+    font-size: 20px;
+    float: left;
+    margin-top: 20px;
+    margin-right: 2px;
+}
+
+.contFormPorta span.priceEquip {
+    font-family: 'MovistarHeadline';
+    font-weight: bold;
+    font-size: 40px;
+    float: left;
+}
+
+.contFormPorta span.priceEquipCenti {
+    font-family: 'MovistarHeadline';
+    font-weight: bold;
+    font-size: 24px;
+    float: left;
+    padding-top: 8px;
+}
+
+.contFormPorta span.cantMes {
+    font-weight: bold;
+    font-size: 14px;
+    float: left;
+    padding-top: 14px;
+    line-height: 14px;
+    padding-left: 4px
+}
+
+.contFormPorta label {
+    color: #515559;
+    font-size: 18px;
+    font-weight: normal;
+    text-align: left !important;
+    padding-top: 0 !important;
+}
+
+.contFormPorta input[type='text'], .contFormPorta select {
+    border: 1px solid #abd8e5;
+    height: 30px;
+}
+
+
+
+.form-horizontal {
+    padding-top: 20px;
+}
+
+.contFormPorta .checkbox-inline {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.contFormPorta p.termi{
+    padding-top: 40px;
+}
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+
+
+.contFormPorta .form-errors{
+    color: #ED1E1E;
+    font-family: 'MovistarHeadline';
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 24px;
+}
+
+.contFormPorta .btnEnviarPorta{
+    background: url(../images/btnEnviarPorta.png) no-repeat;
+    width: 104px;
+    height: 24px;
+    display: block;
+    margin-top: 16px;
+}
+
+.contFormPorta .errorCaja{
+   border: 2px solid #ED1E1E !important;
+}
+.contFormPorta .subra{
+    text-decoration: underline !important;
+}
+
+
+.equipoNone{
+    float: right;
+    position: relative;
+    display: inline-block;
+}
+
+.contBot{
+    width: 320px;
+}
+
+.imgSopt{
+    max-width: 172px;
+}
+
+.contBot .stikerGuia{
+ margin-top: 26px;
+ float: left;
+}
+
+.marTop2{
+    margin: 30px 0;
+}
+.marTopRenue{
+    margin-top: 60px;
+}
+
+.contRespond h2{
+    color: #0a5d81;
+    font-family: MovistarText;
+    font-size: 18px;
+    font-weight: bold;
+
+}
+
+.contRespond p{
+    color: #727171;
+    font-family: MovistarText !important;
+    font-size: 16px !important;
+    padding: 10px 0;
+    margin: 0 0 40px !important;
+}
+
+.marTop6{
+    margin-top: 30px;
+}
+
+.marLeft{
+    margin-left: 36px;
+}
+
+.col1{
+    padding: 0 20px;
+    width: 10%;
+    float: left;
+    box-sizing: border-box;
+}
+
+.col3{
+    padding: 0 20px;
+    width: 30%;
+    float: left;
+    box-sizing: border-box;
+}
+
+.col4{
+    padding: 0 20px;
+    width: 40%;
+    float: left;
+    box-sizing: border-box;
+}
+
+.col5{
+    padding: 0 20px;
+    width: 56%;
+    float: left;
+    box-sizing: border-box;
+}
+
+.col9{
+    padding: 0 20px;
+    width: 90%;
+    float: left;
+    box-sizing: border-box;
+}
+
+.text-center{
+    text-align: center;
+}
+
+select.cboFilter{
+    background: #efefef;
+    width: 220px;
+    height: 30px;
+    float: left;
+    color: #848484;
+    font-family: arial;
+    font-size: 16px !important;
+    padding: 0 8px;
+}
+
+.boxCambioCel{
+    padding: 25px 10px 10px;
+    background: #119CBF;
+    width: 100%;
+    min-height: 160px;
+    height: auto;
+    float: left;
+    clear: both;
+    box-sizing: border-box;
+}
+
+.boxCambioCel.bgGreen{
+    width: 98%;
+    background: #7ab800;
+    min-height: 80px;
+    padding: 8px 10px 0;
+}
+
+.boxCambioCel.bgGreen .col3{
+    padding: 0;
+}
+
+.marTopRenueNew{
+    margin-top: 30px;
+}
+
+.menMar{
+    margin-right: -20px;
+}
+
+.sbHolder{
+    background-color: #EFEFEF;
+    border-color:#A9A9A9 ;
+    width: 220px;
+    height: 30px;
+    float: left;
+    margin-right: 20px;
+}
+
+.sbSelector:link, .sbSelector:visited, .sbSelector:hover {
+    color: #848484;
+    font-family: arial;
+    font-size: 16px !important;
+}
+
+.sbOptions{
+    width: 100%;
+    background-color: #EFEFEF;
+    border-color:#A9A9A9 ;
+}
+
+.sbOptions a:link, .sbOptions a:visited{
+    color: #848484;
+    font-family: arial;
+    font-size: 15px !important;
+}
+
+.sbOptions a:hover{
+    color: #000;
+}
+
+.breadcrumbNew{
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px 0 0 20px;
+}
+
+.breadcrumbNew ul{
+    padding: 5px 2px;
+    margin: 0;
+    list-style: none;
+}
+
+.breadcrumbNew ul>li{
+    display: inline-block;
+    text-shadow: 0 1px 0 #FFF;
+    float: left;
+}
+
+.breadcrumbNew li a{
+    font-family: MovistarText;
+    color: #00769F;
+}
+
+.breadcrumbNew li a:hover{
+    text-decoration: underline;
+}
+
+.breadcrumbNew li .divider{
+    color: #00C6D7;
+    padding: 0 5px;
+}
+
+.btnRenuevaPur{
+    background: url(../images/btnSolicitarPurp.jpg) no-repeat;
+    width: 144px;
+    height: 34px;
+    clear: both;
+    float: left;
+}
+
+@media only screen and (max-width: 1200px){
+
+}
+
+@media only screen and (max-width: 992px){
+    .contFormPorta .marBoot{
+        margin-bottom: 16px;
+    }
+    .noPaMob{
+        margin: 0 !important;
+    }
+    .marLeft{
+        margin-top: 10px;
+        margin-left: 0;
+    }
+    .col3-md{
+        width: 50%;
+    }
+    .col10-md{
+        width: 100%;
+    }
+
+    .marTopRenue{
+        margin-top: 10px;
+    }
+    .marTopRenueNew {
+        margin-top: 2px;
+        margin-bottom: 10px;
+    }
+    .maskIsq{
+        width: 182px !important;
+        bottom: -80px !important;;
+        left: 74px !important;;
+    }
+    .sbHolder {
+        margin-bottom: 22px;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .contPorta {
+        padding: 20px 0;
+    }
+    .contFormPorta.padForm {
+        padding: 8px 14px 28px;
+    }
+    .contFormPorta .marBoot{
+        margin-bottom: 16px;
+    }
+    .noPaMob{
+        margin: 0 !important;
+    }
+    .col4, .col5{
+        width: 100%;
+    }
+    .col3-tm{
+        width: 100%;
+    }
+    .marTop6{
+        margin-top: 10px;
+    }
+    .img-responsive{
+        max-width: 100%;
+        height: auto;
+    }
+    .cboModelo{
+        margin-bottom: 30px;
+    }
+    .marLeft {
+        margin-top: 0;
+        margin-left: 20px;
+    }
+    .maskIsq{
+        width: 182px !important;
+        bottom: -80px !important;
+        left: 74px !important;
+    }
+
+    .col1-md{
+        width: 20%;
+    }
+    .col9-md{
+        width: 80%;
+    }
+    .BoxPromo4g{
+        text-align: center !important;
+    }
+    .BoxPromo4g span{
+        width: 100% !important;
+    }
+    .BoxPromo4g img{
+        float: none !important;
+    }
+}
+
+@media only screen and (max-width: 580px){
+    select.cboMarca,select.cboModelo{
+        width: 100%;
+    }
+
+    .marLeft {
+        margin-top: 20px;
+        margin-left: 0;
+    }
+
+    .col1-md{
+        width: 30%;
+    }
+    .col9-md{
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 480px){
+  .col-xs-6{
+      width: 100% !important;
+  }
+    .cargo{
+        width: 76% !important;
+    }
+    .col4, .col5{
+        width: 100%;
+    }
+    .cboModelo{
+        margin-bottom: 30px;
+    }
+    .marTop6{
+        margin-top: 10px;
+    }
+    select.cboMarca,select.cboModelo{
+        width: 100%;
+    }
+
+    .marLeft {
+        margin-top: 20px;
+        margin-left: 0;
+    }
+
+    .img-responsive2{
+        max-width: 70%;
+        float: left;
+    }
+
+    .col1-md,.col9-md{
+        width: 100%;
+    }
+
+    .BoxPromo4g{
+        text-align: center !important;;
+    }
+    .BoxPromo4g span{
+        width: 100% !important;
+        line-height: 22px !important;
+        font-size: 24px !important;
+    }
+    .BoxPromo4g img{
+        width: 100% !important;
+        float: none !important;
+    }
+}

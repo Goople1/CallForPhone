@@ -1,0 +1,627 @@
+/* block alpha */
+.block-alpha {
+
+}
+
+.block-alpha .block-header {
+    background-color: #cfe1eb;
+    display: block;
+    padding: 7px 20px;
+    position: relative;
+}
+
+
+
+.block-alpha .block-content {
+    border: 1px solid #cfe1eb;
+    display: block;
+    padding: 9px;
+
+}
+
+.block-alpha p {
+    color: #999999;
+    font: normal normal 13px/1.3em Arial, Helvetica, sans-serif;
+    margin: 0 0 5px;
+}
+
+/* block delta */
+.block-delta {
+    display: block;
+    margin: 0 0 15px;
+}
+
+.block-delta .block-content {
+    background-color: #edf2f5;
+    display: block;
+    padding: 10px 0 10px 5px;
+    /*overflow: hidden;*/
+}
+
+.block-delta .block-footer {
+    background: url('res/block-delta-footer.png') no-repeat center 0;
+    display: block;
+    height: 14px;
+}
+
+/* block teta */
+.block-teta {
+
+}
+
+.block-teta .block-header {
+    display: block;
+    margin: 0 0 15px;
+    overflow: hidden;
+}
+
+.block-teta .block-header-group {
+    display: inline;
+    float: left;
+    margin-right: 20px;
+}
+
+.block-teta .block-title {
+    color: #8dc63f;
+    font: normal bold 26px/1.3em 'MovistarHeadline', Arial, Helvetica, sans-serif;
+    letter-spacing: -0.05em;
+}
+
+.block-teta .block-sub-title {
+    color: #00517a;
+    font: normal normal 26px/1.3em 'MovistarText', Arial, Helvetica, sans-serif;
+}
+
+.block .block-title-smartphones {
+    background: url('res/smart01.png') no-repeat 0px 0px;
+    display: block;
+    height: 25px;
+    overflow: hidden;
+    text-indent: -999px;
+    width: 214px;
+}
+
+.block .block-title-multimedia {
+    background: url('res/smart03.png') no-repeat 0px 0px;
+    display: block;
+    height: 25px;
+    overflow: hidden;
+    text-indent: -999px;
+    width: 168px;
+}
+
+.block .block-title-musicales {
+    background: url('res/smart02.png') no-repeat 0 0px;
+    display: block;
+    height: 27px;
+    overflow: hidden;
+    text-indent: -999px;
+    width: 152px;
+}
+
+.block .block-title-comparador {
+    background: url('res/sprite.png') no-repeat -326px -114px;
+    display: block;
+    height: 30px;
+    overflow: hidden;
+    text-indent: -999px;
+    width: 220px;
+}
+
+.block .block-title-beneficios {
+    background: url('res/sprite.png') no-repeat -326px -144px;
+    display: block;
+    height: 30px;
+    overflow: hidden;
+    text-indent: -999px;
+    width: 220px;
+}
+
+.block .block-title-soporte {
+    background: url('res/sprite.png') no-repeat 0 -110px;
+    display: block;
+    height: 24px;
+    overflow: hidden;
+    text-indent: -999px;
+    width: 90px;
+}
+
+.block .block-title-comparador-large {
+    display: block;
+    overflow: hidden;
+    font-family: MovistarText;
+    width: 306px;
+    font-size: 26px;
+    color: #00527B;
+    font-weight: bold;
+}
+
+.block p {
+    color: #707070;
+    font: normal normal 12px/1.3em Arial, Helvetica, sans-serif;
+    margin: 0 0 15px;
+}
+
+/* social block */
+.block .block-social {
+    position: absolute;
+}
+
+.block-social .block-header {
+    margin: 0 0 5px;
+}
+
+.block-social .block-title {
+    background: url('res/sprite.png') no-repeat 0 -150px;
+    display: block;
+    height: 15px;
+    overflow: hidden;
+    text-indent: -999px;
+    width: 202px;
+}
+
+.block-social .link-social-network:link,
+.block-social .link-social-network:visited,
+.block-social .link-social-network:active,
+.block-social .link-social-network:hover {
+    /*background-image: url('res/sprite.png');*/
+    display: inline;
+    float: left;
+    /*height: 28px;*/
+    margin-right: 5px;
+    /*width: 29px;*/
+}
+
+.block-social .link-social-facebook:link,
+.block-social .link-social-facebook:visited,
+.block-social .link-social-facebook:active,
+.block-social .link-social-facebook:hover {
+    /*background-position: 0 0;*/
+    background-image: url('../images/ico-fb.png');
+    background-repeat: no-repeat;
+    width: 18px;
+    height: 16px;
+}
+
+.block-social .link-social-twitter:link,
+.block-social .link-social-twitter:visited,
+.block-social .link-social-twitter:active,
+.block-social .link-social-twitter:hover {
+    /*background-position: -29px 0;*/
+    background-image: url('../images/ico-tw.png');
+    background-repeat: no-repeat;
+    width: 18px;
+    height: 16px;
+}
+
+.block-social .link-social-google:link,
+.block-social .link-social-google:visited,
+.block-social .link-social-google:active,
+.block-social .link-social-google:hover {
+    /*background-position: -58px 0;
+    width: 28px;*/
+    background-image: url('../images/ico-gp.png');
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 16px;
+}
+
+.block-social .link-social-pinterest:link,
+.block-social .link-social-pinterest:visited,
+.block-social .link-social-pinterest:active,
+.block-social .link-social-pinterest:hover {
+    /*background-position: -86px 0;
+    width: 28px;*/
+    background-image: url('../images/ico-pt.png');
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 16px;
+}
+
+/* block nav */
+.block-nav {
+
+    display: block;
+    height: 40px;
+    margin: 0 0 20px;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+.block-nav .block-nav-item {
+    color: #fff;
+    cursor: pointer;
+    display: inline;
+    float: left;
+    font: normal normal 14px/1.3em 'MovistarText', Arial, Helvetica, sans-serif;
+    margin: 6px 5px 0;
+
+    text-align: center;
+    width: 120px;
+}
+
+.block-nav .block-nav-item-selected,
+.block-nav .block-nav-item:hover {
+    background-color: #fff;
+    color: #005179;
+}
+
+.block-tab .block-nav {
+    width: 83%;
+    clear: both;
+    display: block;
+    height: auto;
+    margin: 0 auto 20px;
+    overflow: hidden;
+    padding: 0 20px;
+    float: none;
+}
+
+.block-tab .block-nav .block-nav-item {
+    width: 235px;
+    height: 56px;
+    border: 1px solid #00c6d7;
+    color: #005c84;
+    cursor: pointer;
+    display: table;
+    float: left;
+    font: normal 18px 'MovistarText', Arial, Helvetica, sans-serif;
+    margin: 0 10px;
+    text-align: center;
+}
+
+.block-tab .block-nav .block-nav-item .textTab{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.block-tab .block-nav .block-nav-item .textTab .txtIco{
+    display: inline-block;
+    margin-top: -30px;
+    vertical-align: middle;
+}
+
+.block-tab .block-nav .block-nav-item .textTab .icoTab{
+    background: url(../images/icoTab.png) no-repeat;
+    width: 43px;
+    height: 43px;
+    display: inline-block;
+}
+
+.block-tab .block-nav .block-nav-item-selected,
+.block-tab .block-nav .block-nav-item:hover {
+    background: #00C6D7;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 18px;
+    border-bottom: 4px solid #17A4B0;
+    height: 53px;
+}
+.block-tab .block-nav .block-nav-item-selected .textTab .icoTab,
+.block-tab .block-nav .block-nav-item:hover .icoTab{
+    background-position: bottom !important;
+}
+
+/* block selector */
+.block-selector {
+    display: block;
+    overflow: hidden;
+}
+
+.itemNew{
+    padding: 10px 0;
+}
+
+.block-selector .block-item-smartphone:link,
+.block-selector .block-item-smartphone:visited,
+.block-selector .block-item-smartphone:active,
+.block-selector .block-item-smartphone:hover {
+    color: #0086c3;
+    display: inline;
+    float: left;
+    font: normal normal 10px/1.4em Arial, Helvetica, sans-serif;
+    margin: 10px 0 0;
+    padding: 100px 0 5px;
+    position: relative;
+    text-align: center;
+    width: 70px;
+}
+
+.block-selector .block-item-smartphone-selected:link,
+.block-selector .block-item-smartphone-selected:visited,
+.block-selector .block-item-smartphone-selected:active,
+.block-selector .block-item-smartphone-selected:hover,
+.block-selector .block-item-smartphone:hover {
+    background-color: #fff;
+}
+
+.block-selector .block-item-smartphone span {
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: block;
+    height: 100px;
+    left: 50%;
+    margin: 0 0 0 -35px;
+    overflow: hidden;
+    position: absolute;
+    text-indent: -999px;
+    top: 0;
+    width: 70px;
+}
+
+.block-selector .block-item-smartphone-alcatel span {
+    background-position: 0 0;
+    height: 20px;
+    margin: 5px 0 0 -38px;
+    width: 76px;
+}
+
+.block-selector .block-item-smartphone-apple span {
+    background-position: 0 -20px;
+    height: 27px;
+    margin: 0 0 0 -11px;
+    width: 23px;
+}
+
+.block-selector .block-item-smartphone-bb span {
+    background-position: -76px 0;
+    height: 12px;
+    margin: 7px 0 0 -32px;
+    width: 65px;
+}
+
+.block-selector .block-item-smartphone-htc span {
+    background-position: -141px 0;
+    height: 17px;
+    margin: 5px 0 0 -24px;
+    width: 48px;
+}
+
+.block-selector .block-item-smartphone-huaweii span {
+    background-position: -23px -20px;
+    height: 31px;
+    margin: 0 0 0 -16px;
+    width: 32px;
+}
+
+.block-selector .block-item-smartphone-lg span {
+    background-position: -55px -20px;
+    height: 30px;
+    margin: 0 0 0 -15px;
+    width: 29px;
+}
+
+.block-selector .block-item-smartphone-motorola span {
+    background-position: -84px -20px;
+    height: 28px;
+    margin: 0 0 0 -15px;
+    width: 29px;
+}
+
+.block-selector .block-item-smartphone-nokia span {
+    background-position: -189px 0;
+    height: 9px;
+    margin: 10px 0 0 -26px;
+    width: 52px;
+}
+
+.block-selector .block-item-smartphone-samsung span {
+    background-position: -167px -20px;
+    height: 17px;
+    margin: 5px 0 0 -27px;
+    width: 54px;
+}
+
+.block-selector .block-item-smartphone-sony span {
+    background-position: -113px -20px;
+    height: 27px;
+    margin: 0 0 0 -13px;
+    width: 27px;
+}
+
+.block-selector .block-item-smartphone-zte span {
+    background-position: -140px -20px;
+    height: 27px;
+    margin: 5px 0 0 -13px;
+    width: 27px;
+}
+
+.block-list {
+    display: block;
+    overflow: hidden;
+}
+
+.block-list .block-list-item {
+    background-color: #edf2f5;
+    display: inline;
+    float: left;
+    height: 120px;
+    margin: 5px 2px;
+    padding: 5px;
+    width: 220px;
+}
+
+.block-list .block-list-item-title {
+    background-image: url('res/sprite.png');
+    display: block;
+    height: 40px;
+    margin: 0 0 5px;
+    overflow: hidden;
+    text-indent: -999px;
+}
+
+.block-list .block-list-item-title-1 {
+    background-position: 0 -302px;
+    width: 109px;
+}
+
+.block-list .block-list-item-title-2 {
+    background-position: -109px -302px;
+    width: 78px;
+}
+
+.block-list .block-list-item-title-3 {
+    background-position: -187px -302px;
+    width: 139px;
+}
+
+.block-list .block-list-item-title-4 {
+    background-position: -326px -302px;
+    width: 103px;
+}
+
+.block-list .block-list-item-title-5 {
+    background-position: -429px -302px;
+    width: 124px;
+}
+
+.block-list .block-list-item p {
+    color: #515559;
+    font: normal normal 12px/1.3em Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+.block-benefits {
+    /*border: 1px solid #d3e1e4;*/
+    display: block;
+    /*padding: 10px;*/
+    position: relative;
+
+    /*background: #f2f6f9*/
+    /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+
+    /*background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2YyZjZmOSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkNmU1ZTgiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #f2f6f9 0%, #d6e5e8 100%); */
+    /* FF3.6+ */
+    /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2f6f9), color-stop(100%,#d6e5e8));*/
+    /* Chrome,Safari4+ */
+    /*background: -webkit-linear-gradient(top,  #f2f6f9 0%,#d6e5e8 100%);*/
+    /* Chrome10+,Safari5.1+ */
+    /*background: -o-linear-gradient(top,  #f2f6f9 0%,#d6e5e8 100%);*/
+    /* Opera 11.10+ */
+    /*background: -ms-linear-gradient(top,  #f2f6f9 0%,#d6e5e8 100%);*/
+    /* IE10+ */
+    /*background: linear-gradient(to bottom,  #f2f6f9 0%,#d6e5e8 100%);*/
+    /* W3C */
+    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f9', endColorstr='#d6e5e8',GradientType=0 );*/
+    /* IE6-8 */
+
+    /*-webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    -webkit-box-shadow: inset 0 0 10px 0px rgba(244, 247, 252, 0.75);
+    box-shadow: inset 0 0 10px 0px rgba(244, 247, 252, 0.75);*/
+}
+
+.block-benefits .block-title {
+    color: #44484b;
+    display: block;
+    font: normal bold 15px/1.4em Verdana, Tahoma, sans-serif;
+    padding: 10px 0;
+}
+
+.block-benefits ul {
+    list-style: disc;
+    padding: 0 20px;
+}
+
+.block-benefits li {
+    color: #44484b;
+    font: normal normal 14px/1.3em Arial, Helvetica, sans-serif;
+}
+
+.block-header-title-small {
+    background: url('../images/comparador_title.jpg') no-repeat;
+    width: 940px;
+    height: 31px;
+    margin-bottom: 35px;
+
+}
+
+.block-nav a:hover {
+    text-decoration: none;
+}
+
+.contBox {
+    width: 100%;
+    height: auto;
+    float: left;
+    padding-bottom: 26px;
+    display: none
+}
+
+.boxPrepago {
+    background-size: 100% auto;
+    width: 29%;
+    height: 70px;
+    float: left;
+    padding-left: 159px;
+    color: #005B83;
+    font-family: 'MovistarHeadline', Arial, Helvetica;
+    font-size: 26px;
+    font-weight: bold;
+    padding-top: 22px;
+}
+
+.btnComrparPrep {
+    margin-top: 6px;
+    margin-right: 13px;
+    background-size: 100% auto;
+    background-image: url('../images/btnComrparPrep.png');
+    background-repeat: no-repeat;
+    width: 42%;
+    height: 31px;
+    float: right;
+}
+
+.bgPrep1 {
+    background-image: url('../images/boxPrepago1.png');
+    background-repeat: no-repeat;
+    margin-left: 14px;
+}
+
+.bgPrep2 {
+    background-image: url('../images/boxPrepago2.png');
+    background-repeat: no-repeat;
+    margin-left: 48px;
+}
+
+.prepTitle {
+    width: 360px;
+    color: #005b83;
+    font-family: "Verdana";
+    font-size: 14px;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+#btn-caeq{
+    width: 100%;
+    float: left;
+    padding: 20px 0;
+    display: table;
+}
+
+
+.txtBoxRenueva {
+    color: #005c84;
+    font-family: 'MovistarHeadline', Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    float: left;
+    width: 64.3067%;
+    line-height: 20px;
+
+}
+
+
+.btnIngresarRenueva{
+    background: url(../images/btnIngresar.png) no-repeat;
+    width: 108px;
+    height: 33px;
+    display: table-cell;
+    vertical-align: middle;
+}
+

@@ -1,0 +1,81 @@
+.block {
+    display: block;
+    clear: both
+}
+.link-compare:link,
+.link-compare:visited,
+.link-compare:active,
+.link-compare:hover {
+    background: url('res/sprite.png') no-repeat -636px -203px;
+    color: #0086c3;
+    display: none;
+    float: right;
+    font: normal normal 12px/1.4em Arial, Helvetica, sans-serif;
+    height: 24px;
+    overflow: hidden;
+    text-indent: -999px;
+    width: 114px;
+}
+
+.icon-exclusive {
+    background: url('res/sprite.png') no-repeat -693px 0;
+    height: 62px;
+    overflow: hidden;
+    position: absolute;
+    right: 5px;
+    top: 2px;
+    text-indent: -999px;
+    width: 57px;
+}
+
+.bgPreventa span.icon-exclusive{
+    top: 108px;
+    right: 60px;
+}
+.link-buy:link,
+.link-buy:visited,
+.link-buy:active,
+.link-buy:hover {
+    background: url('res/sprite.png') no-repeat -637px -123px;
+    color: #0086c3;
+    display: inline;
+    float: right;
+    font: normal normal 12px/1.4em Arial, Helvetica, sans-serif;
+    height: 21px;
+    margin: 8px 6px 0 0;
+    overflow: hidden;
+    text-indent: -999px;
+    width: 112px;
+}
+.link-buy-large:link,
+.link-buy-large:visited,
+.link-buy-large:active,
+.link-buy-large:hover {
+    background: url('res/sprite.png') no-repeat -634px -91px;
+    font: normal normal 12px/1.4em Arial, Helvetica, sans-serif;
+    height: 32px;
+    width: 116px;
+}
+.link-buy-mid1:link,
+.link-buy-mid1:visited,
+.link-buy-mid1:active,
+.link-buy-mid1:hover {
+    /*background: url('res/sprite.png') no-repeat -667px -149px;*/
+    background: url("../images/img_btn_compra.jpg") no-repeat scroll transparent;
+    font: normal normal 12px/1.4em Arial, Helvetica, sans-serif;
+    /*height: 22px;*/
+    /*width: 83px;*/
+    height: 33px;
+    width: 117px;
+    position: absolute;
+    right: 0;
+}
+.link-buy-mid:link,
+.link-buy-mid:visited,
+.link-buy-mid:active,
+.link-buy-mid:hover {
+    background: url("res/sprite.png") no-repeat scroll -655px -123px transparent;
+    font: 12px/1.4em Arial, Helvetica, sans-serif;
+    height: 20px;
+    width: 95px;
+}
