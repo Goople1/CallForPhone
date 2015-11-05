@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	{% load staticfiles%}
+	<div class = "row">
+
+			<div class="col-sm-12">
+			          <div class="panel panel-primary">
+				            <div class="panel-heading">
+				              	<div class="panel-btns">
+				               	<!-- <a href="" class="panel-close">×</a> -->
+					                <a href="" class="minimize">−</a>
+					            </div><!-- panel-btns -->
+					             <h3 class="panel-title"> PANEL  PRINCIPAL VENTAS</h3>
+					         </div>
+			            <div class="panel-body">
+			                
+						       
+
+
+						        <div class="col-sm-6 col-md-3">
+						          <div class="panel panel-danger panel-stat">
+                                    <a href="{% url "venta" %}">
+						            <div class="panel-heading">
+
+						              <div class="stat">
+						                <div class="row">
+						                  <div class="col-xs-4">
+						                    <img src="{% static "static/images/reportes.png"%}" alt="" />
+						                  </div>
+						                  <div class="col-xs-8">
+						                    <small class="stat-label">VENTAS</small>
+						                    <h3>Vender</h3>
+						                  </div>
+						                </div><!-- row -->
+
+						                <div class="mb15"></div>
+
+						              <!--   <small class="stat-label">Avg. Visit Duration</small>
+						                <h4>01:80:22</h4> -->
+
+						              </div><!-- stat -->
+
+						            </div><!-- panel-heading -->
+                                    </a>
+						          </div><!-- panel -->
+						        </div><!-- col-sm-6 -->
+
+						        <!--................................................-->
+
+						        <div class="col-sm-6 col-md-3">
+						          <div class="panel panel-danger panel-stat">
+                                    <a href="{% url "lista_producto" %}">
+						            <div class="panel-heading">
+
+						              <div class="stat">
+						                <div class="row">
+						                  <div class="col-xs-4">
+						                    <img src="{% static "static/images/reportes.png"%}" alt="" />
+						                  </div>
+						                  <div class="col-xs-8">
+						                    <small class="stat-label">VENTAS</small>
+						                    <h3> STOCK </h3>
+						                  </div>
+						                </div><!-- row -->
+
+						                <div class="mb15"></div>
+
+						              <!--   <small class="stat-label">Avg. Visit Duration</small>
+						                <h4>01:80:22</h4> -->
+
+						              </div><!-- stat -->
+
+						            </div><!-- panel-heading -->
+                                    </a>
+						          </div><!-- panel -->
+						        </div><!-- col-sm-6 -->
+
+						        <div class="col-sm-6 col-md-3">
+						          <div class="panel panel-danger panel-stat">
+                                    <a href="{% url "reporteve" %}">
+						            <div class="panel-heading">
+
+						              <div class="stat">
+						                <div class="row">
+						                  <div class="col-xs-4">
+						                    <img src="{% static "static/images/reportes.png"%}" alt="" />
+						                  </div>
+						                  <div class="col-xs-8">
+						                    <small class="stat-label">VENTAS</small>
+						                    <h3> Reporte Ventas </h3>
+						                  </div>
+						                </div><!-- row -->
+
+						                <div class="mb15"></div>
+
+						              <!--   <small class="stat-label">Avg. Visit Duration</small>
+						                <h4>01:80:22</h4> -->
+
+						              </div><!-- stat -->
+
+						            </div><!-- panel-heading -->
+                                    </a>
+						          </div><!-- panel -->
+						        </div><!-- col-sm-6 -->
+
+
+
+
+
+
+
+
+
+			            </div><!--panel-body-->
+			          </div><!-- panel -->
+			 </div>
+	</div>
+{% endblock content %}
+
+{% block javascript %}
+	{% load staticfiles %}
+	<!-- JS ADDED-->
+	    <script src="{% static "static/js/csrf.js"%}"></script>
+	    <script src="{% static "static/js/agregarVenta.js" %}"></script>
+	    <script src="{% static "static/js/modificarVenta.js" %}"></script>
+	 <!-- fin JS ADDED-->
+{% endblock javascript %}

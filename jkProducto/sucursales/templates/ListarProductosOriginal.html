@@ -382,7 +382,15 @@
                   <option value="Zambia">Zambia</option>
                   <option value="Zimbabwe">Zimbabwe</option>
                 </select>
-            
+
+                
+                <div style="margin-top: 12px;">
+                <a  class = "btn btn-primary" role="button" href="{% url "export" sucursal.id %}">Exportar Todos los Productos a Excel</a>
+                </div>
+
+
+
+
             <div class="mb20"></div>
        
             <br />
@@ -574,6 +582,35 @@
       
         
     });
+
+    $("#export").on("click", function(){
+
+    $.ajax({
+
+        type:"get",
+        url : "/export/",
+
+  
+
+      })
+  .done(function(data){
+
+   
+      console.log(data);
+
+      alert("Download");
+
+  })
+
+  .fail(function(data){
+
+    alert("FAIL");
+  });
+
+
+
+    });
+
 </script>
     </body>
 </html>

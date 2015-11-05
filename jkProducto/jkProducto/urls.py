@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^cuenta/', include('empleados_login.urls')),
     url(r'^ventas/', include('ventas.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^public/', include('internetWeb.urls')),
 
     #url(r'^admin/', include('empleados_login.urls')),
 )
@@ -31,7 +32,12 @@ urlpatterns += patterns('sucursales.views',
     url(r'^mantenimientoSucursal/dameStock/$', 'dameStock',name='stock'),
     url(r'^mantenimientoSucursal/StockDetalleSucursalAlamcen/$', 'StockDetalleSucursalAlmacen',name='stockDetSecAl'),
     url(r'^mantenimientoSucursal/addProductotoSucursal/$', 'addProductotoSucursal',name='addProductotoSucursal'),   
-    url(r'^mantenimientoSucursal/editProductotoSucursal/$', 'editProductotoSucursal',name='editProductotoSucursal'),    
+    url(r'^mantenimientoSucursal/editProductotoSucursal/$', 'editProductotoSucursal',name='editProductotoSucursal'), 
+    url(r'^mantenimientoSucursal/historialVentas/$', 'historialVentas',name='historialVentas'), 
+    url(r'^mantenimientoSucursal/historialVentas/(?P<id>[\w-]+)/$', 'Historial_ventas_Sucursal_Admin',name='histoSucursalVentasAdm'), 
+    url(r'^export/(?P<suc_id>[0-9]+)$', 'export',name='export'), 
+
+
 
     
 

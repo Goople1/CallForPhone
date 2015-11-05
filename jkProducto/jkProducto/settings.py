@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'sucursales',
     'ventas',
     'empleados_login',
+    'internetWeb',
 
 )
 

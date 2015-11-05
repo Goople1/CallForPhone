@@ -4,9 +4,18 @@ from models import Sucursal , DetalleAlmacen , DetalleSucursalAlmacen, Historial
 from productos.models import Producto
 from sucursales.utilidades import Utilidades
 from django.core.exceptions import ObjectDoesNotExist
+from ventas.models import Venta
+from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+import djqscsv
+
+
+
 
 # Create your views here.
 
+@login_required(login_url='/cuenta/')
 def mantenimientoSucursal(request):
 	#template = 'MantenimientoAsignacionSucursales.html'
 	#template = 'modificarProductoSucursalOriginal.html'
@@ -16,124 +25,188 @@ def mantenimientoSucursal(request):
 	#template = 'AddProductosSucursal.html'
 	#template = 'ListarSucursales.html' #fake
 	#template = 'registrarProductoOriginal.html'
-	template = 'mantenimientoSucursal.html'
-	return render_to_response(template,{},context_instance=RequestContext(request))
+	if  is_admin(request.user.id):
+		template = 'mantenimientoSucursal.html'
+		return render_to_response(template,{},context_instance=RequestContext(request))
 
+	else :
+		return HttpResponseRedirect("/ventas/")
+
+@login_required(login_url='/cuenta/')
 def addSucursal(request):
-	template='ListarSucursales.html'
-	template = "IndiceOriginal.html"
-	operation = 'addSucursalA'
-	sucursal = Sucursal.objects.all()
-	return render_to_response(template,{'sucursales':sucursal,'operation':operation},context_instance=RequestContext(request))
+	if is_admin(request.user.id):
+		template='ListarSucursales.html'
+		template = "IndiceOriginal.html"
+		operation = 'addSucursalA'
+		sucursal = Sucursal.objects.all()
+		return render_to_response(template,{'sucursales':sucursal,'operation':operation},context_instance=RequestContext(request))
 
+	else :
+		return HttpResponseRedirect("/ventas/")
+
+@login_required(login_url='/cuenta/')
 def editSucursal(request):
-	template='ListarSucursales.html'
-	template = "IndiceOriginal.html"
-	operation = 'editSucursalE'
-	sucursal = Sucursal.objects.all()
-	return render_to_response(template,{'sucursales':sucursal,'operation':operation},context_instance=RequestContext(request))
+	if is_admin(request.user.id):
+		template='ListarSucursales.html'
+		template = "IndiceOriginal.html"
+		operation = 'editSucursalE'
+		sucursal = Sucursal.objects.all()
+		return render_to_response(template,{'sucursales':sucursal,'operation':operation},context_instance=RequestContext(request))
 
+	else:
+		return HttpResponseRedirect("/ventas/")
+
+@login_required(login_url='/cuenta/')
 def listSucursal(request):
-	template='ListarSucursales.html'
-	template = "IndiceOriginal.html"
-	operation = 'listSucursalL'
-	sucursal = Sucursal.objects.all()
-	return render_to_response(template,{'sucursales':sucursal,'operation':operation},context_instance=RequestContext(request))
+	if is_admin(request.user.id):
+		template='ListarSucursales.html'
+		template = "IndiceOriginal.html"
+		operation = 'listSucursalL'
+		sucursal = Sucursal.objects.all()
+		return render_to_response(template,{'sucursales':sucursal,'operation':operation},context_instance=RequestContext(request))
+	else:
+		return HttpResponseRedirect("/ventas/")
+
+@login_required(login_url='/cuenta/')
+def historialVentas(request):
+	if is_admin(request.user.id):
+		template = "IndiceOriginal.html"
+		operation = 'histoSucursalVentasAdm'
+		sucursal = Sucursal.objects.all()
+		return render_to_response(template,{'sucursales':sucursal,'operation':operation},context_instance=RequestContext(request))
+	else:
+		return HttpResponseRedirect("/ventas/")
+
+@login_required(login_url='/cuenta/')
+def Historial_ventas_Sucursal_Admin(request,id):
+
+	if is_admin(request.user.id):
+
+		sucursal_id = Utilidades().validarIngresoNum(id)
+
+		try:
+			ventas  = Venta.objects.filter(sucursal = sucursal_id)
+		except Exception,e :
+			print e
+
+		template  = "reporteHistorialVenta.html"
+
+		return render_to_response(template , {"ventas":ventas} , context_instance  = RequestContext(request))
+
+	else:
+		return HttpResponseRedirect("/ventas/")
 
 
+@login_required(login_url='/cuenta/')
 def addSucursalA(request,id):
 
 	#template = 'AddProductosSucursal.html'
 	#template = 'mantenimientoSucursal.html'
-	template = 'registrarProductoOriginal.html'
 
-	#para Sacar los productos  que ya existen en  los DetallesSucursalAlmacen  de una Sucursal 
-	sucursal_id = id 
-	print sucursal_id
+	if is_admin(request.user.id):
 
-	try:
-		Sucursal.objects.get(pk=sucursal_id)
+		template = 'registrarProductoOriginal.html'
+
+		#para Sacar los productos  que ya existen en  los DetallesSucursalAlmacen  de una Sucursal 
+		sucursal_id = id 
+
 		try:
-			detalle_sucursal_almacen_productos = DetalleSucursalAlmacen.objects.filter(sucursal_id = sucursal_id)
+			Sucursal.objects.get(pk=sucursal_id)
+			try:
+				detalle_sucursal_almacen_productos = DetalleSucursalAlmacen.objects.filter(sucursal_id = sucursal_id)
+			
+			except Exception, e:
+				print e
+				return  HttpResponse("PROBLEMAS CON SERVER")
+			
+
+			if detalle_sucursal_almacen_productos:
+				id_producto_detalle_sucu_almacen = [deta.producto_id for deta in  detalle_sucursal_almacen_productos]
+				#print "Productos en Detalle Sucursal Almacen"
+				#print id_producto_detalle_sucu_almacen
+				#print "Productos En Detalle Almacen que no estan En DetalleSucursalAlmacen "
+				detalle_almacen_productos = DetalleAlmacen.objects.exclude(producto_id__in= id_producto_detalle_sucu_almacen)
+				#print detalle_almacen_productos
+
+
+			else:
+				#print " No hay nada en la lista asi que rojo par y pasa "
+				detalle_almacen_productos  =  DetalleAlmacen.objects.only("producto_id")
 		
 		except Exception, e:
-			print e
-			return  HttpResponse("PROBLEMAS CON SERVER")
+			return HttpResponse("<html><body>PAGE NOT FOUND</body></html>")
+
+
+		return render_to_response (template, {'productos':detalle_almacen_productos ,'id_sucursal': sucursal_id} , context_instance = RequestContext(request))
+
+	else :
+		return HttpResponseRedirect("/ventas/")
+
 		
-
-		if detalle_sucursal_almacen_productos:
-			id_producto_detalle_sucu_almacen = [deta.producto_id for deta in  detalle_sucursal_almacen_productos]
-			#print "Productos en Detalle Sucursal Almacen"
-			#print id_producto_detalle_sucu_almacen
-			#print "Productos En Detalle Almacen que no estan En DetalleSucursalAlmacen "
-			detalle_almacen_productos = DetalleAlmacen.objects.exclude(producto_id__in= id_producto_detalle_sucu_almacen)
-			#print detalle_almacen_productos
-
-
-		else:
-			#print " No hay nada en la lista asi que rojo par y pasa "
-			detalle_almacen_productos  =  DetalleAlmacen.objects.only("producto_id")
-	
-	except Exception, e:
-		return HttpResponse("<html><body>PAGE NOT FOUND</body></html>")
-
-
-	return render_to_response (template, {'productos':detalle_almacen_productos ,'id_sucursal': sucursal_id} , context_instance = RequestContext(request))
-	
-
+@login_required(login_url='/cuenta/')
 def editSucursalE(request,id):
-	#template  = "modificarProductoSucursal.html"
-	template = "modificarProductoSucursalOriginal.html"
-	sucursal_id = id
-	
-	
-	try:
-
-		Sucursal.objects.get(pk=sucursal_id)
+	if is_admin(request.user.id):
+		#template  = "modificarProductoSucursal.html"
+		template = "modificarProductoSucursalOriginal.html"
+		sucursal_id = id
+		
 		
 		try:
-			detalle_sucursal_almacen_productos = DetalleSucursalAlmacen.objects.filter(sucursal_id = sucursal_id)
-		except Exception, e:
-			print e
-			return HttpResponse("Problemas Con el  Server")
 
-	except ObjectDoesNotExist,e:
+			Sucursal.objects.get(pk=sucursal_id)
+			
+			try:
+				detalle_sucursal_almacen_productos = DetalleSucursalAlmacen.objects.filter(sucursal_id = sucursal_id)
+			except Exception, e:
+				print e
+				return HttpResponse("Problemas Con el  Server")
 
-		return HttpResponse("<html><body>PAGE NOT FOUND</body></html>")
+		except ObjectDoesNotExist,e:
 
-	id_producto_detalle_sucu_almacen = [detalle.producto_id for detalle  in detalle_sucursal_almacen_productos]
+			return HttpResponse("<html><body>PAGE NOT FOUND</body></html>")
 
-	return render_to_response(template,{"productos": id_producto_detalle_sucu_almacen , 'id_sucursal': sucursal_id },context_instance = RequestContext(request))
+		id_producto_detalle_sucu_almacen = [detalle.producto_id for detalle  in detalle_sucursal_almacen_productos]
+
+		return render_to_response(template,{"productos": id_producto_detalle_sucu_almacen , 'id_sucursal': sucursal_id },context_instance = RequestContext(request))
+	else:
+		return HttpResponseRedirect("/ventas/")
 	
 
+
+
+@login_required(login_url='/cuenta/')
 def listSucursalL(request,id):
 
-	sucursal_id = Utilidades().validarIngresoNum(id)
-	try:
-		sucursal = Sucursal.objects.get(pk=sucursal_id)
+	if is_admin(request.user.id):
 
-
+		sucursal_id = Utilidades().validarIngresoNum(id)
 		try:
-			detalle_sucursal_almacen_productos = DetalleSucursalAlmacen.objects.filter(sucursal_id = sucursal)
-		except Exception, e:
-			return HttpResponse("Problemas del Server")
-
-	
-	except Exception, e : 
-		print e  
-		mensaje ="<html>	<head>		<title></title>		</head>		<body>			<h1> PAGE NOT FOUND!</h1>		</body>		</html>"
-		return HttpResponse(mensaje)
+			sucursal = Sucursal.objects.get(pk=sucursal_id)
 
 
-	#template = "listaProductosSucursalAlmacen.html"
-	template = "ListarProductosOriginal.html"
-	return render_to_response (template, locals() , context_instance = RequestContext(request))
+			try:
+				detalle_sucursal_almacen_productos = DetalleSucursalAlmacen.objects.filter(sucursal_id = sucursal)
+			except Exception, e:
+				return HttpResponse("Problemas del Server")
+
+		
+		except Exception, e : 
+			print e  
+			mensaje ="<html>	<head>		<title></title>		</head>		<body>			<h1> PAGE NOT FOUND!</h1>		</body>		</html>"
+			return HttpResponse(mensaje)
+
+
+		#template = "listaProductosSucursalAlmacen.html"
+		template = "ListarProductosOriginal.html"
+		return render_to_response (template, locals() , context_instance = RequestContext(request))
+	else: 
+		return HttpResponseRedirect("/ventas/")
 	
 #Asignacion de Pedidos a Sucursales
 def registrarPedidoSucursal(request):
 	pass
 
-
+@login_required(login_url='/cuenta/')
 def dameStock(request):
 	print "Consultando Stock de DetalleAlmecen"
 
@@ -165,8 +238,9 @@ def dameStock(request):
 		print "algo paso"
 
 
+@login_required(login_url='/cuenta/')
 def addProductotoSucursal(request):
-	print "LLEGA ACA SI O SI"
+
 	if request.method == "POST":
 		producto_id = Utilidades().validarIngresoNum(request.POST.get("producto_id"))
 		sucursal_id  = Utilidades().validarIngresoNum(request.POST.get("sucursal_id"))
@@ -233,7 +307,7 @@ def addProductotoSucursal(request):
 	else: 
 		return HttpResponse("No es posible esta accion por metodo Get")
 
-
+@login_required(login_url='/cuenta/')
 def StockDetalleSucursalAlmacen(request):
 
 	print "Dentro de StockDetalleSucursalAlmacen"
@@ -268,6 +342,8 @@ def StockDetalleSucursalAlmacen(request):
 		print mensaje
 		return HttpResponse(mensaje)
 
+
+@login_required(login_url='/cuenta/')
 def editProductotoSucursal(request):
 
 	print "Editar Producto  de DetalleSucursalAlmacen ..."
@@ -327,6 +403,41 @@ def editProductotoSucursal(request):
 		return HttpResponse(" 27 rojo , impar  y pasa ")
 
 
+
+
+
+
+def is_admin(user_id):
+	print "is admin ?"
+
+	user = User.objects.get(id = user_id)
+
+	print user.is_staff
+	if user.is_staff:
+
+ 		return True
+
+	else: 
+		return False
+
+def export(request , suc_id):
+
+	sucursal_id = Utilidades().validarIngresoNum(suc_id)
+
+
+
+
+	print "Export"
+
+	detalle_productos_sucursal	=	DetalleSucursalAlmacen.objects.filter(sucursal_id = sucursal_id)
+
+	print ".."
+
+	data = detalle_productos_sucursal.values('id','producto_id__tipo_producto__nombre','producto_id__marca__nombre','producto_id__codigo','producto_id__color','stock','producto_id__precio_x_menor','producto_id__precio_x_mayor')	
+	#field_header_map={'producto_id__tipo_producto__nombre': 'TIPO','producto_id__marca__nombre':'MARCA','producto_id__codigo': 'MODELO' , 'producto_id__color':'COLOR', 'producto_id__precio_x_menor': 'PRECIO por Menor' , 'producto_id__precio_x_mayor': 'Precio por Mayor'}
+	
+	# qs = Producto.objects.all()
+	return djqscsv.render_to_csv_response(data,field_header_map = {'producto_id__tipo_producto__nombre': 'TIPO','producto_id__marca__nombre':'MARCA','producto_id__codigo': 'MODELO' , 'producto_id__color':'COLOR', 'producto_id__precio_x_menor': 'PRECIO por Menor' , 'producto_id__precio_x_mayor': 'Precio por Mayor'})
 
 
 

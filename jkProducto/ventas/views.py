@@ -7,6 +7,10 @@ import json
 from sucursales.utilidades import Utilidades
 from ventas.models import  Venta , DetalleVenta
 from django.db import transaction, IntegrityError
+from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User
+
+
 
 
 # from django.http import HttpResponse
@@ -17,46 +21,64 @@ from django.db import transaction, IntegrityError
 
 @login_required(login_url='/cuenta/')
 def home_ventas(request):
-	print request.user.id
-	user_id = request.user.id
-	try :
-		trabajador = SucursalTrabajador.objects.get(trabajador = user_id)
-		print trabajador._meta.get_all_field_names()
-	except Exception , e :
-		print e
-		return HttpResponse("Es  Usuario , Pero no Trabajador")
+    print request.user.id
+    user_id = request.user.id
+    try :
+        trabajador = SucursalTrabajador.objects.get(trabajador = user_id)
+    except Exception , e :
+        print e
+        user = User.objects.get(id = user_id)
+        print user
+        if user.is_staff:
+           return HttpResponseRedirect("/admin/")
+            #return HttpResponse("Es  Usuario , Pero no Trabajador")
+    #template = "empleado_home.html"
+    template = "homeEmpleado.html"
+    return render_to_response(template , {"trabajador": trabajador} , context_instance=RequestContext(request))
 
-	template = "empleado_home.html"
-	return render_to_response(template , {"trabajador": trabajador} , context_instance=RequestContext(request))
 
 @login_required(login_url='/cuenta/')
-def lista_producto (request):
+def lista_producto(request):
+    print "lista porducto"
+    user_id = request.user.id
+    try:
+        trabajador = SucursalTrabajador.objects.get(trabajador=user_id)
+        print trabajador
 
-	user_id = request.user.id
-	
-	trabajador = SucursalTrabajador.objects.get(trabajador = user_id)
-	print trabajador
+    except Exception , e :
+        print e
+        user = User.objects.get(id = user_id)
+        if user.is_staff:
+            return HttpResponseRedirect("/admin/")
 
-	
-	trabajador = SucursalTrabajador.objects.get(trabajador = user_id)
-	trabajador_sucursal_id = trabajador.sucursal.id
-	print trabajador_sucursal_id
-	sucursal  = Sucursal.objects.get(pk =trabajador_sucursal_id )
-	lista_producto = DetalleSucursalAlmacen.objects.filter(sucursal_id = trabajador_sucursal_id)
-	template = "listaProductosSucursalAlmacen.html"
-
-	return render_to_response(template,{"detalle_sucursal_almacen_productos":lista_producto , "sucursal" :sucursal} , context_instance = RequestContext(request))
+    print "pase try"
+    trabajador_sucursal_id = trabajador.sucursal.id
+    print trabajador_sucursal_id
+    sucursal  = Sucursal.objects.get(pk =trabajador_sucursal_id )
+    lista_producto = DetalleSucursalAlmacen.objects.filter(sucursal_id = trabajador_sucursal_id)
+    template = "homeListaProductoSucursal.html"
+    return render_to_response(template,{"detalle_sucursal_almacen_productos":lista_producto , "sucursal" :sucursal} , context_instance = RequestContext(request))
 
 @login_required(login_url='/cuenta/')
 def venta (request):	
 
-	user_id = request.user.id
-	trabajador = SucursalTrabajador.objects.get(trabajador = user_id)
 
-	if request.method == "GET":
-		trabajador_sucursal_id = trabajador.sucursal.id
-		template = "template_ventas.html"
-		lista_productos = DetalleSucursalAlmacen.objects.filter(sucursal_id = trabajador_sucursal_id)
+
+
+    if request.method == "GET":
+
+        user_id = request.user.id
+        try:
+            trabajador = SucursalTrabajador.objects.get(trabajador=user_id)
+        except Exception , e :
+            print e
+            user = User.objects.get(id = user_id)
+            if user.is_staff:
+                return HttpResponseRedirect("/admin/")
+
+        trabajador_sucursal_id = trabajador.sucursal.id
+        lista_productos = DetalleSucursalAlmacen.objects.filter(sucursal_id = trabajador_sucursal_id)
+        template = "template_ventas.html"
         venta  = True
         return  render_to_response( template , {"venta":venta,"productos": lista_productos} , context_instance = RequestContext(request))
 
@@ -121,12 +143,14 @@ def reporte_ventas(request):
     if request.method == "GET":
         #primero saber en que sucursal estoy  ....
         #Sacar la info del trabajador
-        template = "reporteVentas.html"
+        template = "homeReporteVentas.html"
         try:
             trabajador = SucursalTrabajador.objects.get(trabajador = request.user.id)
         except Exception,e :
-            print e 
-            return HttpResponse("Problemas con el Server")
+            print e
+            user = User.objects.get(id =request.user.id)
+            if user.is_staff:
+                return HttpResponseRedirect("/admin/")
         trabajador_sucursal  = trabajador.sucursal
         try:
             ventas = Venta.objects.filter(sucursal = trabajador_sucursal , estado  = True)
@@ -145,10 +169,16 @@ def detalle_ventas (request,venta_id):
 
     if request.method == "GET":
 
-        trabajador = SucursalTrabajador.objects.get(trabajador = request.user.id)
+        try:
+            trabajador = SucursalTrabajador.objects.get(trabajador = request.user.id)
+        except Exception,e :
+            print e
+            user = User.objects.get(id =request.user.id)
+            if user.is_staff:
+                return HttpResponseRedirect("/admin/")
         try:
             venta = Venta.objects.get(id = venta_id , estado = True)
-        except Exception ,e : 
+        except Exception ,e :
             print e
             return  HttpResponse("No se puede Acceder a esta Detalle de venta")
         detalle_venta = DetalleVenta.objects.filter(venta_id = venta_id)
@@ -161,9 +191,9 @@ def detalle_ventas (request,venta_id):
 producto_id
 por el momento lo  unico que me interesa  es :
 
-    1.- id producto 
+    1.- id producto
     2.- cantidad del  producto
-    3.- sucursal 
+    3.- sucursal
     4.-  ...
 """
 @login_required(login_url='/cuenta/')
@@ -171,7 +201,7 @@ def cargar_productos(request):
 
     if request.method == "POST":
 
-        # Obtener el Trabajador para sacarla sucursal 
+        # Obtener el Trabajador para sacarla sucursal
         #trabajador = SucursalTrabajador.objects.get(trabajador = request.user.id)
         dict_products = json.loads(request.POST.get("json"))
         venta_id = request.POST.get("venta_id")
@@ -196,27 +226,15 @@ def cargar_productos(request):
                 cantidad =  Utilidades().validarIngresoNum(producto.get("cantidad"))
                 producto_id = producto.get("producto_id")
                 try:
-
                     det_sucu_alm_prod_to_add = DetalleSucursalAlmacen.objects.get(producto_id = producto_id , sucursal_id = venta.sucursal)
                 except Exception,e:
                     print e
                 det_sucu_alm_prod_to_add.stock += cantidad
                 det_sucu_alm_prod_to_add.save()
-
-
             return HttpResponse("1")
-
-        else : 
-
+        else :
             return HttpResponse("0")
-
-
-
-
-        
-
-
-    else: 
+    else:
         #mensaje = "No se Puede Realizar esta Action"
         return HttpResponse("2")
 

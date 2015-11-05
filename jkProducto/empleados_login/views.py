@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response,redirect
+from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate,logout
@@ -18,18 +18,18 @@ def iniciarSesion(request):
                 user = iniciar_sesion.cleaned_data['username'] #iniciar_sesion.cleaned_data['iniciar_input_email']
                 clave = iniciar_sesion.cleaned_data['password']#iniciar_sesion.cleaned_data['iniciar_input_password']
                 acceso = authenticate(username=user,password=clave)
-                login(request,acceso)
                 #return redirect("/admin/")
                 if acceso is not None:
                     if acceso.is_active:
                         if acceso.is_staff:
+                            login(request,acceso)
 
                             return HttpResponseRedirect('/admin/')
 
                         else :
 
 
-                        #login(request,acceso)
+                            login(request,acceso)
                             print "acceso"
                             return HttpResponseRedirect('/ventas/')
                     else:
