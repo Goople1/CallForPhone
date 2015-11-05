@@ -5,6 +5,7 @@ urlpatterns = patterns('',
 
 	url(r'^$',views.iniciarSesion , name='iniciarSesion'),
 	url(r'^logout/$',views.cerrarSesion , name='cerrarSesion'),
+	url(r'^asistencia/$',views.asistencia , name='asistencia'),
 
 
   	)

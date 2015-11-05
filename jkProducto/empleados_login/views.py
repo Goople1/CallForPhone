@@ -1,9 +1,14 @@
-from django.shortcuts import render_to_response,redirect
+from django.shortcuts import render_to_response,redirect,HttpResponse
 from django.template.context import RequestContext
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate,logout
 from django.contrib.auth.decorators import login_required
 from forms import FormInciarSesion
+from models import AsistenciaTrabajador
+from sucursales.models import SucursalTrabajador
+#from django.utils import timezone
+from django.db.models import Q
+import datetime
 # Create your views here.
 def iniciarSesion(request):
 
@@ -46,7 +51,9 @@ def iniciarSesion(request):
             iniciar_sesion = FormInciarSesion(request.POST)
             return render_to_response(template,{'form_iniciar_sesion':iniciar_sesion},context_instance=RequestContext(request))
     else:
-    	return HttpResponseRedirect("/ventas/")
+        template = "asistencia.html"
+        return render_to_response(template,{},context_instance=RequestContext(request))
+    	#return HttpResponseRedirect("/ventas/")
     	
 
 	
@@ -54,3 +61,53 @@ def iniciarSesion(request):
 def cerrarSesion(request):
     logout(request)
     return  HttpResponseRedirect('/')
+
+
+def asistencia(request):
+    print "tiempo"
+    fecha = datetime.datetime.now()
+    if request.method == 'POST':
+        try:            
+            traba = SucursalTrabajador.objects.get(trabajador=request.user)
+            tipo = request.POST.get('tipo',"")
+            print "post"
+            #Asistencia Manana
+            if tipo.strip().lower() == "on":
+                asistir = AsistenciaTrabajador.objects.filter(Q(hora_ingreso__year=fecha.year) , Q(hora_ingreso__month=fecha.month), Q(hora_ingreso__day=fecha.day) )
+                if len(asistir)==1:
+                    #actualizar = asistir.get()
+                    actualizar = 'Ya se marco hora de ingreso'
+                elif len(asistir) == 0:
+                    AsistenciaTrabajador.objects.create(trabajador = traba,hora_ingreso=fecha)
+                    actualizar = 'Hora de Ingreso registrado'
+                else:
+                    print "Ha ocurrido un error, duplicidad de data"
+                    actualizar = "Ha Ocurrido un error"    
+            elif tipo.strip().lower() == "off":
+                #Asumimos que este es off-Asistencia Salida
+                asistir = AsistenciaTrabajador.objects.filter(Q(hora_ingreso__year=fecha.year) , Q(hora_ingreso__month=fecha.month), Q(hora_ingreso__day=fecha.day) )
+                if len(asistir) == 1:
+                    #code para registrar salida
+                    salida = AsistenciaTrabajador.objects.filter(Q(hora_salida__year=fecha.year) , Q(hora_salida__month=fecha.month), Q(hora_salida__day=fecha.day) )
+                    if len(salida) == 1:
+                        actualizar = 'Ya se marco hora de salida'
+                    elif len(salida) == 0:
+                        asistir = asistir.get()
+                        asistir.hora_salida = fecha
+                        asistir.save()
+                        actualizar = 'Hora de Salida registrado'
+                    else:
+                        print "Ha ocurrido un error, duplicidad de data"
+                        actualizar = "Ha Ocurrido un error"
+                elif len(asistir) == 0:
+                    actualizar = "Primero debe de registrar,su Ingreso"
+                else:
+                    print "Ha ocurrido un error, duplicidad de data"
+                    actualizar = "Ha Ocurrido un error"
+        except Exception, e:
+            print "fallo"
+            print e
+            actualizar = "Ha ocurrido un error"
+        return HttpResponse(actualizar)
+    else:
+        return HttpResponse("No se permite, esta accion")
