@@ -2,16 +2,16 @@
 
 
 {% block sucursalname %}
-	{{sucursal.codigo_puesto}}	
+	{{sucursal.nombre}}	
 {% endblock sucursalname %}
 
 {% block sucursal %}
-    {{sucursal.codigo_puesto}}  
+    {{sucursal.nombre}}  
 {% endblock sucursal %}
 
 {% block sucursalPageHeader %}
 
-    {{sucursal.codigo_puesto}}  
+    {{sucursal.nombre}}  
     
 {% endblock sucursalPageHeader %}
 
@@ -51,8 +51,7 @@
 
                             <th class="sorting center" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Precio: activate to sort column ascending" style ="width:100px;" >Precio x Mayor</th>
 
-                            <th class="sorting center" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Precio: activate to sort column ascending" >Fecha Ingreso</th>
-
+                          
                         </tr>
                   </thead>
 
@@ -71,7 +70,7 @@
                             <td class = "center">{{producto.stock}}</td>
                             <td class = "center">{{producto.producto_id.precio_x_menor}}</td>
                             <td class = "center">{{producto.producto_id.precio_x_mayor}}</td>
-                            <td class ="center">{{producto.fecha_ingreso| date:" D d M Y" }}</td>
+                          
                         </tr>
 
                     {% empty %}

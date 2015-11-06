@@ -28,6 +28,7 @@ class Marca(models.Model):
 
 class Producto(models.Model):
 	codigo = models.CharField(max_length=20)
+	nombre_comercial = models.CharField(max_length=60)
 	color_todos = (('Sc',''),('Az','Azul'), ('Bl','Blanco'), ('Ne','Negro'),('Ot','Otro'), ('Pl','Plomo'),)
 	color = models.CharField(max_length=2, choices=color_todos, default='Ot')
 	precio_x_mayor = models.PositiveIntegerField()

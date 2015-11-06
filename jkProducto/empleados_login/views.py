@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-from django.shortcuts import render_to_response
-=======
-from django.shortcuts import render_to_response,redirect,HttpResponse
->>>>>>> 88944daaf8c3e3ed73961759b5031a0d4bd5c39e
+from django.shortcuts import render_to_response,HttpResponse
 from django.template.context import RequestContext
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate,logout

@@ -78,9 +78,9 @@ def venta (request):
 
         trabajador_sucursal_id = trabajador.sucursal.id
         lista_productos = DetalleSucursalAlmacen.objects.filter(sucursal_id = trabajador_sucursal_id)
-        template = "template_ventas.html"
+        template = "homeVentas.html"
         venta  = True
-        return  render_to_response( template , {"venta":venta,"productos": lista_productos} , context_instance = RequestContext(request))
+        return  render_to_response( template , {"venta":venta,"productos": lista_productos, "trabajador":trabajador} , context_instance = RequestContext(request))
 
 
 
@@ -118,17 +118,24 @@ def addVenta(request):
                         print detalle_sucursal_producto.stock
                         print cantidad
                         print "#-------------------------------#"
+
+                        if tipo_precio == "mayor":
+                            precio_real = detalle_sucursal_producto.producto_id.precio_x_mayor
+                        if  tipo_precio == "menor":
+                            precio_real = detalle_sucursal_producto.producto_id.precio_x_menor
+
+
                         if detalle_sucursal_producto.stock  > cantidad:
                             detalle_sucursal_producto.stock-= cantidad
                             print "detalle_sucursal cambios"
-                            detalle_venta = DetalleVenta(venta_id = venta,detalle_Sucursal_almacen_id = detalle_sucursal_producto , cantidad = cantidad , tipo_precio  =  tipo_precio , precio =precio , importe = importe, descripcion = descripcion)
+                            detalle_venta = DetalleVenta(venta_id = venta,detalle_Sucursal_almacen_id = detalle_sucursal_producto , cantidad = cantidad , tipo_precio  =  tipo_precio , precio =precio , importe = importe, descripcion = descripcion , precio_real = precio_real)
                             detalle_venta.save()
                             detalle_sucursal_producto.save()
                         else:
                             print "Else"
                             raise IntegrityError
                 else :
-                    raise IntegrityError
+                    return HttpResponse("JSON VACIO")
         except :
             print "roll"
             transaction.rollback()
@@ -153,8 +160,7 @@ def reporte_ventas(request):
                 return HttpResponseRedirect("/admin/")
         trabajador_sucursal  = trabajador.sucursal
         try:
-            ventas = Venta.objects.filter(sucursal = trabajador_sucursal , estado  = True)
-
+            ventas = Venta.objects.filter(sucursal = trabajador_sucursal , estado  = True).order_by('-fecha_emision')
         except Exception,e:
             print e
 
@@ -181,11 +187,17 @@ def detalle_ventas (request,venta_id):
         except Exception ,e :
             print e
             return  HttpResponse("No se puede Acceder a esta Detalle de venta")
-        detalle_venta = DetalleVenta.objects.filter(venta_id = venta_id)
-        template = "template_ventas.html"
-        modificar = True
-        lista_productos = DetalleSucursalAlmacen.objects.filter(sucursal_id = trabajador.sucursal.id)
-        return render_to_response (template , {"detalle_venta": detalle_venta , "modificar":modificar,"productos": lista_productos , "ObjVenta" : venta} , context_instance = RequestContext(request))
+
+        if trabajador.sucursal.id == venta.sucursal.id:
+
+            detalle_venta = DetalleVenta.objects.filter(venta_id = venta_id)
+            template = "homeVentas.html"
+            modificar = True
+            lista_productos = DetalleSucursalAlmacen.objects.filter(sucursal_id = trabajador.sucursal.id)
+            return render_to_response (template , {"trabajador":trabajador,"detalle_venta": detalle_venta , "modificar":modificar,"productos": lista_productos , "ObjVenta" : venta} , context_instance = RequestContext(request))
+        else :
+            return  HttpResponse("ESTE DETALLE PERTENECE A OTRA SUCURSAL")
+
 
 """
 producto_id
