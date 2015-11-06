@@ -163,6 +163,24 @@ def reporte_ventas(request):
 
         return render_to_response( template , {"ventas":ventas , "trabajador" :trabajador}, context_instance = RequestContext(request))
 
+@login_required(login_url='/login/')
+def reporte_asistencia(request):
+    if request.method == "GET":
+        template = "reporteAsistencia.html"
+        print "test"
+        print request.user.is_staff
+        print request.user.is_active
+        try:
+            if request.user.is_staff:
+                #pero tb redireccionar a la misma plantilla pero con if...si es trabajador o admin
+                return HttpResponseRedirect("/admin/")
+            elif request.user.is_active:
+                asistenciaTodas = AsistenciaTrabajador.objects.all()
+                return render_to_response( template , {"asistencias":asistenciaTodas }, context_instance = RequestContext(request))
+
+        except:
+            return HttpResponse("")
+
 
 
 @login_required(login_url='/login/')
