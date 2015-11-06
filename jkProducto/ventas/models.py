@@ -1,11 +1,9 @@
-from django.db import models
-from sucursales.models import  SucursalTrabajador
-from sucursales.models import Sucursal,DetalleSucursalAlmacen
+from django.db import models  
+from sucursales.models import Sucursal,DetalleSucursalAlmacen, SucursalTrabajador
 # Create your models here.
 
 #Boletao/Factura
 class Venta(models.Model):
-
 	#cliente  = models.ForeignKey(Cliente)
 	empleado = models.ForeignKey(SucursalTrabajador)
 	sucursal = models.ForeignKey(Sucursal)	
@@ -32,7 +30,12 @@ class DetalleVenta(models.Model):
 
 	def __unicode__(self):
 		pass
-	
+
+class AsistenciaTrabajador(models.Model):
+	trabajador = models.ForeignKey(SucursalTrabajador)
+	hora_ingreso = models.DateTimeField(null = True)
+	hora_salida = models.DateTimeField(null=True)
+	justificacion = models.TextField(max_length=400,blank=True, null = True)
 	
 
 

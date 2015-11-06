@@ -39,7 +39,6 @@ INSTALLED_APPS = (
     'productos',
     'sucursales',
     'ventas',
-    'empleados_login',
     'internetWeb',
 
 )
@@ -114,6 +113,6 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 """ 
-LOGIN_URL = '/cuenta/'
+LOGIN_URL = '/login/'
 
 # STATICFILES_STORAGE ='django.contrib.staticfiles.storage.CachedStaticFilesStorage'

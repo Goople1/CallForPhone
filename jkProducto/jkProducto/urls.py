@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.conf.urls.static import static 
+from ventas import views 
 admin.site.login = login_required(admin.site.login)
 admin.autodiscover()
 
@@ -13,10 +14,13 @@ urlpatterns = patterns('',
     url(r'^media/(?P<path>.*)$','django.views.static.serve', {'document_root':settings.MEDIA_ROOT,}),
     url(r'^$', 'productos.views.home', name='home'),
     #url(r'^login/$', 'productos.views.iniciarSesion', name='login'),
-    url(r'^cuenta/', include('empleados_login.urls')),
+    #url(r'^$',algo.iniciarSesion , name='iniciarSesion'),
+    url(r'^login/', views.iniciarSesion , name='iniciarSesion'),
+    url(r'^logout/', views.cerrarSesion , name='cerrarSesion'),
     url(r'^ventas/', include('ventas.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^public/', include('internetWeb.urls')),
+
 
     #url(r'^admin/', include('empleados_login.urls')),
 )

@@ -12,7 +12,7 @@ urlpatterns = patterns('',
 	url(r'^reporte/(?P<venta_id>[0-9]+)/$',views.detalle_ventas, name='detalleventa'),
 
 	url(r'^cargarProductos/$',views.cargar_productos, name='cargar_productos'),
-
+	url(r'^asistencia/$',views.asistencia , name='asistencia'),
 
 
 
