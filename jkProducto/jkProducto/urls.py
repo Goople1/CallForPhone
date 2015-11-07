@@ -38,8 +38,13 @@ urlpatterns += patterns('sucursales.views',
     url(r'^mantenimientoSucursal/addProductotoSucursal/$', 'addProductotoSucursal',name='addProductotoSucursal'),   
     url(r'^mantenimientoSucursal/editProductotoSucursal/$', 'editProductotoSucursal',name='editProductotoSucursal'), 
     url(r'^mantenimientoSucursal/historialVentas/$', 'historialVentas',name='historialVentas'), 
+    #url(r'^mantenimientoSucursal/historialVentas/$', 'historialVentas',name='historialVentas'), 
     url(r'^mantenimientoSucursal/historialVentas/(?P<id>[\w-]+)/$', 'Historial_ventas_Sucursal_Admin',name='histoSucursalVentasAdm'), 
+    url(r'^mantenimientoSucursal/detalle/ver/$', 'prueba',name='algo1'), 
     url(r'^export/(?P<suc_id>[0-9]+)$', 'export',name='export'), 
+   # url(r'^exportVentas/(?P<suc_id>[0-9]+)$', 'export123',name='export'), 
+
+
 
 
 

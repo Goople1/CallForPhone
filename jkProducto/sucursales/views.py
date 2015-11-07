@@ -8,6 +8,8 @@ from ventas.models import Venta
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from ventas.models import DetalleVenta
+import json
 import djqscsv
 
 
@@ -27,6 +29,7 @@ def mantenimientoSucursal(request):
 	#template = 'registrarProductoOriginal.html'
 	if  is_admin(request.user.id):
 		template = 'mantenimientoSucursal.html'
+		print "template7"
 		return render_to_response(template,{},context_instance=RequestContext(request))
 
 	else :
@@ -39,6 +42,7 @@ def addSucursal(request):
 		template = "IndiceOriginal.html"
 		operation = 'addSucursalA'
 		sucursal = Sucursal.objects.all()
+
 		return render_to_response(template,{'sucursales':sucursal,'operation':operation},context_instance=RequestContext(request))
 
 	else :
@@ -90,7 +94,7 @@ def Historial_ventas_Sucursal_Admin(request,id):
 			print e
 
 		template  = "reporteHistorialVenta.html"
-
+		print "template4"
 		return render_to_response(template , {"ventas":ventas} , context_instance  = RequestContext(request))
 
 	else:
@@ -136,7 +140,7 @@ def addSucursalA(request,id):
 		except Exception, e:
 			return HttpResponse("<html><body>PAGE NOT FOUND</body></html>")
 
-
+		print "templa3"
 		return render_to_response (template, {'productos':detalle_almacen_productos ,'id_sucursal': sucursal_id} , context_instance = RequestContext(request))
 
 	else :
@@ -166,7 +170,7 @@ def editSucursalE(request,id):
 			return HttpResponse("<html><body>PAGE NOT FOUND</body></html>")
 
 		id_producto_detalle_sucu_almacen = [detalle.producto_id for detalle  in detalle_sucursal_almacen_productos]
-
+		print  "template2"
 		return render_to_response(template,{"productos": id_producto_detalle_sucu_almacen , 'id_sucursal': sucursal_id },context_instance = RequestContext(request))
 	else:
 		return HttpResponseRedirect("/ventas/")
@@ -198,6 +202,7 @@ def listSucursalL(request,id):
 
 		#template = "listaProductosSucursalAlmacen.html"
 		template = "ListarProductosOriginal.html"
+		print "dsfasd"
 		return render_to_response (template, locals() , context_instance = RequestContext(request))
 	else: 
 		return HttpResponseRedirect("/ventas/")
@@ -408,11 +413,9 @@ def editProductotoSucursal(request):
 
 
 def is_admin(user_id):
-	print "is admin ?"
 
 	user = User.objects.get(id = user_id)
 
-	print user.is_staff
 	if user.is_staff:
 
  		return True
@@ -440,6 +443,44 @@ def export(request , suc_id):
 	return djqscsv.render_to_csv_response(data,field_header_map = {'producto_id__tipo_producto__nombre': 'TIPO','producto_id__marca__nombre':'MARCA','producto_id__codigo': 'MODELO' , 'producto_id__color':'COLOR', 'producto_id__precio_x_menor': 'PRECIO por Menor' , 'producto_id__precio_x_mayor': 'Precio por Mayor'})
 
 
+@login_required(login_url='/cuenta/')
+def prueba(request):
+	
+
+	if request.method == "GET":
+
+
+		if request.user.is_staff:
+
+
+			codido =Utilidades().validarIngresoNum(request.GET.get("codigo"))
+			try:
+				venta = Venta.objects.get(id = codido)
+			except Exception, e:
+				print e
+				HttpResponse("Error")
+			det = DetalleVenta.objects.filter(venta_id = venta.id)
+
+			if det:
+				data = [Utilidades().detalle_venta_to_json(detalle) for detalle in det] 
+
+
+			else :
+				data = []
+			return HttpResponse( json.dumps(data) , content_type='application/json')
+
+		else :
+			return HttpResponse("Zorry")
+
+
+	else :
+		return HttpResponse("Zorry")
 
 
 
+
+
+
+def algo1 (request):
+
+	return HttpResponse("Holi")

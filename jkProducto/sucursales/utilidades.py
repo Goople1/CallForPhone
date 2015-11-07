@@ -40,6 +40,34 @@ class Utilidades():
 		return to_json
 
 
+	def detalle_venta_to_json(self,ObjDetalleVenta):
+
+		to_json = {"producto":str(ObjDetalleVenta.detalle_Sucursal_almacen_id.producto_id), "tipo_precio" : ObjDetalleVenta.tipo_precio ,"cantidad" :ObjDetalleVenta.cantidad , "precio":ObjDetalleVenta.precio , "descripcion" : ObjDetalleVenta.descripcion ,"importe": ObjDetalleVenta.importe}
+		return to_json
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

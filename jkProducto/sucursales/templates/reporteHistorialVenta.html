@@ -135,13 +135,13 @@
                          <tr role="row">
                             <th class="sorting_asc" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="activate to sort column ascending" style="width: 182px;">#</th>
 
-                            <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Codigo: activate to sort column ascending" style="width: 253px;">Codigo</th>
-
                             <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Empleado: activate to sort column ascending" style="width: 233px;">Empleado</th>
 
                             <th class="sorting center" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Monto Venta: activate to sort column ascending" style="width: 153px;">Monto Venta</th>
 
                             <th class="sorting center" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Fecha: activate to sort column ascending" style="width: 110px;">Fecha </th>
+
+                            <th class="sorting" tabindex="0" aria-controls="table1" rowspan="1" colspan="1" aria-label="Codigo: activate to sort column ascending" style="width: 253px;"> Ver</th>
 
                         </tr>
                   </thead>
@@ -154,10 +154,12 @@
                         <tr class="gradeA odd" role="row">
 
                             <td class ="gradeA {% cycle 'odd' 'even' %}"> {{forloop.counter}}</td>
-                            <td><a href="">por Definir=</a></td>
                             <td>{{venta.empleado.trabajador.get_full_name}}</td>
                             <td class = "center">{{venta.total}}</td>
                             <td class ="center">{{venta.fecha_emision| date:" D d M Y" }}  {{venta.fecha_emision|date:"P"}}</td>
+                            <td>
+                               <a  class ="ventaDetalle" href ="#" data-venta ="{{venta.id}}" data-target=".bs-example-modal-lg" data-toggle="modal">ver</a>
+                            </td>
                         </tr>
 
                     {% empty %}
@@ -205,6 +207,20 @@
             -->
             </div><!-- rightpanel -->
 
+
+        <div aria-hidden="true" aria-labelledby="myLargeModalLabel" role="dialog" tabindex="-1" class="modal fade bs-example-modal-lg" style="display: none;">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Large Modal</h4>
+                    </div>
+                <div class="modal-body">...</div>
+      
+                </div>
+            </div>
+        </div>
+
         </section>
 
         <script src="{% static "static/js/sucursal/jquery-1.11.1.min.js"%}"></script>
@@ -251,6 +267,74 @@
   
   
   });
+</script>
+
+<script type="text/javascript">
+
+$(".ventaDetalle").on("click" , function(){
+
+    console.log("me llamaron ");
+
+    var codigo = $(this).attr( "data-venta" );
+        console.log(codigo);
+      $.ajax({
+
+              data : {'codigo' : codigo },
+              url :"/mantenimientoSucursal/detalle/ver/",
+              type : 'GET',
+              })
+              .done(function(data){
+
+               console.log(data);
+                var table =  createTable();
+                var result = []
+
+                for( var i = 0  ;  i<data.length ; i++){
+
+                var row = $("<tr>"+
+                    "<td>"+(i+1)+"</td>"+
+                    "<td>"+data[i].producto+"</td>"+
+                    "<td>"+data[i].tipo_precio+"</td>"+
+                    "<td>"+data[i].cantidad+"</td>"+
+                    "<td>"+data[i].precio+"</td>"+
+                    "<td>"+data[i].descripcion+"</td>"+
+                    "<td>"+data[i].importe+"</td>"+
+                    +"</tr>");
+
+                    result.push(row)
+
+                }
+
+                var tbody  = $("<tbody/>");
+                tbody.append(result);
+                tbody.appendTo(table);
+
+
+                $('.modal-body').html("");
+                $('.modal-body').append(table);
+              
+                
+
+              })
+              .fail(function(){
+                alert("fail");
+              });
+
+})
+
+
+function createTable(){
+
+    var table  = $(" <table class='table dataTable no-footer table-hidaction table-hover' id='table1' role='grid' aria-describedby='table1_info'>") ;
+    var thead = $(" <thead> <tr> <td>#</td><td>producto</td><td>tipo_precio</td><td>CANT</td><td>P.UNIT</td><td>DESCRIPCIÓN</td><<td>IMPORTE</td><tr></thead>");
+
+
+    thead.appendTo(table);
+    return table;
+
+}
+
+
 </script>
 
     </body>

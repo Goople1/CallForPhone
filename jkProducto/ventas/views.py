@@ -142,12 +142,12 @@ def addVenta(request):
             return HttpResponse("algo")
 
 @login_required(login_url='/login/')
-def reporte_ventas(request):
+def modificar_venta(request):
 
     if request.method == "GET":
         #primero saber en que sucursal estoy  ....
         #Sacar la info del trabajador
-        template = "homeReporteVentas.html"
+        template = "homeModificarVentas.html"
         try:
             trabajador = SucursalTrabajador.objects.get(trabajador = request.user.id)
         except Exception,e :
@@ -175,7 +175,10 @@ def reporte_asistencia(request):
                 #pero tb redireccionar a la misma plantilla pero con if...si es trabajador o admin
                 return HttpResponseRedirect("/admin/")
             elif request.user.is_active:
+                print "tesst2"
                 asistenciaTodas = AsistenciaTrabajador.objects.all()
+                print "test3"
+                print asistenciaTodas
                 return render_to_response( template , {"asistencias":asistenciaTodas }, context_instance = RequestContext(request))
 
         except:
@@ -184,9 +187,11 @@ def reporte_asistencia(request):
 
 
 @login_required(login_url='/login/')
-def detalle_ventas (request,venta_id):
+def modificar_detalle_ventas (request,venta_id):
 
     #FALTA VALIDAR ALGUNOS CAMPOS
+
+
 
     if request.method == "GET":
 
@@ -365,4 +370,98 @@ def asistencia(request):
         return render_to_response(template,{},context_instance=RequestContext(request))
 
 
+@login_required(login_url='/login/')
+def home_empleado_menu_reporte(request):
+    if request.method == "GET":
+        if request.user.is_staff:
+            return HttpResponseRedirect("/admin/")
+
+        elif  request.user.is_active:
+            try:
+                trabajador =  SucursalTrabajador.objects.get(trabajador = request.user.id)
+            except Exception, e:
+                print e
+
+            template = "homeEmpleadoReporte.html"
+            return render_to_response(template , {"trabajador":trabajador} , context_instance=RequestContext(request) )
+        else :
+            return HttpResponse("ERROR ")
+    else : 
+        return HttpResponse("Error")
+
+
+@login_required(login_url='/login/')
+def reporte_venta (request):
+    if request.method == "GET":
+        if request.user.is_staff:
+            return HttpResponseRedirect("/admin/")
+
+        elif  request.user.is_active:
+            try:
+                trabajador =  SucursalTrabajador.objects.get(trabajador = request.user.id)
+            except Exception, e:
+                print e
+                return HttpResponse("error")
+
+            template = "homeEmpleadoReporteVentas.html"
+            ventas = Venta.objects.filter(sucursal = trabajador.sucursal.id , estado  = True).order_by('-fecha_emision')
+            return render_to_response(template , {"trabajador":trabajador , "ventas":ventas } , context_instance=RequestContext(request) )
+        else :
+            return HttpResponse("ERROR ")
+    else : 
+        return HttpResponse("Error")
+
+
+
+
+
+
+def detalle_venta(request):
+
+
+    if request.method  == "GET":
+
+
+        if request.user.is_staff:
+            return HttpResponseRedirect("/admin/")
+
+        elif  request.user.is_active:
+            try:
+                trabajador =  SucursalTrabajador.objects.get(trabajador = request.user.id)
+            except Exception, e:
+                print e
+                return HttpResponse("error")
+
+            codido =Utilidades().validarIngresoNum(request.GET.get("codigo"))
+
+            try:
+                venta = Venta.objects.get(id = codido)
+            except Exception, e:
+                print e
+                HttpResponse("Error")
+
+            if trabajador.sucursal.id == venta.sucursal.id:
+                det = DetalleVenta.objects.filter(venta_id = venta.id)
+                if det:
+
+                    data = [Utilidades().detalle_venta_to_json(detalle) for detalle in det] 
+                else :
+
+                    data = []
+
+                return HttpResponse( json.dumps(data) , content_type='application/json')
+                
+
+
+
+
+
+                
+
+
+
+
+
+
+            
 

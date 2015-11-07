@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 
+
 {% block content %}
 
+
+	
 	{% load staticfiles%}
 	<div class = "row">
 
@@ -12,7 +15,7 @@
 				               	<!-- <a href="" class="panel-close">×</a> -->
 					                <a href="" class="minimize">−</a>
 					            </div><!-- panel-btns -->
-					             <h3 class="panel-title"> PANEL  PRINCIPAL VENTAS</h3>
+					             <h3 class="panel-title"> Reporte</h3>
 					         </div>
 			            <div class="panel-body">
 			                
@@ -21,7 +24,7 @@
 
 						        <div class="col-sm-6 col-md-3">
 						          <div class="panel panel-danger panel-stat">
-                                    <a href="{% url "venta" %}">
+                                    <a href="{% url "reporteAsistencia" %}">
 						            <div class="panel-heading">
 
 						              <div class="stat">
@@ -30,8 +33,8 @@
 						                    <img src="{% static "static/images/reportes.png"%}" alt="" />
 						                  </div>
 						                  <div class="col-xs-8">
-						                    <small class="stat-label">VENTAS</small>
-						                    <h3>Registar</h3>
+						                    <small class="stat-label">Reporte</small>
+						                    <h3>Asistencia</h3>
 						                  </div>
 						                </div><!-- row -->
 
@@ -47,13 +50,40 @@
 						          </div><!-- panel -->
 						        </div><!-- col-sm-6 -->
 
-						        <!--................................................-->
+							<!--  -->
 
 
+							<div class="col-sm-6 col-md-3">
+						          <div class="panel panel-danger panel-stat">
+                                    <a href="{% url "reporteStock" %}">
+						            <div class="panel-heading">
 
+						              <div class="stat">
+						                <div class="row">
+						                  <div class="col-xs-4">
+						                    <img src="{% static "static/images/reportes.png"%}" alt="" />
+						                  </div>
+						                  <div class="col-xs-8">
+						                    <small class="stat-label">Reporte</small>
+						                    <h3>Stock</h3>
+						                  </div>
+						                </div><!-- row -->
+
+						                <div class="mb15"></div>
+
+						              <!--   <small class="stat-label">Avg. Visit Duration</small>
+						                <h4>01:80:22</h4> -->
+
+						              </div><!-- stat -->
+
+						            </div><!-- panel-heading -->
+                                    </a>
+						          </div><!-- panel -->
+						        </div><!-- col-sm-6 -->
+						        <!---->
 						        <div class="col-sm-6 col-md-3">
 						          <div class="panel panel-danger panel-stat">
-                                    <a href="{% url "modificar" %}">
+                                    <a href="{% url "reporteVenta" %}">
 						            <div class="panel-heading">
 
 						              <div class="stat">
@@ -62,8 +92,8 @@
 						                    <img src="{% static "static/images/reportes.png"%}" alt="" />
 						                  </div>
 						                  <div class="col-xs-8">
-						                    <small class="stat-label">VENTAS</small>
-						                    <h3> Modificar </h3>
+						                    <small class="stat-label">Reporte</small>
+						                    <h3>Ventas</h3>
 						                  </div>
 						                </div><!-- row -->
 
@@ -78,21 +108,5 @@
                                     </a>
 						          </div><!-- panel -->
 						        </div><!-- col-sm-6 -->
-
-
-
-
-
-
-
-
-
-			            </div><!--panel-body-->
-			          </div><!-- panel -->
-			 </div>
-	</div>
-{% endblock content %}
-
-{% block javascript %}
 	
-{% endblock javascript %}
+{% endblock content %}
