@@ -127,7 +127,7 @@
                           <h3 class="panel-title">Modificar Productos a Sucursales</h3>
                         </div>
             <div class="panel-body">
-                         
+   
                 <div class="form-group">
                   <label class="col-sm-3 control-label">Producto <span class="asterisk">*</span></label>
                   <div class="col-sm-9">
@@ -139,73 +139,46 @@
                     </select>
                   </div>
                 </div>
-                <!--
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">Email <span class="asterisk">*</span></label>
-                  <div class="col-sm-9">
-                    <input type="email" name="email" class="form-control" placeholder="Type your email..." required="">
-                  </div>
-                </div>
-                
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">URL</label>
-                  <div class="col-sm-9">
-                    <input type="url" name="url" class="form-control">
-                  </div>
-                </div>
-                
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">Comment <span class="asterisk">*</span></label>
-                  <div class="col-sm-9">
-                    <textarea rows="5" class="form-control" placeholder="Type your comment..." required=""></textarea>
-                  </div>
-                </div>
 
-                 <div class="form-group">
-                      <label class="col-sm-3 control-label">Stock Disponible</label>
-                      <div class="col-sm-9">
-                        <input type="text" id="spinner1" class="spinner" />
-                        <span class="help-block">Enhance a text input for entering numeric values, with up/down buttons and arrow key handling.</span>
-                      </div>
-                </div>
-                 <div class="form-group">
-                      <label class="col-sm-3 control-label">Stock Actual</label>
-                      <div class="col-sm-9">
-                        <input type="text" id="spinner2" class="spinner" />
-                        <span class="help-block">Enhance a text input for entering numeric values, with up/down buttons and arrow key handling.</span>
-                      </div>
-                </div>
-                 <div class="form-group">
-                      <label class="col-sm-3 control-label">Stock a Asignar</label>
-                      <div class="col-sm-9">
-                        <input type="text" id="spinner3" class="spinner" />
-                        <span class="help-block">Enhance a text input for entering numeric values, with up/down buttons and arrow key handling.</span>
-                      </div>
-                </div>
-              -->
               <div class="form-group">
                       <label class="col-sm-3 control-label">Stock Disponible</label>
                       <div class="col-sm-9">
-                        <input type="text" id="stock_dispo" class="spinner" />
-                        <span class="help-block">Enhance a text input for entering numeric values, with up/down buttons and arrow key handling.</span>
+                        <div class="row">
+                          <div class="col-sm-3"> 
+                            <input type="text"  id="stock_dispo" readonly="readonly" class="form-control" />
+                            
+                          </div>
+                          <div class="col-sm-8"></div>
+                          <span class="help-block">Enhance a text input for entering numeric values, with up/down buttons and arrow key handling.</span>
+                        </div>
+                        
                       </div>
                 </div>
                  <div class="form-group">
                       <label class="col-sm-3 control-label">Stock Actual:</label>
                       <div class="col-sm-9">
-                        <input type="text" id="stock_actual" class="spinner" />
-                        <span class="help-block">Enhance a text input for entering numeric values, with up/down buttons and arrow key handling.</span>
+                        <div class="row">
+                          <div class="col-sm-3">
+                               <input type="text" id="stock_actual" readonly="readonly" class="form-control" />
+                          </div>
+                          <span class="help-block">Enhance a text input for entering numeric values, with up/down buttons and arrow key handling.</span>
+                        </div>
+
                       </div>
                 </div>
                  <div class="form-group">
                       <label class="col-sm-3 control-label">Stock Adicional:</label>
                       <div class="col-sm-9">
-                        <input type="text" id="stock_adcional" class="spinner" />
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <input type="text" id="stock_adcional" class="spinner form-control" />
+                          </div>
                         <span class="help-block">Enhance a text input for entering numeric values, with up/down buttons and arrow key handling.</span>
+                        </div>
                       </div>
                 </div>
 
-         </div>
+         </div> <!-- panel body-->
 
             <div class="panel-footer">
              <div class="row">
@@ -262,6 +235,7 @@ jQuery(document).ready(function(){
  // Spinner
 var spinner = jQuery('.spinner').spinner();
   spinner.spinner('value', 0);
+    spinner.spinner({min: 0});
 });
 /*
 var spinner = jQuery('#spinner2').spinner();

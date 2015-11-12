@@ -144,16 +144,24 @@
 
                  <div class="form-group">
                       <label class="col-sm-3 control-label">Stock Disponible</label>
-                      <div class="col-sm-9">
-                        <input type="text" id="stock_dispo" class="spinner" />
-                        <span class="help-block">Enhance a text input for entering numeric values, with up/down buttons and arrow key handling.</span>
+                      <div class="col-sm-9"> 
+                        <div class="row">
+                          <div class="col-sm-3">
+                               <input type="text" id="stock_dispo" readonly="readonly" class="form-control" />
+                          </div>
+                          <span class="help-block">Enhance a text input for entering numeric values, with up/down buttons and arrow key handling.</span>
+                        </div>
                       </div>
                 </div>
                  <div class="form-group">
                       <label class="col-sm-3 control-label">Stock a Asignar</label>
                       <div class="col-sm-9">
-                        <input type="text" id="stock_add" class="spinner" />
-                        <span class="help-block">Enhance a text input for entering numeric values, with up/down buttons and arrow key handling.</span>
+                         <div class="row">
+                          <div class="col-sm-3">
+                            <input type="text" id="stock_add" class="spinner form-control" />
+                          </div>
+                            <span class="help-block">Enhance a text input for entering numeric values, with up/down buttons and arrow key handling.</span>
+                        </div>
                       </div>
                 </div>
 
@@ -214,6 +222,7 @@ jQuery(document).ready(function(){
  // Spinner
 var spinner = jQuery('.spinner').spinner();
   spinner.spinner('value', 0);
+  spinner.spinner({min: 0});
 });
 /*
 var spinner = jQuery('#spinner2').spinner();
