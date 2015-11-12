@@ -32,6 +32,7 @@ def filtroproductos(request):
 
 
 	template = "InternetCatalogo.html"
+	template = "catalogo.html"
 	return render_to_response(template , {"sucursales":sucursales , "marcas" : marcas , "tipos":tipos} ,context_instance = RequestContext(request)) 
 
 def filtrocriterio(request):

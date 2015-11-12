@@ -5,6 +5,7 @@ $("#btn-vender").on("click" , function(){
 	//alert("Que empiece el juego") ;
 	// primero capturar los  datos que esten la venta.
 
+
 	var jsonObj = [];
 	var key = ["producto_id" , "tipo_precio","cantidad" ,"descripcion" , "precio_unitario" , "importe"]
 	$("#tab_logic tbody tr").each(function(i){
@@ -46,6 +47,7 @@ $("#btn-vender").on("click" , function(){
 					//console.log("info child :" ,i,"" ,j," " , info_child);
 	
 				 }
+				 producto_info["precio_real"] = 
 				jsonObj.push(producto_info);
 
 			}
@@ -55,16 +57,23 @@ $("#btn-vender").on("click" , function(){
 
 	total = $("#total").val()
 
-	$.ajax({
-    url: '/ventas/addVenta/',
-    type: 'POST',
-    //contentType: 'application/json; charset=utf-8',
-    data: {"json":JSON.stringify(jsonObj) ,"total":total},
-    dataType: 'text',
-    success: function(result) {
-        alert(result);
-    }
-});
+if(jsonObj.length != 0 ){
+
+		$.ajax({
+	    url: '/ventas/addVenta/',
+	    type: 'POST',
+	    //contentType: 'application/json; charset=utf-8',
+	    data: {"json":JSON.stringify(jsonObj) ,"total":total},
+	    dataType: 'text',
+	    success: function(result) {
+	        alert(result);
+	    }
+	});
+}
+
+else {
+	console.log("JSON VACIO")
+}
 
 
 

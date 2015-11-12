@@ -27,7 +27,7 @@ $('document').ready(function(){
 	
 	        console.log("data" , data[i].producto.color);
 
-	        result.push(to_show(data[i]));
+	        result.push(to_show2(data[i]));
 
       }
 
@@ -86,6 +86,35 @@ $('document').ready(function(){
 
 
     return article;
+
+
+function to_show2 (data){
+
+
+  
+
+
+
+     var div_item = $("<div/>" , {"class": "col-lg-4 col-sm-6 text-center item"});
+         var img = $("<img/>"  , {"class":"img-circle img-responsive img-center" , "src" :  data.producto.imagen});
+         img.appendTo(div_item);
+
+         var h3 = $("<h3>"+
+          "<small>"+data.producto.marca.nombre+"</small>"+
+          "<p>"+data.producto.tipo_producto.nombre+"</p>"+
+          "</h3>");
+
+         h3.appendTo(div_item);
+
+
+
+    return div_item;
+
+
+
+
+}
+
 }
 
 
