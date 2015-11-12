@@ -2,20 +2,19 @@
 <html lang="en">
     
 <head>
-         {% load staticfiles %}
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
+         {% load staticfiles %}
         <link rel="shortcut icon" href="{% static "static/images/favicon.png "%}" type="image/png">
+
+        <title>Las Malvinas</title>
+
         <link href="{% static "static/css/style.default.css"%}" rel="stylesheet">
-        <link href="{% static "static/css/jquery.datatables.css"%}" rel="stylesheet">
-
-        <title>{% block title %}
-
-                {{trabajador.sucursal.nombre}}
+        {% block css %}
             
-        {% endblock title %}</title>
+        {% endblock css %}
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -31,12 +30,7 @@
             <div class="leftpanel">
 
                 <div class="logopanel">
-                    <h1><span>[</span>  {% block sucursal %}
-                        
-                    {{datos.empresa}}  
-
-                    {% endblock sucursal %} 
-                     <span>]</span></h1>
+                    <h1><span>[</span> {{datos.empresa}} <span>]</span></h1>
                 </div><!-- logopanel -->
 
                 <div class="leftpanelinner">
@@ -54,36 +48,37 @@
                         <h5 class="sidebartitle actitle">Account</h5>
                         <ul class="nav nav-pills nav-stacked nav-bracket mb30">
                           
-                            <li><a href="signout.html"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
+                            <li><a href="{% url "cerrarSesion" %}"><i class="fa fa-sign-out"></i> <span>Sign  Out</span></a></li>
                         </ul>
                     </div>
 
                     <h5 class="sidebartitle">Navegar</h5>
                     <ul class="nav nav-pills nav-stacked nav-bracket">
-                        <li><a href="{% url "home_ventas" %}"><i class="fa fa-home"></i> <span>Principal</span></a></li>
+                        <li><a href="{%url "mantenimientoSucursal" %}"><i class="fa fa-home"></i> <span>Principal</span></a></li>
                         
 
-                        <li class="nav-parent" id="menuVender"><a href=><i class="fa fa-th-list"></i> <span>Ventas</span></a>
-                                                                
+                        <li class="nav-parent" id="menuProducto"><a href="#"><i class="fa fa-th-list"></i> <span>Productos</span></a>
+                            <ul class="children">
+                                <li><a href="{% url "add" %}"><i class="fa fa-caret-right"></i> Registrar</a></li>
+                                <li><a href="{% url "edit" %}"><i class="fa fa-caret-right"></i> Modificar</a></li>
+                                <li><a href="{% url "list" %}"><i class="fa fa-caret-right"></i>Listar</a></li>
 
-                            <ul class="children">
-                                <li><a href="#"><i class="fa fa-caret-right"></i> Registrar</a></li>
-                                <li><a href="#"><i class="fa fa-caret-right"></i> Modificar</a></li>
                             </ul>
                         </li>
-                         <li class="nav-parent" id="menuAsistencia"><a href="#"><i class="fa fa-th-list"></i> <span>Asistencia</span></a>
+
+                        <li class="nav-parent" id="menuHistoral"><a href="#"><i class="fa fa-th-list"></i> <span>Historial</span></a>
                             <ul class="children">
-                                <li><a href="#"><i class="fa fa-caret-right"></i>Registrar</a></li>
-                            </ul>
-                        </li>
-                         <li class="nav-parent" id="menuReporte"><a href="{% url "menuReporte" %}"><i class="fa fa-th-list"></i> <span>Reporte</span></a>
-                            <ul class="children">
+                                <li><a href="{% url "historialVentas" %}"><i class="fa fa-caret-right"></i>Ventas</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i>Sucursal</a></li>
                                 <li><a href="#"><i class="fa fa-caret-right"></i>Asistencia</a></li>
-                                <li><a href="#"><i class="fa fa-caret-right"></i>Productos</a></li>
-                                <li><a href="#"><i class="fa fa-caret-right"></i>Ventas</a></li>                           
+
                             </ul>
                         </li>
 
+                        <li class=""><a href="/admin"><i class=""></i> <span> Opciones Básicas </span></a>
+                          
+                        </li>
+                       
                     </ul>
 
                 </div><!-- leftpanelinner -->
@@ -105,11 +100,11 @@
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                         <img src="{% static "static/images/photos/loggeduser.png"%}" alt="" />
-                                        {{user.get_full_name}}
+                                        JK
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
-                                        <li><a href="signin.html"><i class="glyphicon glyphicon-log-out"></i>Salir</a></li>
+                                        <li><a href="{% url "cerrarSesion" %}"><i class="glyphicon glyphicon-log-out"></i>Salir</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -119,11 +114,7 @@
                 </div><!-- headerbar -->
 
                 <div class="pageheader">
-                    <h2><i class="fa fa-home"></i> {% block sucursalPageHeader %}
-
-                         {{trabajador.sucursal.nombre}}
-                        
-                    {% endblock sucursalPageHeader %} <span>Repuestos de celulares...</span></h2>
+                    <h2><i class="fa fa-home"></i> Las Malvinas <span>Repuestos de celulares...</span></h2>
                     <div class="breadcrumb-wrapper">
                         <span class="label">Tu estas aqu&iacute;:</span>
                         <ol class="breadcrumb">
@@ -134,9 +125,23 @@
                 </div>
 
                 <div class="contentpanel">
-                   {% block content %}{% endblock %}                
-                </div>
+                    <!-- content goes here... -->
 
+                {% block content %}
+                    
+                {% endblock content %}
+                    
+
+                   
+
+
+
+
+
+
+
+                   
+                </div> <!-- Content Panel -->
 
             </div><!-- mainpanel -->
 
@@ -153,7 +158,6 @@
 
         </section>
 
-
         <script src="{% static "static/js/sucursal/jquery-1.11.1.min.js"%}"></script>
         <script src="{% static "static/js/sucursal/jquery-migrate-1.2.1.min.js"%}"></script>
         <script src="{% static "static/js/sucursal/bootstrap.min.js"%}"></script>
@@ -162,36 +166,12 @@
         <script src="{% static "static/js/sucursal/toggles.min.js"%}"></script>
         <script src="{% static "static/js/sucursal/retina.min.js"%}"></script>
         <script src="{% static "static/js/sucursal/jquery.cookies.js"%}"></script>
-        <script src="{% static "static/js/jquery.datatables.min.js"%}"></script>
         <script src="{% static "static/js/sucursal/custom.js"%}"></script>
 
         {% block javascript %}
-        {% endblock javascript %}
-        <script>
-        jQuery(document).ready(function() {
-            "use strict";
-            jQuery('#table1').dataTable();
-            // Select2
-            // Delete row in a table
-            jQuery('.delete-row').click(function(){
-              var c = confirm("Continue delete?");
-              if(c)
-                jQuery(this).closest('tr').fadeOut(function(){
-                  jQuery(this).remove();
-                });
-                
-                return false;
-            });
             
-            // // Show aciton upon row hover
-            // jQuery('.table-hidaction tbody tr').hover(function(){
-            //   jQuery(this).find('.table-action-hide a').animate({opacity: 1});
-            // },function(){
-            //   jQuery(this).find('.table-action-hide a').animate({opacity: 0});
-            // });
-          
-        });
-        </script>
+        {% endblock javascript %}
+
 
     </body>
 </html>

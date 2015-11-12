@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response , HttpResponse
+from django.shortcuts import render_to_response , HttpResponse,render
 from django.template.context import RequestContext
 from models import Sucursal , DetalleAlmacen , DetalleSucursalAlmacen, HistorialDetalleSucursalAlmacen
 from productos.models import Producto
@@ -30,7 +30,11 @@ def mantenimientoSucursal(request):
 	if  is_admin(request.user.id):
 		template = 'mantenimientoSucursal.html'
 		print "template7"
-		return render_to_response(template,{},context_instance=RequestContext(request))
+		
+		datos = sessionData(request)
+
+		print datos
+		return render_to_response(template,{"datos":datos},context_instance = RequestContext(request))
 
 	else :
 		return HttpResponseRedirect("/ventas/")
@@ -481,6 +485,10 @@ def prueba(request):
 
 
 
-def algo1 (request):
+def sessionData(request):
+    return request.session['datos']
 
-	return HttpResponse("Holi")
+
+
+
+

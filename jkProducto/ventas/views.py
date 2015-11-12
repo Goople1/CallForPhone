@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response , HttpResponse
+from django.shortcuts import render_to_response , HttpResponse,render
 from django.template.context import RequestContext
 from sucursales.models import SucursalTrabajador,DetalleSucursalAlmacen,Sucursal
 from productos.models import Producto
@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from forms import FormInciarSesion
 from django.contrib.auth import login, authenticate,logout
+from sucursales.models import Almacen
 from models import AsistenciaTrabajador
 import datetime
 import json
@@ -34,7 +35,10 @@ def home_ventas(request):
             #return HttpResponse("Es  Usuario , Pero no Trabajador")
     #template = "empleado_home.html"
     template = "homeEmpleado.html"
-    return render_to_response(template , {"trabajador": trabajador} , context_instance=RequestContext(request))
+    datos = sessionData(request)
+    print "asds"
+    print datos
+    return render_to_response(template , {"trabajador": trabajador , 'datos':datos} ,context_instance=RequestContext(request))
 
 
 @login_required(login_url='/cuenta/')
@@ -276,7 +280,6 @@ def cargar_productos(request):
 def iniciarSesion(request):
     template = "login.html"
     template = "signin.html"
-    print request.user.is_authenticated()
     if not request.user.is_authenticated():
         if request.method == "POST":
             iniciar_sesion = FormInciarSesion(request.POST)
@@ -287,13 +290,43 @@ def iniciarSesion(request):
                 #return redirect("/admin/")
                 if acceso is not None:
                     if acceso.is_active:
-                        if acceso.is_staff:
-                            login(request,acceso)
-                            return HttpResponseRedirect('/admin/')
-                        else :
-                            login(request,acceso)
-                            print "acceso"
-                            return HttpResponseRedirect('/ventas/')
+                        login(request,acceso)
+                        try:
+
+                            print "entra si"
+                            trabajador = SucursalTrabajador.objects.get(trabajador = request.user)  
+                            print trabajador.cargo
+                            print "fin"
+                            if trabajador.cargo.lower() == "empl":
+                                print "pendejo"
+
+                                request.session["datos"] = {"empresa": trabajador.sucursal.nombre,"nombre":trabajador.trabajador.get_full_name()}
+
+                                return HttpResponseRedirect('/ventas/')
+
+
+                            else :
+                                print "entra njo"
+                                if trabajador.cargo.lower() == "admi":
+                                    request.session["datos"] = {"empresa": trabajador.sucursal.id_almacen.nombre_empresa,"nombre":trabajador.trabajador.get_full_name()}
+                                    print request.session.datos
+                                    return HttpResponseRedirect('/admin/')
+
+                        except Exception ,e : 
+                            print e
+                            print "fail"
+                            if acceso.is_staff:
+                                request.session['datos'] = {"empresa": "Administrador","nombre":request.user.get_full_name()}
+                                print request.session['datos']
+                                return HttpResponseRedirect('/admin/')
+                            else :
+                                return render_to_response(template,{'form_iniciar_sesion':iniciar_sesion,'error':'Su cuenta ha sido desactivada,por violar los derechos de uso'},context_instance = RequestContext(request))
+
+
+
+                        
+                        
+                            
                     else:
                         iniciar_sesion = FormInciarSesion(request.POST)
                         return render_to_response(template,{'form_iniciar_sesion':iniciar_sesion,'error':'Su cuenta ha sido desactivada,por violar los derechos de uso'},context_instance = RequestContext(request))
@@ -451,17 +484,8 @@ def detalle_venta(request):
 
                 return HttpResponse( json.dumps(data) , content_type='application/json')
                 
-
-
-
-
-
-                
-
-
-
-
-
+def sessionData(request):
+    return request.session['datos']
 
             
 
