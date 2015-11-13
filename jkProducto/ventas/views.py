@@ -292,8 +292,6 @@ def iniciarSesion(request):
                     if acceso.is_active:
                         login(request,acceso)
                         try:
-
-                            print "entra si"
                             trabajador = SucursalTrabajador.objects.get(trabajador = request.user)  
                             print trabajador.cargo
                             print "fin"
@@ -320,13 +318,7 @@ def iniciarSesion(request):
                                 print request.session['datos']
                                 return HttpResponseRedirect('/admin/')
                             else :
-                                return render_to_response(template,{'form_iniciar_sesion':iniciar_sesion,'error':'Su cuenta ha sido desactivada,por violar los derechos de uso'},context_instance = RequestContext(request))
-
-
-
-                        
-                        
-                            
+                                return render_to_response(template,{'form_iniciar_sesion':iniciar_sesion,'error':'Su cuenta ha sido desactivada,por violar los derechos de uso'},context_instance = RequestContext(request))     
                     else:
                         iniciar_sesion = FormInciarSesion(request.POST)
                         return render_to_response(template,{'form_iniciar_sesion':iniciar_sesion,'error':'Su cuenta ha sido desactivada,por violar los derechos de uso'},context_instance = RequestContext(request))
@@ -485,7 +477,20 @@ def detalle_venta(request):
                 return HttpResponse( json.dumps(data) , content_type='application/json')
                 
 def sessionData(request):
-    return request.session['datos']
+    if request.session['datos']:
+        return request.session['datos']
+    else:
+        try:
+            trabajador = SucursalTrabajador.objects.get(trabajador = request.user)  
+            if trabajador.cargo.lower() == "empl":
+                request.session["datos"] = {"empresa": trabajador.sucursal.nombre,"nombre":trabajador.trabajador.get_full_name()}
+            else :
+                if trabajador.cargo.lower() == "admi":
+                    request.session["datos"] = {"empresa": trabajador.sucursal.id_almacen.nombre_empresa,"nombre":trabajador.trabajador.get_full_name()}
+        except Exception ,e : 
+            if acceso.is_staff:
+                request.session['datos'] = {"empresa": "Administrador","nombre":request.user.get_full_name()}
+            
 
             
 

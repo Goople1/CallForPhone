@@ -486,7 +486,19 @@ def prueba(request):
 
 
 def sessionData(request):
-    return request.session['datos']
+    if request.session['datos']:
+        return request.session['datos']
+    else:
+        try:
+            trabajador = SucursalTrabajador.objects.get(trabajador = request.user)  
+            if trabajador.cargo.lower() == "empl":
+                request.session["datos"] = {"empresa": trabajador.sucursal.nombre,"nombre":trabajador.trabajador.get_full_name()}
+            else :
+                if trabajador.cargo.lower() == "admi":
+                    request.session["datos"] = {"empresa": trabajador.sucursal.id_almacen.nombre_empresa,"nombre":trabajador.trabajador.get_full_name()}
+        except Exception ,e : 
+            if acceso.is_staff:
+                request.session['datos'] = {"empresa": "Administrador","nombre":request.user.get_full_name()}
 
 
 
