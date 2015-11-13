@@ -2,7 +2,6 @@ from django.shortcuts import render_to_response ,HttpResponse
 from django.template.context import RequestContext
 from  productos.models import Marca , TipoProducto
 from  sucursales.models import Sucursal , DetalleSucursalAlmacen
-
 from sucursales.utilidades import Utilidades
 
 
@@ -48,22 +47,15 @@ def filtrocriterio(request):
 
 
 		rpt = criteriobusqueda(sucursal_id,producto_id,tipo_id)
-		print "criterios"
-		print rpt
-
+		
 		if not rpt :
-
-			print  "Pasar todos los Objetos"
-
+	
 			productos = DetalleSucursalAlmacen.objects.all()
-			print productos.count()
-
+		
 			if productos:
 
-				print "helllo"
-				data = [Utilidades().detalle_sucursal_almacen_to_json(producto) for producto in productos]
-				print data
 
+				data = [Utilidades().detalle_sucursal_almacen_to_json(producto) for producto in productos]
 			else : 
 
 				data = []
@@ -73,17 +65,15 @@ def filtrocriterio(request):
 
 		else :
 
-			print "rpt  Tiene Criterios"
+	
 			try:
 				productos = DetalleSucursalAlmacen.objects.filter(**rpt)
-				print productos
+	
 
 				if productos:
 
-					print "helllo"
 					data = [Utilidades().detalle_sucursal_almacen_to_json(producto) for producto in productos]
-					print data
-
+	
 				else : 
 
 					data = []

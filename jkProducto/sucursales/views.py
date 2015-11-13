@@ -29,11 +29,7 @@ def mantenimientoSucursal(request):
 	#template = 'registrarProductoOriginal.html'
 	if  is_admin(request.user.id):
 		template = 'mantenimientoSucursal.html'
-		print "template7"
-		
-		datos = sessionData(request)
-
-		print datos
+		datos = request.session["datos"]
 		return render_to_response(template,{"datos":datos},context_instance = RequestContext(request))
 
 	else :
@@ -46,8 +42,9 @@ def addSucursal(request):
 		template = "IndiceOriginal.html"
 		operation = 'addSucursalA'
 		sucursal = Sucursal.objects.all()
+		datos = request.session["datos"]
 
-		return render_to_response(template,{'sucursales':sucursal,'operation':operation},context_instance=RequestContext(request))
+		return render_to_response(template,{'sucursales':sucursal,'operation':operation , "datos":datos},context_instance=RequestContext(request))
 
 	else :
 		return HttpResponseRedirect("/ventas/")
@@ -59,7 +56,9 @@ def editSucursal(request):
 		template = "IndiceOriginal.html"
 		operation = 'editSucursalE'
 		sucursal = Sucursal.objects.all()
-		return render_to_response(template,{'sucursales':sucursal,'operation':operation},context_instance=RequestContext(request))
+		datos = request.session["datos"]
+
+		return render_to_response(template,{'sucursales':sucursal,'operation':operation,"datos":datos},context_instance=RequestContext(request))
 
 	else:
 		return HttpResponseRedirect("/ventas/")
@@ -71,7 +70,9 @@ def listSucursal(request):
 		template = "IndiceOriginal.html"
 		operation = 'listSucursalL'
 		sucursal = Sucursal.objects.all()
-		return render_to_response(template,{'sucursales':sucursal,'operation':operation},context_instance=RequestContext(request))
+		datos = request.session["datos"]
+
+		return render_to_response(template,{'sucursales':sucursal,'operation':operation , "datos" : datos},context_instance=RequestContext(request))
 	else:
 		return HttpResponseRedirect("/ventas/")
 
@@ -81,7 +82,9 @@ def historialVentas(request):
 		template = "IndiceOriginal.html"
 		operation = 'histoSucursalVentasAdm'
 		sucursal = Sucursal.objects.all()
-		return render_to_response(template,{'sucursales':sucursal,'operation':operation},context_instance=RequestContext(request))
+		datos = request.session["datos"]
+
+		return render_to_response(template,{'sucursales':sucursal,'operation':operation , "datos":datos},context_instance=RequestContext(request))
 	else:
 		return HttpResponseRedirect("/ventas/")
 
@@ -98,8 +101,8 @@ def Historial_ventas_Sucursal_Admin(request,id):
 			print e
 
 		template  = "reporteHistorialVenta.html"
-		print "template4"
-		return render_to_response(template , {"ventas":ventas} , context_instance  = RequestContext(request))
+		datos = request.session["datos"]
+		return render_to_response(template , {"ventas":ventas , "datos" : datos} , context_instance  = RequestContext(request))
 
 	else:
 		return HttpResponseRedirect("/ventas/")
@@ -144,8 +147,8 @@ def addSucursalA(request,id):
 		except Exception, e:
 			return HttpResponse("<html><body>PAGE NOT FOUND</body></html>")
 
-		print "templa3"
-		return render_to_response (template, {'productos':detalle_almacen_productos ,'id_sucursal': sucursal_id} , context_instance = RequestContext(request))
+		datos = request.session["datos"]
+		return render_to_response (template, {'productos':detalle_almacen_productos ,'id_sucursal': sucursal_id , "datos":datos} , context_instance = RequestContext(request))
 
 	else :
 		return HttpResponseRedirect("/ventas/")
@@ -174,8 +177,10 @@ def editSucursalE(request,id):
 			return HttpResponse("<html><body>PAGE NOT FOUND</body></html>")
 
 		id_producto_detalle_sucu_almacen = [detalle.producto_id for detalle  in detalle_sucursal_almacen_productos]
-		print  "template2"
-		return render_to_response(template,{"productos": id_producto_detalle_sucu_almacen , 'id_sucursal': sucursal_id },context_instance = RequestContext(request))
+
+		datos = request.session["datos"]
+
+		return render_to_response(template,{"productos": id_producto_detalle_sucu_almacen , 'id_sucursal': sucursal_id , "datos":datos },context_instance = RequestContext(request))
 	else:
 		return HttpResponseRedirect("/ventas/")
 	
@@ -217,7 +222,7 @@ def registrarPedidoSucursal(request):
 
 @login_required(login_url='/cuenta/')
 def dameStock(request):
-	print "Consultando Stock de DetalleAlmecen"
+
 
 	if request.method == "GET":
 		#print "pase el get"
@@ -240,11 +245,9 @@ def dameStock(request):
 
 		else:
 			mensaje = "imposible de encontrar el Producto "
-			print mensaje
-			mensaje = ""
 			return HttpResponse(mensaje)
 	else : 
-		print "algo paso"
+		return HttpResponse("Only Get")
 
 
 @login_required(login_url='/cuenta/')
@@ -269,7 +272,7 @@ def addProductotoSucursal(request):
 
 				#print detalle_almacen
 				detalle_almacen.stock -= stock_add
-				print detalle_almacen.stock
+				
 
 				try:
 					producto = Producto.objects.get(id = producto_id)
@@ -295,7 +298,7 @@ def addProductotoSucursal(request):
 
 				try:
 					detalleSA = DetalleSucursalAlmacen(stock = stock_add, producto_id = producto , sucursal_id =  sucursal) 
-					print "llega aca DETALLE HISTORIAL"
+					
 					detalleSA.save()
 					HistorialDetalleSucursalAlmacen.objects.create(stock_actual =detalleSA.stock ,id_detalle_sucursal_almacen=detalleSA)
 
@@ -319,14 +322,13 @@ def addProductotoSucursal(request):
 @login_required(login_url='/cuenta/')
 def StockDetalleSucursalAlmacen(request):
 
-	print "Dentro de StockDetalleSucursalAlmacen"
+	
 	if request.method == "GET":
 
 		cod_prod = Utilidades().validarIngresoNum(request.GET.get('codigo_producto'))
 		cod_suc = Utilidades().validarIngresoNum(request.GET.get('codigo_sucursal'))
 
-		print "codigo_producto:",cod_prod
-		print "codigo_sucursal:",cod_suc
+		
 
 		if (cod_prod != 0) & (cod_prod > 0) :
 			try:
@@ -355,9 +357,6 @@ def StockDetalleSucursalAlmacen(request):
 @login_required(login_url='/cuenta/')
 def editProductotoSucursal(request):
 
-	print "Editar Producto  de DetalleSucursalAlmacen ..."
-	print "Obteniendo  datos  ... "
-
 	if request.method == "POST":
 		
 		sucursal_id  = Utilidades().validarIngresoNum(request.POST.get("sucursal_id",0))
@@ -367,8 +366,6 @@ def editProductotoSucursal(request):
 		stock_add = Utilidades().validarIngresoNum(request.POST.get("stock_add",0))
 		# stock_dispo = request.POST.get("stock_dispo")
 
-		print "Datos Obtenidos :  "
-		print  "Sucursal_id :  %s , producto_id : %s , stock_add : %s " %(sucursal_id,producto_id,stock_add)
 
 		if(producto_id != 0 )& (producto_id > 0):
 
@@ -386,10 +383,6 @@ def editProductotoSucursal(request):
 			except Exception, e:
 				print e
 				return HttpResponse ("Problemas con el Server")
-
-			print "...................................."
-			print type(detalle_almacen.stock),type(stock_add)
-			print "....................................."
 
 			if(detalle_almacen.stock >= stock_add): 
 				detalle_almacen.stock-=stock_add
@@ -409,7 +402,7 @@ def editProductotoSucursal(request):
 			return HttpResponse(mensaje)
 
 	else: 
-		return HttpResponse(" 27 rojo , impar  y pasa ")
+		return HttpResponse(" Problemas Con el Server")
 
 
 
@@ -431,14 +424,7 @@ def export(request , suc_id):
 
 	sucursal_id = Utilidades().validarIngresoNum(suc_id)
 
-
-
-
-	print "Export"
-
 	detalle_productos_sucursal	=	DetalleSucursalAlmacen.objects.filter(sucursal_id = sucursal_id)
-
-	print ".."
 
 	data = detalle_productos_sucursal.values('id','producto_id__tipo_producto__nombre','producto_id__marca__nombre','producto_id__codigo','producto_id__color','stock','producto_id__precio_x_menor','producto_id__precio_x_mayor')	
 	#field_header_map={'producto_id__tipo_producto__nombre': 'TIPO','producto_id__marca__nombre':'MARCA','producto_id__codigo': 'MODELO' , 'producto_id__color':'COLOR', 'producto_id__precio_x_menor': 'PRECIO por Menor' , 'producto_id__precio_x_mayor': 'Precio por Mayor'}
@@ -499,6 +485,10 @@ def sessionData(request):
         except Exception ,e : 
             if acceso.is_staff:
                 request.session['datos'] = {"empresa": "Administrador","nombre":request.user.get_full_name()}
+            return request.session['datos']
+
+
+
 
 
 

@@ -119,4 +119,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 """ 
 LOGIN_URL = '/login/'
 
+
+
 # STATICFILES_STORAGE ='django.contrib.staticfiles.storage.CachedStaticFilesStorage'

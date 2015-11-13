@@ -13,7 +13,7 @@
 
         <title>{% block title %}
 
-                {{trabajador.sucursal.nombre}}
+                {{datos.empresa}}
             
         {% endblock title %}</title>
 
@@ -31,9 +31,9 @@
             <div class="leftpanel">
 
                 <div class="logopanel">
-                    <h1><span>[</span>  {% block sucursal %}
+                    <h1><span>[</span>   {% block sucursal %}
                         
-                    {{datos.empresa}}  
+                    {{ datos.empresa}}
 
                     {% endblock sucursal %} 
                      <span>]</span></h1>
@@ -105,7 +105,7 @@
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                         <img src="{% static "static/images/photos/loggeduser.png"%}" alt="" />
-                                        {{user.get_full_name}}
+                                        {{datos.nombre}}
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
@@ -121,7 +121,7 @@
                 <div class="pageheader">
                     <h2><i class="fa fa-home"></i> {% block sucursalPageHeader %}
 
-                         {{trabajador.sucursal.nombre}}
+                         {{datos.empresa}}
                         
                     {% endblock sucursalPageHeader %} <span>Repuestos de celulares...</span></h2>
                     <div class="breadcrumb-wrapper">

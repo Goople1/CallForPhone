@@ -35,15 +35,13 @@ def home_ventas(request):
             #return HttpResponse("Es  Usuario , Pero no Trabajador")
     #template = "empleado_home.html"
     template = "homeEmpleado.html"
-    datos = sessionData(request)
-    print "asds"
-    print datos
+    datos = request.session["datos"]
     return render_to_response(template , {"trabajador": trabajador , 'datos':datos} ,context_instance=RequestContext(request))
 
 
 @login_required(login_url='/cuenta/')
 def lista_producto(request):
-    print "lista porducto"
+   
     user_id = request.user.id
     try:
         trabajador = SucursalTrabajador.objects.get(trabajador=user_id)
@@ -55,13 +53,13 @@ def lista_producto(request):
         if user.is_staff:
             return HttpResponseRedirect("/admin/")
 
-    print "pase try"
+    
     trabajador_sucursal_id = trabajador.sucursal.id
-    print trabajador_sucursal_id
     sucursal  = Sucursal.objects.get(pk =trabajador_sucursal_id )
     lista_producto = DetalleSucursalAlmacen.objects.filter(sucursal_id = trabajador_sucursal_id)
     template = "homeListaProductoSucursal.html"
-    return render_to_response(template,{"detalle_sucursal_almacen_productos":lista_producto , "sucursal" :sucursal} , context_instance = RequestContext(request))
+    datos = request.session["datos"]
+    return render_to_response(template,{"detalle_sucursal_almacen_productos":lista_producto , "sucursal" :sucursal , "datos":datos} , context_instance = RequestContext(request))
 
 @login_required(login_url='/cuenta/')
 def venta (request):	
@@ -81,7 +79,8 @@ def venta (request):
         lista_productos = DetalleSucursalAlmacen.objects.filter(sucursal_id = trabajador_sucursal_id)
         template = "homeVentas.html"
         venta  = True
-        return  render_to_response( template , {"venta":venta,"productos": lista_productos, "trabajador":trabajador} , context_instance = RequestContext(request))
+        datos = request.session["datos"]
+        return  render_to_response( template , {"venta":venta,"productos": lista_productos, "trabajador":trabajador, "datos":datos} , context_instance = RequestContext(request))
 
 
 
@@ -93,14 +92,10 @@ def addVenta(request):
         try:
             with transaction.atomic():
                 trabajador = SucursalTrabajador.objects.get(trabajador = request.user.id)
-                print trabajador.sucursal
                 my_json_products_to_dict = json.loads(request.POST.get("json"))
                 if my_json_products_to_dict:
-                    print "Create Venta"
                     total = Utilidades().validarIngresoNum(request.POST.get("total"))
                     venta = Venta(empleado = trabajador , sucursal = trabajador.sucursal , total = total)
-                    print "--------------------------------------------------"
-                    print "--------------------------------------------------"
                     venta.save()
                     #En my_json_products_to_dict estan todos los productos  que se agregan a la venta		
                     for producto_dict in my_json_products_to_dict :
@@ -111,14 +106,8 @@ def addVenta(request):
                         producto2 = producto_dict.get("producto_id")
                         descripcion = producto_dict.get("descripcion")
                         #Saber que  el Producto Existe :[Porsiaca]
-                        producto = Producto.objects.get(id = producto_dict.get("producto_id"))
-                        print producto
                         detalle_sucursal_producto = DetalleSucursalAlmacen.objects.get(producto_id = producto2 , sucursal_id = trabajador.sucursal)
-                        print detalle_sucursal_producto
-                        print "#-------------------------------#"
-                        print detalle_sucursal_producto.stock
-                        print cantidad
-                        print "#-------------------------------#"
+                    
 
                         if tipo_precio == "mayor":
                             precio_real = detalle_sucursal_producto.producto_id.precio_x_mayor
@@ -128,17 +117,14 @@ def addVenta(request):
 
                         if detalle_sucursal_producto.stock  > cantidad:
                             detalle_sucursal_producto.stock-= cantidad
-                            print "detalle_sucursal cambios"
                             detalle_venta = DetalleVenta(venta_id = venta,detalle_Sucursal_almacen_id = detalle_sucursal_producto , cantidad = cantidad , tipo_precio  =  tipo_precio , precio =precio , importe = importe, descripcion = descripcion , precio_real = precio_real)
                             detalle_venta.save()
                             detalle_sucursal_producto.save()
                         else:
-                            print "Else"
                             raise IntegrityError
                 else :
                     return HttpResponse("JSON VACIO")
         except :
-            print "roll"
             transaction.rollback()
         else:
             transaction.commit()
@@ -165,24 +151,19 @@ def modificar_venta(request):
         except Exception,e:
             print e
 
-        return render_to_response( template , {"ventas":ventas , "trabajador" :trabajador}, context_instance = RequestContext(request))
+        datos = request.session["datos"]
+        return render_to_response( template , {"ventas":ventas , "trabajador" :trabajador , "datos":datos}, context_instance = RequestContext(request))
 
 @login_required(login_url='/login/')
 def reporte_asistencia(request):
     if request.method == "GET":
         template = "reporteAsistencia.html"
-        print "test"
-        print request.user.is_staff
-        print request.user.is_active
         try:
             if request.user.is_staff:
                 #pero tb redireccionar a la misma plantilla pero con if...si es trabajador o admin
                 return HttpResponseRedirect("/admin/")
             elif request.user.is_active:
-                print "tesst2"
                 asistenciaTodas = AsistenciaTrabajador.objects.all()
-                print "test3"
-                print asistenciaTodas
                 return render_to_response( template , {"asistencias":asistenciaTodas }, context_instance = RequestContext(request))
 
         except:
@@ -218,7 +199,9 @@ def modificar_detalle_ventas (request,venta_id):
             template = "homeVentas.html"
             modificar = True
             lista_productos = DetalleSucursalAlmacen.objects.filter(sucursal_id = trabajador.sucursal.id)
-            return render_to_response (template , {"trabajador":trabajador,"detalle_venta": detalle_venta , "modificar":modificar,"productos": lista_productos , "ObjVenta" : venta} , context_instance = RequestContext(request))
+            datos = request.session["datos"]
+
+            return render_to_response (template , {"trabajador":trabajador,"detalle_venta": detalle_venta , "modificar":modificar,"productos": lista_productos , "ObjVenta" : venta ,"datos":datos} , context_instance = RequestContext(request))
         else :
             return  HttpResponse("ESTE DETALLE PERTENECE A OTRA SUCURSAL")
 
@@ -246,13 +229,6 @@ def cargar_productos(request):
 
         venta = Venta.objects.get(id = venta_id)
         venta.sucursal
-
-
-        print "cargar_productos"
-        print "datos : "
-        print "venta_id : " ,venta_id
-        print "json obj : ", dict_products
-
         venta.estado = False
         venta.save()
 
@@ -291,34 +267,39 @@ def iniciarSesion(request):
                 if acceso is not None:
                     if acceso.is_active:
                         login(request,acceso)
-                        try:
-                            trabajador = SucursalTrabajador.objects.get(trabajador = request.user)  
-                            print trabajador.cargo
-                            print "fin"
-                            if trabajador.cargo.lower() == "empl":
-                                print "pendejo"
 
-                                request.session["datos"] = {"empresa": trabajador.sucursal.nombre,"nombre":trabajador.trabajador.get_full_name()}
+                        session = sessionData(request)
 
+                        if session.get("cargo") == "admi":
+                            return HttpResponseRedirect('/admin/')
+                        else:
+                            if session.get("cargo") == "empl":
                                 return HttpResponseRedirect('/ventas/')
+             
+                        # try:
+                        #     trabajador = SucursalTrabajador.objects.get(trabajador = request.user)  
+                        #     print trabajador.cargo
+                        #     if trabajador.cargo.lower() == "empl":
+
+                        #         request.session["datos"] = {"empresa": trabajador.sucursal.nombre,"nombre":trabajador.trabajador.get_full_name()}
+
+                        #         return HttpResponseRedirect('/ventas/')
 
 
-                            else :
-                                print "entra njo"
-                                if trabajador.cargo.lower() == "admi":
-                                    request.session["datos"] = {"empresa": trabajador.sucursal.id_almacen.nombre_empresa,"nombre":trabajador.trabajador.get_full_name()}
-                                    print request.session.datos
-                                    return HttpResponseRedirect('/admin/')
+                        #     else :
+                        #         if trabajador.cargo.lower() == "admi":
+                        #             request.session["datos"] = {"empresa": trabajador.sucursal.id_almacen.nombre_empresa,"nombre":trabajador.trabajador.get_full_name()}
+                        #             print request.session.datos
+                        #             return HttpResponseRedirect('/admin/')
 
-                        except Exception ,e : 
-                            print e
-                            print "fail"
-                            if acceso.is_staff:
-                                request.session['datos'] = {"empresa": "Administrador","nombre":request.user.get_full_name()}
-                                print request.session['datos']
-                                return HttpResponseRedirect('/admin/')
-                            else :
-                                return render_to_response(template,{'form_iniciar_sesion':iniciar_sesion,'error':'Su cuenta ha sido desactivada,por violar los derechos de uso'},context_instance = RequestContext(request))     
+                        # except Exception ,e : 
+                        #     print e
+                        #     print "fail"
+                        #     if acceso.is_staff:
+                        #         request.session['datos'] = {"empresa": "Administrador","nombre":request.user.get_full_name()}
+                        #         return HttpResponseRedirect('/admin/')
+                        #     else :
+                        #         return render_to_response(template,{'form_iniciar_sesion':iniciar_sesion,'error':'Su cuenta ha sido desactivada,por violar los derechos de uso'},context_instance = RequestContext(request))     
                     else:
                         iniciar_sesion = FormInciarSesion(request.POST)
                         return render_to_response(template,{'form_iniciar_sesion':iniciar_sesion,'error':'Su cuenta ha sido desactivada,por violar los derechos de uso'},context_instance = RequestContext(request))
@@ -396,7 +377,9 @@ def asistencia(request):
         return HttpResponse(actualizar)
     else:
         template = "asistencia.html"
-        return render_to_response(template,{},context_instance=RequestContext(request))
+        datos = request.session["datos"]
+
+        return render_to_response(template,{"datos": datos},context_instance=RequestContext(request))
 
 
 @login_required(login_url='/login/')
@@ -412,7 +395,9 @@ def home_empleado_menu_reporte(request):
                 print e
 
             template = "homeEmpleadoReporte.html"
-            return render_to_response(template , {"trabajador":trabajador} , context_instance=RequestContext(request) )
+            datos = request.session["datos"]
+
+            return render_to_response(template , {"trabajador":trabajador , "datos":datos} , context_instance=RequestContext(request) )
         else :
             return HttpResponse("ERROR ")
     else : 
@@ -434,7 +419,9 @@ def reporte_venta (request):
 
             template = "homeEmpleadoReporteVentas.html"
             ventas = Venta.objects.filter(sucursal = trabajador.sucursal.id , estado  = True).order_by('-fecha_emision')
-            return render_to_response(template , {"trabajador":trabajador , "ventas":ventas } , context_instance=RequestContext(request) )
+            datos = request.session["datos"]
+
+            return render_to_response(template , {"trabajador":trabajador , "ventas":ventas , "datos":datos} , context_instance=RequestContext(request) )
         else :
             return HttpResponse("ERROR ")
     else : 
@@ -481,20 +468,33 @@ def detalle_venta(request):
                 return HttpResponse( json.dumps(data) , content_type='application/json')
                 
 def sessionData(request):
-    if request.session['datos']:
+    print "datos"
+    print "datos" in request.session
+    #print request.session['datos']
+
+    if "datos" in request.session:
         return request.session['datos']
     else:
         try:
             trabajador = SucursalTrabajador.objects.get(trabajador = request.user)  
             if trabajador.cargo.lower() == "empl":
-                request.session["datos"] = {"empresa": trabajador.sucursal.nombre,"nombre":trabajador.trabajador.get_full_name()}
+                request.session["datos"] = {"empresa": trabajador.sucursal.nombre,"nombre":trabajador.trabajador.get_full_name() , "cargo" : trabajador.cargo}
             else :
                 if trabajador.cargo.lower() == "admi":
-                    request.session["datos"] = {"empresa": trabajador.sucursal.id_almacen.nombre_empresa,"nombre":trabajador.trabajador.get_full_name()}
+                    request.session["datos"] = {"empresa": trabajador.sucursal.id_almacen.nombre_empresa,"nombre":trabajador.trabajador.get_full_name(),"cargo" : trabajador.cargo}
         except Exception ,e : 
-            if acceso.is_staff:
-                request.session['datos'] = {"empresa": "Administrador","nombre":request.user.get_full_name()}
 
+            try:
+                if not request.user.is_anonymous() :
+                    if request.user.is_staff:
+                        request.session['datos'] = {"empresa": "Administrador","nombre":request.user.get_full_name(),"cargo":"admi"}
+
+                else : 
+                    return HttpResponseRedirect("/login")
+
+            except Exception ,e   :
+                print e
+                    
         return request.session['datos']
             
 

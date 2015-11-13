@@ -100,7 +100,7 @@
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                         <img src="{% static "static/images/photos/loggeduser.png"%}" alt="" />
-                                        JK
+                                        {{datos.nombre}}
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
@@ -114,7 +114,7 @@
                 </div><!-- headerbar -->
 
                 <div class="pageheader">
-                    <h2><i class="fa fa-home"></i> Las Malvinas <span>Repuestos de celulares...</span></h2>
+                    <h2><i class="fa fa-home"></i> {{datos.empresa}}<span>Repuestos de celulares...</span></h2>
                     <div class="breadcrumb-wrapper">
                         <span class="label">Tu estas aqu&iacute;:</span>
                         <ol class="breadcrumb">
