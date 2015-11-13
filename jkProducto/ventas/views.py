@@ -342,6 +342,10 @@ def iniciarSesion(request):
 @login_required(login_url='/login/')
 def cerrarSesion(request):
     logout(request)
+    try:
+        del request.session['datos']
+    except:
+        pass
     return  HttpResponseRedirect('/')
 
 
@@ -490,6 +494,8 @@ def sessionData(request):
         except Exception ,e : 
             if acceso.is_staff:
                 request.session['datos'] = {"empresa": "Administrador","nombre":request.user.get_full_name()}
+
+        return request.session['datos']
             
 
             
