@@ -164,7 +164,9 @@ def reporte_asistencia(request):
                 return HttpResponseRedirect("/admin/")
             elif request.user.is_active:
                 asistenciaTodas = AsistenciaTrabajador.objects.all()
-                return render_to_response( template , {"asistencias":asistenciaTodas }, context_instance = RequestContext(request))
+                datos = request.session["datos"]
+
+                return render_to_response( template , {"asistencias":asistenciaTodas ,"datos":datos}, context_instance = RequestContext(request))
 
         except:
             return HttpResponse("")

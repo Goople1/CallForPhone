@@ -211,7 +211,8 @@ def listSucursalL(request,id):
 
 		#template = "listaProductosSucursalAlmacen.html"
 		template = "ListarProductosOriginal.html"
-		print "dsfasd"
+		datos = request.session["datos"]
+		
 		return render_to_response (template, locals() , context_instance = RequestContext(request))
 	else: 
 		return HttpResponseRedirect("/ventas/")
