@@ -168,20 +168,20 @@
         {% block javascript %}
         {% endblock javascript %}
         <script>
-        jQuery(document).ready(function() {
-            "use strict";
-            jQuery('#table1').dataTable();
-            // Select2
-            // Delete row in a table
-            jQuery('.delete-row').click(function(){
-              var c = confirm("Continue delete?");
-              if(c)
-                jQuery(this).closest('tr').fadeOut(function(){
-                  jQuery(this).remove();
-                });
+        // jQuery(document).ready(function() {
+        //     "use strict";
+        //     jQuery('#table1').dataTable();
+        //     // Select2
+        //     // Delete row in a table
+        //     jQuery('.delete-row').click(function(){
+        //       var c = confirm("Continue delete?");
+        //       if(c)
+        //         jQuery(this).closest('tr').fadeOut(function(){
+        //           jQuery(this).remove();
+        //         });
                 
-                return false;
-            });
+        //         return false;
+        //     });
             
             // // Show aciton upon row hover
             // jQuery('.table-hidaction tbody tr').hover(function(){
