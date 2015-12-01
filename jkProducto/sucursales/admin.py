@@ -19,20 +19,20 @@ class SucursalAdmin(admin.ModelAdmin):
 	list_display = ('codigo_puesto', 'nombre', 'departamento', 'id_estadoSucursal')
 	list_filter = ('codigo_puesto', 'departamento','nombre','id_estadoSucursal',)
 	search_fields = ('codigo_puesto', 'departamento')
-	list_editable = ('codigo_puesto', 'departamento','id_estadoSucursal',)
+	#list_editable = ('codigo_puesto', 'departamento','id_estadoSucursal',)
 
 class SucursalTrabajadorAdmin(admin.ModelAdmin):
 	list_display = ('sucursal','trabajador','fecha_ingreso',)
 	list_filter = ('sucursal',)
 	search_fields = ('sucursal',)
-	list_editable = ('sucursal',)
+	#list_editable = ('sucursal',)
 
 class ClienteAdmin(admin.ModelAdmin):
 	list_display = ('nombre','apellidos','telefono','dni','ruc' ,'correo' , 'direccion')
 
 class AlmacenAdmin(admin.ModelAdmin):
 	list_display = ('nombre_empresa','ruc','departamento','fecha_registro', 'descripcion','telefono','celular',)
-	list_editable = ('nombre_empresa','ruc','departamento','descripcion','telefono','celular',)
+	#list_editable = ('nombre_empresa','ruc','departamento','descripcion','telefono','celular',)
 
 #list_display = ('codigo','marca','tipo_producto','color','stock','adicional','mayor','menor','fecha_ingreso',)
 
