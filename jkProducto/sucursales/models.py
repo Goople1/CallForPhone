@@ -4,7 +4,15 @@ from django.contrib.auth.models import User
 from datetime import date
 from productos.models import Producto
 from utilidades import Utilidades
+from django.core.exceptions import ValidationError
+import propiedades as Constante
 # Create your models here.
+def validate_only_one_instance(obj,cantidad):
+    model = obj.__class__
+    if (model.objects.count() >= cantidad and
+            obj.id != model.objects.get().id):
+        raise ValidationError("Puede solo crear maximo %d, %s." % (cantidad,model.__name__))
+
 class Almacen(models.Model):
     nombre_empresa = models.CharField(max_length=80)
     logo = models.ImageField(upload_to='empresa/',blank=True,null=True)
@@ -18,10 +26,13 @@ class Almacen(models.Model):
     descripcion = models.TextField(max_length=400)
     def clean(self):
         self.nombre_empresa = self.nombre_empresa.capitalize()
+        validate_only_one_instance(self, Constante.CANTIDAD_EMPRESA)
     class Meta:
         verbose_name="Empresa"
     def __unicode__(self):
-        return u'%s' % (self.nombre_empresa)		
+        return u'%s' % (self.nombre_empresa)
+
+		
 
 class DetalleAlmacen(models.Model):
 	id_almacen = models.ForeignKey(Almacen) 
@@ -76,6 +87,7 @@ class Sucursal(models.Model):
 	def clean(self):
 		self.codigo_puesto = self.codigo_puesto.capitalize()
 		self.nombre = self.nombre.capitalize()
+		validate_only_one_instance(self, Constante.CANTIDAD_SUCURSAL_PBASCICO)
 	class Meta:
 		verbose_name_plural = "Mantenimiento de Sucursales"
 		unique_together = ('codigo_puesto', 'departamento',)

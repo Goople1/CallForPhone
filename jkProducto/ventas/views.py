@@ -62,7 +62,7 @@ def lista_producto(request):
     return render_to_response(template,{"detalle_sucursal_almacen_productos":lista_producto , "sucursal" :sucursal , "datos":datos} , context_instance = RequestContext(request))
 
 @login_required(login_url='/cuenta/')
-def venta (request):	
+def venta (request):    
 
     if request.method == "GET":
 
@@ -97,7 +97,7 @@ def addVenta(request):
                     total = Utilidades().validarIngresoNum(request.POST.get("total"))
                     venta = Venta(empleado = trabajador , sucursal = trabajador.sucursal , total = total)
                     venta.save()
-                    #En my_json_products_to_dict estan todos los productos  que se agregan a la venta		
+                    #En my_json_products_to_dict estan todos los productos  que se agregan a la venta       
                     for producto_dict in my_json_products_to_dict :
                         cantidad =  Utilidades().validarIngresoNum(producto_dict.get("cantidad"))
                         tipo_precio = producto_dict.get("tipo_precio")

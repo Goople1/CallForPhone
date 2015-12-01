@@ -3,8 +3,14 @@ from django.db import models
 #from django.contrib.auth.models import User
 from django.conf import settings
 #from django.contrib.auth import get_user_model
-
+import propiedades as Constante
 # Create your models here.
+def validate_only_one_instance(obj,cantidad):
+    model = obj.__class__
+    if (model.objects.count() >= cantidad and
+            obj.id != model.objects.get().id):
+        raise ValidationError("Puede solo crear maximo %d, %s." % (cantidad,model.__name__))
+
 
 class TipoProducto(models.Model):
     nombre = models.CharField(max_length=60,unique=True)
@@ -37,6 +43,8 @@ class Producto(models.Model):
 	tipo_producto = models.ForeignKey(TipoProducto)
 	#logo = models.ImageField(upload_to='fotos/',blank=True,null=True)
 	imagen = models.ImageField(upload_to='productos/',blank=True,null=True)
+	def clean(self):
+		validate_only_one_instance(self, Constante.CANTIDAD_PRODUCTO)
 	class Meta:
 		verbose_name_plural = "Mantenimiento de Productos"
 		unique_together = ('codigo', 'color','marca','tipo_producto')
